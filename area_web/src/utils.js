@@ -1,1 +1,1 @@
-export let API_URL = "http://ec2-13-38-85-194.eu-west-3.compute.amazonaws.com:8080";
+export let API_URL = "http://ec2-18-205-18-70.compute-1.amazonaws.com:8080";
