@@ -2,7 +2,7 @@
     {
         "app" : "Discord",
         "icon" : "DiscordLogo.png",
-        "authUrl" : "https://discord.com/api/oauth2/authorize?client_id=1183779111005597766&response_type=code&redirect_uri=http%3A%2F%2Fec2-18-205-18-70.compute-1.amazonaws.com%2FconfirmDiscord&scope=identify+email",
+        "authUrl" : "https://discord.com/api/oauth2/authorize?client_id=1183779111005597766&response_type=code&redirect_uri=http%3A%2F%2F35.180.174.148%2FconfirmDiscord&scope=identify+email",
         "actions" : [
             {
                 "displayName" : "Send a private message to the bot",
