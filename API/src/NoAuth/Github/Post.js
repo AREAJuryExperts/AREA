@@ -3,41 +3,52 @@ const db = require("../../../DB");
 const router = require("./../../Services/Router");
 
 const getUserByGithubId = async (id) => {
-    const params = {
-        TableName: "GithubUsers",
+    let params = {
+        TableName: "GitHubUsers",
         Key: {
             id: id,
         },
     };
-    let tmpUser = await dynamo.client().get(params).promise();
+    console.log("ok 2 ");
+    let tmpUser = await db.client().get(params).promise();
     if (tmpUser.Count == 0) return null;
+
+    console.log("ok 3 ");
+
 
     let user = tmpUser.Item;
     if (!user) return null;
     if (!user.userId) return null;
-
     params = {
         TableName: "Users",
         Key: {
             id: user.userId,
         },
     };
+    console.log("ok 3 ");
 
-    tmpUser = await dynamo.client().get(params).promise();
+    tmpUser = await db.client().get(params).promise();
     if (tmpUser.Count == 0) return null;
     user = tmpUser.Item;
+    console.log("ok 4 ");
+
     return user;
 };
 
+
 const postWebhook = async (req, res) => {
+    console.log("ok");
     const data = req.body;
     const githubEvent = req.headers["x-github-event"];
-    
+    console.log("githubEvent = ", githubEvent);
+    console.log(data.sender.id);
     let user = await getUserByGithubId(data.sender.id);
+
     if (!user) return;
-    
+
     if (githubEvent == "repository") {
         let actionType = data.action;
+        console.log("actionType = ", actionType);
         if (actionType == "created") {
             console.log("repo created");
             router("githubCreate", user);
