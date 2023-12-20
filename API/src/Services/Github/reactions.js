@@ -3,7 +3,7 @@ const db = require("../../../DB");
 const GithubCreateNewRepo = async (user, repoName = "testReaction") => {
 
     let params = {
-        TableName: "GithubUsers",
+        TableName: "GitHubUsers",
         IndexName: "userId",
         KeyConditionExpression: "userId = :n",
         ExpressionAttributeValues: {
