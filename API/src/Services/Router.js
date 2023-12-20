@@ -1,6 +1,6 @@
 const { discordSendMp }  = require("./Discord/reactions")
 const { TrelloCreateNewBoard } = require("./Trello/reactions")
-const { GithubCreateRepo } = require("./Github/reactions")
+const { GithubCreateNewRepo } = require("./Github/reactions")
 const db = require("../../DB");
 
 const getReaction = async (action, user) => {
@@ -32,6 +32,7 @@ const getReaction = async (action, user) => {
 
 const router = async (action, user) => {
     let reactions = await getReaction(action, user);
+    console.log(action);
 
     for (let i = 0; i < reactions.length; i++) {
         console.log(reactions[i].reaction);
@@ -41,9 +42,9 @@ const router = async (action, user) => {
         if (reactions[i].reaction === "trelloCreateNewBoard") {
             TrelloCreateNewBoard(user);
         }
-        if (reactions[i].reaction === "githubCreateRepo") {
+        if (reactions[i].reaction === "GithubCreateNewRepo") {
             console.log("ok");
-            GithubCreateRepo(user);
+            GithubCreateNewRepo(user);
         }
     }
 }

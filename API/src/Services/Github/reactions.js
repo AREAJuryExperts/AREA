@@ -1,6 +1,6 @@
 const db = require("../../../DB");
 
-const GithubCreateRepo = async (user, repoName = "testReaction") => {
+const GithubCreateNewRepo = async (user, repoName = "testReaction") => {
 
     let params = {
         TableName: "GithubUsers",
@@ -21,4 +21,4 @@ const GithubCreateRepo = async (user, repoName = "testReaction") => {
 
 };
 
-module.exports = {GithubCreateRepo};
+module.exports = {GithubCreateNewRepo};
