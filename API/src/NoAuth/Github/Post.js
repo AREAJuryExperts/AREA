@@ -4,7 +4,7 @@ const router = require("./../../Services/Router");
 
 const getUserByGithubId = async (id) => {
     let params = {
-        TableName: "GithubUsers",
+        TableName: "GitHubUsers",
         Key: {
             id: id,
         },
@@ -43,8 +43,9 @@ const postWebhook = async (req, res) => {
     console.log("githubEvent = ", githubEvent);
     
     let user = await getUserByGithubId(data.sender.id);
+
     if (!user) return;
-    
+
     if (githubEvent == "repository") {
         let actionType = data.action;
         console.log("actionType = ", actionType);
