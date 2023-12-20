@@ -26,7 +26,7 @@
     {
         "app" : "Trello",
         "icon" : "TrelloLogo.png",
-        "authUrl" : "https://trello.com/1/authorize?expiration=never&name=Area&scope=read,write&response_type=token&key=5514e3ab1f2a77b0fac7475c09686a05&redirect_uri=http://35.180.174.148/confirmTrello",
+        "authUrl" : "https://trello.com/1/authorize?expiration=never&name=Area&scope=read,write&response_type=token&key=5514e3ab1f2a77b0fac7475c09686a05&redirect_uri=http://35.181.66.104/confirmTrello",
         "actions" : [
             {
                 "displayName" : "Card created",
