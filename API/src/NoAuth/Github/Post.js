@@ -41,11 +41,11 @@ const postWebhook = async (req, res) => {
     if (githubEvent == "repository") {
         let actionType = data.action;
         if (actionType == "created") {
-            router("githubCreate", user);
+            router("GithubCreatedNewRepo", user);
             return;
         }
         if (actionType == "deleted") {
-            router("githubDelete", user);
+            router("githubDeleted", user);
             return;
         }
     }
