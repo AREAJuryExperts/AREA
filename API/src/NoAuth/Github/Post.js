@@ -41,7 +41,7 @@ const postWebhook = async (req, res) => {
     const data = req.body;
     const githubEvent = req.headers["x-github-event"];
     console.log("githubEvent = ", githubEvent);
-    
+    console.log(data.sender.id);
     let user = await getUserByGithubId(data.sender.id);
 
     if (!user) return;
