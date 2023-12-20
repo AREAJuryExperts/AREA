@@ -34,6 +34,7 @@ const router = async (action, user) => {
     let reactions = await getReaction(action, user);
 
     for (let i = 0; i < reactions.length; i++) {
+        console.log(reactions[i].reaction);
         if (reactions[i].reaction === "discordSendMp") {
             discordSendMp(user);
         }
@@ -41,6 +42,7 @@ const router = async (action, user) => {
             TrelloCreateNewBoard(user);
         }
         if (reactions[i].reaction === "githubCreateRepo") {
+            console.log("ok");
             GithubCreateRepo(user);
         }
     }
