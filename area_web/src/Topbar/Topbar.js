@@ -244,7 +244,7 @@ export default function Topbar() {
         <div className={style.topbarContainer}>
             <div className={style.topbarRightPart}>
                 <img src={Logo} alt="Logo AREA" className={style.logoTopbar} />
-                <div className={style.topbarTitle}>TEST</div>
+                <div className={style.topbarTitle}>Area</div>
             </div>
             <div className={style.topbarLeftPart}>
                 <ButtonLinks
