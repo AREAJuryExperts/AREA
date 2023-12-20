@@ -2,7 +2,7 @@
     {
         "app" : "Discord",
         "icon" : "DiscordLogo.png",
-        "authUrl" : "https://discord.com/api/oauth2/authorize?client_id=1183779111005597766&response_type=code&redirect_uri=http%3A%2F%2F35.180.174.148%2FconfirmDiscord&scope=identify+email",
+        "authUrl" : "https://discord.com/api/oauth2/authorize?client_id=1183779111005597766&response_type=code&redirect_uri=http%3A%2F%2F35.181.66.104%2FconfirmDiscord&scope=identify+email",
         "actions" : [
             {
                 "displayName" : "Send a private message to the bot",
@@ -55,7 +55,7 @@
     {
         "app" : "Github",
         "icon" : "GithubLogo.png",
-        "authUrl" : "https://github.com/login/oauth/authorize?client_id=1ed7db428103fa43e40a&redirect_uri=http://35.180.174.148//confirmGithub&scope=read:user,user:email,repo",
+        "authUrl" : "https://github.com/login/oauth/authorize?client_id=1ed7db428103fa43e40a&redirect_uri=http://35.181.66.104//confirmGithub&scope=read:user,user:email,repo",
         "actions" : [
             {
                 "displayName" : "Repository created",
