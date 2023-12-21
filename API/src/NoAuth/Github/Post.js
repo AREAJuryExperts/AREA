@@ -3,19 +3,19 @@ const db = require("../../../DB");
 const router = require("./../../Services/Router");
 
 const getUserByGithubId = async (id) => {
-    const params = {
-        TableName: "GithubUsers",
+    let params = {
+        TableName: "GitHubUsers",
         Key: {
             id: id,
         },
     };
-    let tmpUser = await dynamo.client().get(params).promise();
+    let tmpUser = await db.client().get(params).promise();
     if (tmpUser.Count == 0) return null;
+
 
     let user = tmpUser.Item;
     if (!user) return null;
     if (!user.userId) return null;
-
     params = {
         TableName: "Users",
         Key: {
@@ -23,35 +23,34 @@ const getUserByGithubId = async (id) => {
         },
     };
 
-    tmpUser = await dynamo.client().get(params).promise();
+    tmpUser = await db.client().get(params).promise();
     if (tmpUser.Count == 0) return null;
     user = tmpUser.Item;
+
     return user;
 };
+
 
 const postWebhook = async (req, res) => {
     const data = req.body;
     const githubEvent = req.headers["x-github-event"];
-    
+
     let user = await getUserByGithubId(data.sender.id);
     if (!user) return;
-    
+
     if (githubEvent == "repository") {
         let actionType = data.action;
         if (actionType == "created") {
-            console.log("repo created");
-            router("githubCreate", user);
+            router("GithubCreatedNewRepo", user);
             return;
         }
         if (actionType == "deleted") {
-            console.log("repo deleted");
-            router("githubDelete", user);
+            router("githubDeleted", user);
             return;
         }
     }
 
     if (githubEvent == "push") {
-        console.log("push made");
         router("githubPush", user);
         return;
     }

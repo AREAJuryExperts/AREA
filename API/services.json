@@ -77,5 +77,23 @@
                 "code" : "GithubCreateNewRepo"
             }
         ]
+    },
+    {
+        
+        "app" : "Asana",
+        "icon" : "Asana.png",
+        "authUrl" : "https://app.asana.com/-/oauth_authorize?response_type=code&client_id=1206159461664814&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2FconfirmAsana&state=secretStateParam",
+        "actions" : [
+
+        ],
+        "reactions" : [
+        ]
+    },
+    {
+        "app" : "Google",
+        "icon" : "Google.png",
+        "authUrl" : "https://accounts.google.com/o/oauth2/auth?client_id=403121110510-3bngdn4539epr1lsukguqijeess63f4v.apps.googleusercontent.com&redirect_uri=http://localhost:3000/confirmGoogle&response_type=code&scope=https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/calendar",
+        "actions" : [],
+        "reactions" : []
     }
 ]

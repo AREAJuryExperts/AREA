@@ -1,9 +1,9 @@
 const db = require("../../../DB");
 
-const GithubCreateRepo = async (user, repoName = "testReaction") => {
+const GithubCreateNewRepo = async (user, repoName = "testReaction") => {
 
     let params = {
-        TableName: "GithubUsers",
+        TableName: "GitHubUsers",
         IndexName: "userId",
         KeyConditionExpression: "userId = :n",
         ExpressionAttributeValues: {
@@ -21,4 +21,4 @@ const GithubCreateRepo = async (user, repoName = "testReaction") => {
 
 };
 
-module.exports = {GithubCreateRepo};
+module.exports = {GithubCreateNewRepo};
