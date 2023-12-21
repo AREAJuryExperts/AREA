@@ -21,4 +21,4 @@ jobs:
         chmod 644 ~/.ssh/known_hosts
 
     - name: Execute SSH Command
-      run: ssh -o "StrictHostKeyChecking=no" ec2-user@${{ secrets.SSH_HOST }} "ls"
+      run: ssh -o "StrictHostKeyChecking=no" ec2-user@${{ secrets.SSH_HOST }} "cd .discord_webhook && ./launch.sh"
