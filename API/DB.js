@@ -19,17 +19,17 @@ module.exports = {
             // endpoint: process.env.DB_ENDPOINT,
         });
         client_ = new AWS.DynamoDB.DocumentClient();
-        discordClient_ = new Client({
-            intents: [
-                GatewayIntentBits.DirectMessages,
-                GatewayIntentBits.Guilds,
-                GatewayIntentBits.MessageContent,
-                GatewayIntentBits.GuildPresences,
-                GatewayIntentBits.GuildMembers,
-                GatewayIntentBits.GuildMessages,
-            ],
-            partials: [Partials.Channel],
-        });
+        // discordClient_ = new Client({
+        //     intents: [
+        //         GatewayIntentBits.DirectMessages,
+        //         GatewayIntentBits.Guilds,
+        //         GatewayIntentBits.MessageContent,
+        //         GatewayIntentBits.GuildPresences,
+        //         GatewayIntentBits.GuildMembers,
+        //         GatewayIntentBits.GuildMessages,
+        //     ],
+        //     partials: [Partials.Channel],
+        // });
 
         try {
             services_ = utils.readJSON(path.join(__dirname, "services.json"));
@@ -40,9 +40,9 @@ module.exports = {
             console.log(err);
             process.exit(1);
         }
-        console.log("connecting to discord...")
-        await discordClient_.login(process.env.DISCORD_TOKEN);
-        console.log("connected to discord !")
+        // console.log("connecting to discord...")
+        // await discordClient_.login(process.env.DISCORD_TOKEN);
+        // console.log("connected to discord !")
         callback();
     },
     client: function () {

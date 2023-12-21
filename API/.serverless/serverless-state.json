@@ -20,7 +20,6 @@
         "WEB_URL": "http://localhost:3000",
         "DISCORD_CLIENT_ID": "1183779111005597766",
         "DISCORD_CLIENT_SECRET": "COpuXx882iq6tNro6HnX5Gnf6j_9hl18",
-        "DISCORD_TOKEN": "MTE4Mzc3OTExMTAwNTU5Nzc2Ng.G4aJBG.t-gCy1zl5TWgnNsv2Y8OnhyEjWfxQrpPXn01Co",
         "TRELLO_KEY": "5514e3ab1f2a77b0fac7475c09686a05",
         "GITHUB_CLIENT_ID": "1ed7db428103fa43e40a",
         "GITHUB_CLIENT_SECRET": "6018d9eacf8ecb96b32add9c346c0114411b168f"
@@ -190,7 +189,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/area/dev/1703078496151-2023-12-20T13:21:36.151Z/area.zip"
+                "S3Key": "serverless/area/dev/1703173149199-2023-12-21T15:39:09.199Z/area.zip"
               },
               "Handler": "app/app.handler",
               "Runtime": "nodejs18.x",
@@ -208,7 +207,6 @@
                   "WEB_URL": "http://localhost:3000",
                   "DISCORD_CLIENT_ID": "1183779111005597766",
                   "DISCORD_CLIENT_SECRET": "COpuXx882iq6tNro6HnX5Gnf6j_9hl18",
-                  "DISCORD_TOKEN": "MTE4Mzc3OTExMTAwNTU5Nzc2Ng.G4aJBG.t-gCy1zl5TWgnNsv2Y8OnhyEjWfxQrpPXn01Co",
                   "TRELLO_KEY": "5514e3ab1f2a77b0fac7475c09686a05",
                   "GITHUB_CLIENT_ID": "1ed7db428103fa43e40a",
                   "GITHUB_CLIENT_SECRET": "6018d9eacf8ecb96b32add9c346c0114411b168f"
@@ -225,14 +223,14 @@
               "AppLogGroup"
             ]
           },
-          "AppLambdaVersionZlvl5Efx3xqY5dnr0wCTv7zvxsCq0vFDbr0f28b238": {
+          "AppLambdaVersionSs7nwVajUlcfE1Ec1nAMCOJxyCI5QG54KWTVMd3nOXs": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "AppLambdaFunction"
               },
-              "CodeSha256": "VU7dpulJWxfscASzSIKZxmzzxGzDkcdKVjdWApS/CJ8="
+              "CodeSha256": "wJdm5bBsPCGJt2FsdEmjvSuQ1LcsdYMbdW49NCxJb1c="
             }
           },
           "ApiGatewayRestApi": {
@@ -450,7 +448,7 @@
               "AppLambdaPermissionApiGateway"
             ]
           },
-          "ApiGatewayDeployment1703078493110": {
+          "ApiGatewayDeployment1703173146252": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -515,7 +513,7 @@
           "AppLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "AppLambdaVersionZlvl5Efx3xqY5dnr0wCTv7zvxsCq0vFDbr0f28b238"
+              "Ref": "AppLambdaVersionSs7nwVajUlcfE1Ec1nAMCOJxyCI5QG54KWTVMd3nOXs"
             },
             "Export": {
               "Name": "sls-area-dev-AppLambdaFunctionQualifiedArn"
@@ -693,7 +691,7 @@
         "timeout": 20,
         "runtime": "nodejs18.x",
         "vpc": {},
-        "versionLogicalId": "AppLambdaVersionZlvl5Efx3xqY5dnr0wCTv7zvxsCq0vFDbr0f28b238"
+        "versionLogicalId": "AppLambdaVersionSs7nwVajUlcfE1Ec1nAMCOJxyCI5QG54KWTVMd3nOXs"
       }
     },
     "configValidationMode": "warn",
@@ -713,7 +711,7 @@
     "artifact": "/home/david/EPITECH/Sem5/AREA/AREA/API/.serverless/area.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/area/dev/1703078496151-2023-12-20T13:21:36.151Z",
+    "artifactDirectoryName": "serverless/area/dev/1703173149199-2023-12-21T15:39:09.199Z",
     "artifact": "area.zip"
   }
 }
