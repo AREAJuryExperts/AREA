@@ -23,7 +23,7 @@ discordClient.on("ready", () => {
     discordClient.on("messageCreate", async (message) => {
         if (message.author.id === "1183779111005597766") return;
 
-        fetch(process.env.API_URL + "/webhook", {
+        fetch(process.env.API_URL + "api/discord/webhook", {
             method: "POST",
             body: JSON.stringify(message)
         }) 
