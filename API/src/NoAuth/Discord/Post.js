@@ -1,4 +1,5 @@
 const db = require("../../../DB");
+const router = require("../../Services/Router");
 
 const getUserByDiscordId = async (id) => {
     let params = {
@@ -26,8 +27,18 @@ const getUserByDiscordId = async (id) => {
 };
 
 const webHook = async (req, res) => {
-    console.log(req.body);
-    res.send({"msg": "ok"})
+    let message = req.body;
+    res.send({ msg: "ok" });
+    let user = await getUserByDiscordId(message.author.id);
+    if (user == null) return;
+    if (message.channel.type == 1) {
+        router("discordReceiveMp", user);
+        return;
+    }
+    if (message.channel.type == 0) {
+        router("discordReceiveServer", user);
+        return;
+    }
 };
 
 module.exports = webHook;
