@@ -1,5 +1,6 @@
 name: SSH Deployment
 
+on:
   push:
     branches:
       - dev
