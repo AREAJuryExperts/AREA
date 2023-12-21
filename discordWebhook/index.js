@@ -26,6 +26,6 @@ discordClient.on("ready", () => {
         fetch(process.env.API_URL + "/webhook", {
             method: "POST",
             body: JSON.stringify(message)
-        })
+        }) 
     });
 });
