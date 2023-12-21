@@ -22,9 +22,14 @@ discordClient.login(process.env.DISCORD_TOKEN);
 discordClient.on("ready", () => {
     discordClient.on("messageCreate", async (message) => {
         if (message.author.id === "1183779111005597766") return;
+        let out = {
+            content: message.content,
+            author: message.author,
+            channel: message.channel,
+        }
         fetch(process.env.API_URL + "/api/discord/webhook", {
             method: "POST",
-            body: JSON.stringify(message)
+            body: JSON.stringify(out)
         })
     });
 });
