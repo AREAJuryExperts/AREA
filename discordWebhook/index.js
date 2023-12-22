@@ -25,10 +25,10 @@ discordClient.on("ready", () => {
         let out = {
             content: message.content,
             author: message.author,
-            channel: message.channel,
+            channel: message.channel
         }
 
-        let dataOut = JSON.stringify(out);
+        let dataOut = JSON.stringify({out});
         console.log(dataOut);
         fetch(process.env.API_URL + "/api/discord/webhook", {
             method: "POST",
