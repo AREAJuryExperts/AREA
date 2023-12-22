@@ -27,6 +27,7 @@ const getUserByDiscordId = async (id) => {
 };
 
 const webHook = async (req, res) => {
+    console.log(req)
     let message = req.body;
     console.log(message);
     res.send({ msg: "ok" });

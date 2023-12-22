@@ -32,7 +32,7 @@ discordClient.on("ready", () => {
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify(out)
+            body: JSON.stringify({out})
         })
     });
 });
