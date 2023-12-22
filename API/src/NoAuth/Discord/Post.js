@@ -33,6 +33,7 @@ const webHook = async (req, res) => {
     let user = await getUserByDiscordId(message.author.id);
     if (user == null) return;
     if (message.channel.type == 1) {
+        console.log("MP");
         router("discordReceiveMp", user);
         return;
     }
