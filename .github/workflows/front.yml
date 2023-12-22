@@ -1,0 +1,53 @@
+name: Build and Deploy to front AWS
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    env:
+      CI: false
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      AWS_REGION: 'us-east-1'
+      S3_BUCKET: 'areafront'
+      DISTRIBUTION_ID : "E2JMDNRDATLF7E"
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: install node
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+
+    - name: go to area_web
+      run: cd area_web
+
+    - name: install dependecies
+      run: npm install
+      working-directory: ./area_web
+
+    - name: build
+      run: npm run build
+      working-directory: ./area_web
+
+    - name: deploy
+      run: |
+        aws s3 sync ./area_web/build s3://$S3_BUCKET --delete
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_DEFAULT_REGION: ${{ env.AWS_REGION }}
+
+    - name: refresh cloudfront
+      run: |
+        aws cloudfront create-invalidation --distribution-id $DISTRIBUTION_ID --paths "/*"
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_DEFAULT_REGION: ${{ env.AWS_REGION }}
+

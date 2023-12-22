@@ -2,7 +2,7 @@
     {
         "app" : "Discord",
         "icon" : "DiscordLogo.png",
-        "authUrl" : "https://discord.com/api/oauth2/authorize?client_id=1183779111005597766&response_type=code&redirect_uri=http%3A%2F%2F35.180.174.148%2FconfirmDiscord&scope=identify+email",
+        "authUrl" : "https://discord.com/api/oauth2/authorize?client_id=1183779111005597766&response_type=code&redirect_uri=https%3A%2F%2Fd3lyxkfr0ujo0d.cloudfront.net%2FconfirmDiscord&scope=identify+email",
         "actions" : [
             {
                 "displayName" : "Send a private message to the bot",
@@ -26,7 +26,7 @@
     {
         "app" : "Trello",
         "icon" : "TrelloLogo.png",
-        "authUrl" : "https://trello.com/1/authorize?expiration=never&name=Area&scope=read,write&response_type=token&key=5514e3ab1f2a77b0fac7475c09686a05&redirect_uri=http://35.181.66.104/confirmTrello",
+        "authUrl" : "https://trello.com/1/authorize?expiration=never&name=Area&scope=read,write&response_type=token&key=5514e3ab1f2a77b0fac7475c09686a05&redirect_uri=https://d3lyxkfr0ujo0d.cloudfront.net/confirmTrello",
         "actions" : [
             {
                 "displayName" : "Card created",
@@ -55,7 +55,7 @@
     {
         "app" : "Github",
         "icon" : "GithubLogo.png",
-        "authUrl" : "https://github.com/login/oauth/authorize?client_id=1ed7db428103fa43e40a&redirect_uri=http://35.180.174.148//confirmGithub&scope=read:user,user:email,repo",
+        "authUrl" : "https://github.com/login/oauth/authorize?client_id=1ed7db428103fa43e40a&redirect_uri=https://d3lyxkfr0ujo0d.cloudfront.net/confirmGithub&scope=read:user,user:email,repo",
         "actions" : [
             {
                 "displayName" : "Repository created",
@@ -77,5 +77,27 @@
                 "code" : "GithubCreateNewRepo"
             }
         ]
+    },
+    {
+        
+        "app" : "Asana",
+        "icon" : "Asana.png",
+        "authUrl" : "https://app.asana.com/-/oauth_authorize?response_type=code&client_id=1206159461664814&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2FconfirmAsana&state=secretStateParam",
+        "actions" : [
+
+        ],
+        "reactions" : [
+            {
+                "displayName" : "Create new project",
+                "code" : "AsanaCreateNewProject"
+            }
+        ]
+    },
+    {
+        "app" : "Google",
+        "icon" : "Google.png",
+        "authUrl" : "https://accounts.google.com/o/oauth2/auth?client_id=403121110510-3bngdn4539epr1lsukguqijeess63f4v.apps.googleusercontent.com&redirect_uri=http://localhost:3000/confirmGoogle&response_type=code&scope=https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/calendar",
+        "actions" : [],
+        "reactions" : []
     }
 ]

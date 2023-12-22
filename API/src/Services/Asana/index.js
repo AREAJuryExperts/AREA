@@ -3,9 +3,8 @@ const router = express.Router();
 
 // router.get("/", require("./getMe"));
 router.post("/register", require("./Register"));
-// router.post("/webhook", require("./webHook"));
 
-// require("./webHook")()
+// require("./actions")()
 
 module.exports = router;
 
