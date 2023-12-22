@@ -87,6 +87,10 @@
 
         ],
         "reactions" : [
+            {
+                "displayName" : "Create new project",
+                "code" : "AsanaCreateNewProject"
+            }
         ]
     },
     {
