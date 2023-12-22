@@ -1,4 +1,4 @@
-const db = require("../../../DB");
+const db = require("./../../../DB");
 const router = require("../../Services/Router");
 
 const getUserByDiscordId = async (id) => {
@@ -12,6 +12,7 @@ const getUserByDiscordId = async (id) => {
     if (tmpUser.Count == 0) return null;
 
     let user = tmpUser.Item;
+
     if (!user) return null;
     if (!user.userId) return null;
     params = {
@@ -28,19 +29,15 @@ const getUserByDiscordId = async (id) => {
 
 const webHook = async (req, res) => {
     let message = req.body;
-    res.send({ msg: "ok" });
-    console.log(message);
     let user = await getUserByDiscordId(message.author.id);
     if (user == null) return;
     if (message.channel.type == 1) {
-        console.log("MP");
-        router("discordReceiveMp", user);
-        return;
+        await router("discordReceiveMp", user);
     }
     if (message.channel.type == 0) {
-        router("discordReceiveServer", user);
-        return;
+        await router("discordReceiveServer", user);
     }
+    res.send({ msg: "ok" });
 };
 
 module.exports = webHook;

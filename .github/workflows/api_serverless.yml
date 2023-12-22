@@ -1,0 +1,36 @@
+name: Deploy to AWS lambda
+
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out repository
+      uses: actions/checkout@v2
+
+    - name: install node
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+
+    - name: install serverless
+      run: npm install -g serverless
+
+    - name: configure aws
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ${{ secrets.AWS_REGION }}
+
+    - name: go to api
+      run: cd API
+
+    - name: deploy
+      run: serverless deploy
+      working-directory: ./API

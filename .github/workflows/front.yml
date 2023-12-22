@@ -19,23 +19,23 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Set up Node.js
+    - name: install node
       uses: actions/setup-node@v2
       with:
         node-version: '14'
 
-    - name: Change to area_web directory
+    - name: go to area_web
       run: cd area_web
 
-    - name: Install dependencies
+    - name: install dependecies
       run: npm install
       working-directory: ./area_web
 
-    - name: Build React app
+    - name: build
       run: npm run build
       working-directory: ./area_web
 
-    - name: Deploy to S3
+    - name: deploy
       run: |
         aws s3 sync ./area_web/build s3://$S3_BUCKET --delete
       env:
@@ -43,7 +43,7 @@ jobs:
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         AWS_DEFAULT_REGION: ${{ env.AWS_REGION }}
 
-    - name: Invalidate CloudFront distribution
+    - name: refresh cloudfront
       run: |
         aws cloudfront create-invalidation --distribution-id $DISTRIBUTION_ID --paths "/*"
       env:
