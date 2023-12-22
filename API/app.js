@@ -14,6 +14,7 @@ dynamo.connect(() => {
             origin: "*",
         })
     );
+    app.options('*', cors());
     app.use(express.json());
 
     app.get("/", (req, res) => {
