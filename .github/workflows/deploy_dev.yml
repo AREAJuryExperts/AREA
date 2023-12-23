@@ -38,6 +38,6 @@ jobs:
         ssh-keyscan ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
         chmod 644 ~/.ssh/known_hosts
 
-    # - name: execute
-    #   if: env.COMMIT_CHECK == '0'
-    #   run: ssh -o "StrictHostKeyChecking=no" ec2-user@${{ secrets.SSH_HOST }} "./install.sh"
+    - name: execute
+      if: env.COMMIT_CHECK == '0'
+      run: ssh -o "StrictHostKeyChecking=no" ec2-user@${{ secrets.SSH_HOST }} "./install.sh"
