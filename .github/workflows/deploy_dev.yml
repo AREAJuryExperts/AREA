@@ -22,14 +22,15 @@ jobs:
       run: |
         if ! ./checkCommit "${{ steps.commit-message.outputs.commit }}"; then
           echo "Commit message failed check"
+          echo "{COMMIT_CHECK}={1}" >> "$GITHUB_ENV"
         else
-          echo "Commit message passed check"
+          echo "{COMMIT_CHECK}={0}" >> "$GITHUB_ENV"
         fi
       # run: ./checkCommit "${{ steps.commit-message.outputs.commit }}"
 
     - name: Stop Workflow if Check Fails
-      # if: ${{ steps.test-commit.outputs.stop == '1' }}
-      run: exit 1
+      if: ${{ steps.test-commit.outputs.stop == '1' }}
+      run: exit 0
     
     - name: ssh
       run: |
