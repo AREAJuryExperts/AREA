@@ -1,0 +1,103 @@
+[
+    {
+        "app" : "Discord",
+        "icon" : "DiscordLogo.png",
+        "authUrl" : "https://discord.com/api/oauth2/authorize?client_id=1188091323908112475&response_type=code&redirect_uri=http%3A%2F%2Farea.david-benistant.com%2FconfirmDiscord&scope=identify+email",
+        "actions" : [
+            {
+                "displayName" : "Send a private message to the bot",
+                "code" : "discordReceiveMp",
+                "description" : "This action check if the bot received a private message from a user"
+            },
+            {
+                "displayName" : "Send a message to the server",
+                "code" : "discordReceiveServer",
+                "description" : "This action check if a user send a message to the server"
+            }
+        ],
+        "reactions" : [
+            {
+                "displayName" : "Received a private message",
+                "code" : "discordSendMp",
+                "description" : "This reaction send a private message to a user"
+            }
+        ]
+    },
+    {
+        "app" : "Trello",
+        "icon" : "TrelloLogo.png",
+        "authUrl" : "",
+        "actions" : [
+            {
+                "displayName" : "Card created",
+                "code" : "trelloCreateCard",
+                "description" : "This action check if a card is created in the board"
+            },
+            {
+                "displayName" : "Card deleted",
+                "code" : "trelloDeleteCard",
+                "description" : "This action check if a card is deleted in the board"
+            },
+            {
+                "displayName" : "Card moved",
+                "code" : "trelloUpdateCard",
+                "description" : "This action check if a card is moved in the board"
+            }
+        ],
+        "reactions" : [
+            {
+                "displayName" : "Create new board",
+                "code" : "trelloCreateNewBoard",
+                "description" : "This reaction create a new board"
+            }
+        ]
+    },
+    {
+        "app" : "Github",
+        "icon" : "GithubLogo.png",
+        "authUrl" : "",
+        "actions" : [
+            {
+                "displayName" : "Repository created",
+                "code" : "GithubCreatedNewRepo"
+            },
+            {
+                "displayName" : "Repository deleted",
+                "code" : "GithubDeletedRepo"
+            },
+            {
+                "displayName" : "Push made in a repo",
+                "code" : "GithubPushMade"
+            }
+
+        ],
+        "reactions" : [
+            {
+                "displayName" : "Create new repository",
+                "code" : "GithubCreateNewRepo"
+            }
+        ]
+    },
+    {
+        
+        "app" : "Asana",
+        "icon" : "Asana.png",
+        "authUrl" : "https://app.asana.com/-/oauth_authorize?response_type=code&client_id=1206159461664814&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2FconfirmAsana&state=secretStateParam",
+        "actions" : [
+
+        ],
+        "reactions" : [
+            {
+                "displayName" : "Create new project",
+                "code" : "AsanaCreateNewProject"
+            }
+        ]
+    },
+    {
+        "app" : "Google",
+        "icon" : "Google.png",
+        "authUrl" : "https://accounts.google.com/o/oauth2/auth?client_id=403121110510-3bngdn4539epr1lsukguqijeess63f4v.apps.googleusercontent.com&redirect_uri=http://localhost:3000/confirmGoogle&response_type=code&scope=https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/calendar",
+        "actions" : [],
+        "reactions" : []
+    }
+]

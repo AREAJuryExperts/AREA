@@ -32,9 +32,7 @@ discordClient.on("ready", () => {
                 recipient_id : message.author.id
             })
         })
-        data = data.json()
-        
-
+        data = await data.json()
 
         fetch(process.env.API_URL + "/api/discord/webhook", {
             method: "POST",
