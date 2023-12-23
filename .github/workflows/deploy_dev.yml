@@ -14,11 +14,9 @@ jobs:
       uses: actions/checkout@v2
 
     - name: get last commit message
-      id: commit-message
       run: echo "COMMIT_MESSAGE=$(git log -1 --pretty=%B)" >> "$GITHUB_ENV"
 
     - name: test commit message
-      id: test-commit
       run: |
         if ! ./checkCommit "${{ env.COMMIT_MESSAGE }}"; then
           echo "COMMIT_CHECK=1" >> "$GITHUB_ENV"
