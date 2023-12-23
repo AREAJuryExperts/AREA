@@ -50,7 +50,7 @@ jobs:
       run: npm i
       working-directory: ./API
 
-      -name: test
+    - name: test
         run: env && ls
         working-directory: ./API
     - name: deploy
