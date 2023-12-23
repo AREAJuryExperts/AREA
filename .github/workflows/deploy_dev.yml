@@ -18,11 +18,17 @@ jobs:
       run: echo "::set-output name=commit::$(git log -1 --pretty=%B)"
 
     - name: test commit message
-      run: ./checkCommit "${{ steps.commit-message.outputs.commit }}"
+      run: |
+        if ! ./checkCommit "${{ steps.commit-message.outputs.commit }}"; then
+          echo "::set-output name=stop-stop::1"
+        else
+          echo "::set-output name=stop-stop::0"
+        fi
+      # run: ./checkCommit "${{ steps.commit-message.outputs.commit }}"
 
     - name: Stop Workflow if Check Fails
-      if: ${{ steps.test-commit.outcome == 'failure' }}
-      run: exit 0
+      if: ${{ steps.test-commit.outputs.stop == '1' }}
+      run: exit 1
     
     - name: ssh
       run: |
