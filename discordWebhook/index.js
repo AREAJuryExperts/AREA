@@ -33,8 +33,6 @@ discordClient.on("ready", () => {
             })
         })
         data = data.json()
-        
-
 
         fetch(process.env.API_URL + "/api/discord/webhook", {
             method: "POST",
