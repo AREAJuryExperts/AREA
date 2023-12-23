@@ -26,13 +26,9 @@ jobs:
         else
           echo "{COMMIT_CHECK}={0}" >> "$GITHUB_ENV"
         fi
-      # run: ./checkCommit "${{ steps.commit-message.outputs.commit }}"
-
-    - name: Stop Workflow if Check Fails
-      if: ${{ steps.test-commit.outputs.stop == '1' }}
-      run: exit 0
-    
+  
     - name: ssh
+      if: env.COMMIT_CHECK == '0'
       run: |
         mkdir -p ~/.ssh
         echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
@@ -41,4 +37,5 @@ jobs:
         chmod 644 ~/.ssh/known_hosts
 
     - name: execute
+      if: env.COMMIT_CHECK == '0'
       run: ssh -o "StrictHostKeyChecking=no" ec2-user@${{ secrets.SSH_HOST }} "./install.sh"
