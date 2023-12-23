@@ -21,14 +21,14 @@ jobs:
       id: test-commit
       run: |
         if ! ./checkCommit "${{ steps.commit-message.outputs.commit }}"; then
-          echo "::set-output name=stop-stop::1"
+          echo "Commit message failed check"
         else
-          echo "::set-output name=stop-stop::0"
+          echo "Commit message passed check"
         fi
       # run: ./checkCommit "${{ steps.commit-message.outputs.commit }}"
 
     - name: Stop Workflow if Check Fails
-      if: ${{ steps.test-commit.outputs.stop == '1' }}
+      # if: ${{ steps.test-commit.outputs.stop == '1' }}
       run: exit 1
     
     - name: ssh
