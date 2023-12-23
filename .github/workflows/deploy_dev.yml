@@ -21,8 +21,8 @@ jobs:
       run: ./checkCommit "${{ steps.commit-message.outputs.commit }}"
 
     - name: Stop Workflow if Check Fails
-        if: ${{ steps.test-commit.outcome == 'failure' }}
-        run: exit 0
+      if: ${{ steps.test-commit.outcome == 'failure' }}
+      run: exit 0
     
     - name: ssh
       run: |
