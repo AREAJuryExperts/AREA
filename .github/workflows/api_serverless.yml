@@ -48,6 +48,7 @@ jobs:
 
     - name: install dependencies
       run: npm i
+      working-directory: ./API
 
     - name: deploy
       run: serverless deploy
