@@ -18,6 +18,7 @@ jobs:
       run: echo "::set-output name=commit::$(git log -1 --pretty=%B)"
 
     - name: test commit message
+      id: test-commit
       run: |
         if ! ./checkCommit "${{ steps.commit-message.outputs.commit }}"; then
           echo "::set-output name=stop-stop::1"
