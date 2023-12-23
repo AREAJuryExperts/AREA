@@ -26,7 +26,7 @@
     {
         "app" : "Trello",
         "icon" : "TrelloLogo.png",
-        "authUrl" : "",
+        "authUrl" : "https://trello.com/1/authorize?expiration=never&name=Area&scope=read,write&response_type=token&key=5514e3ab1f2a77b0fac7475c09686a05&redirect_uri=http://area.david-benistant.com/confirmTrello",
         "actions" : [
             {
                 "displayName" : "Card created",
