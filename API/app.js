@@ -8,12 +8,14 @@ const serverless = require("serverless-http");
 dotenv.config({ path: path.join(__dirname, ".env") });
 const app = express();
 
+
 dynamo.connect(() => {
     app.use(
         cors({
             origin: "*",
         })
     );
+    app.options('*', cors());
     app.use(express.json());
 
     app.get("/", (req, res) => {
