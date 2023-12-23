@@ -34,19 +34,19 @@ const postWebhook = async (req, res) => {
     if (data.action.type == "createCard") {
         let user = await getUserByTrelloId(data.action.memberCreator.id);
         if (!user) return;
-        router("trelloCreateCard", user);
+        await router("trelloCreateCard", user);
     }
 
     if (data.action.type == "deleteCard") {
         let user = await getUserByTrelloId(data.action.memberCreator.id);
         if (!user) return;
-        router("trelloDeleteCard", user);
+        await router("trelloDeleteCard", user);
     }
 
     if (data.action.type == "updateCard") {
         let user = await getUserByTrelloId(data.action.memberCreator.id);
         if (!user) return;
-        router("trelloUpdateCard", user);
+        await router("trelloUpdateCard", user);
     }
 
     // const boardName = data.model.name;

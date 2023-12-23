@@ -13,6 +13,17 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v2
 
+    - name: get last commit message
+      id: commit-message
+      run: echo "::set-output name=commit::$(git log -1 --pretty=%B)"
+
+    - name: test commit message
+      run: ./checkCommit "${{ steps.commit-message.outputs.commit }}"
+
+    - name: Stop Workflow if Check Fails
+        if: ${{ steps.test-commit.outcome == 'failure' }}
+        run: exit 0
+    
     - name: ssh
       run: |
         mkdir -p ~/.ssh

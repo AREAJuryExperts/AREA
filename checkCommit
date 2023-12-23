@@ -1,0 +1,34 @@
+#! /usr/bin/env python3
+
+import sys, re
+
+if (len(sys.argv) < 2 or sys.argv[1] == ''):
+    print('No commit message provided')
+    sys.exit(1)
+
+
+def findFlags(message):
+    match = re.search(r'\((.*?)\)', message)
+    if (match):
+        return match.group(1)
+    
+    match = re.search(r'\{(.*?)\}', message)
+    if (match):
+        return match.group(1)
+
+    match = re.search(r'\[(.*?)\]', message)
+    if (match):
+        return match.group(1)
+    
+    return ""
+
+flags = findFlags(sys.argv[1])
+
+if (flags == ""):
+    sys.exit(1)
+
+for i in flags:
+    if (i == 'H'):
+        sys.exit(0)
+
+sys.exit(1)
