@@ -23,6 +23,7 @@ jobs:
       TRELLO_KEY: ${{ secrets.TRELLO_KEY }}
       GITHUB_CLIENT_ID: ${{ secrets.GITHUB_CLIENT_ID }}
       GITHUB_CLIENT_SECRET: ${{ secrets.GITHUB_CLIENT_SECRET }}
+      DEV: "false"
 
     steps:
     - name: Check out repository
