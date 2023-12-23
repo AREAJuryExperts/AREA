@@ -8,7 +8,6 @@ const serverless = require("serverless-http");
 dotenv.config({ path: path.join(__dirname, ".env") });
 const app = express();
 
-console.log( process.env);
 
 dynamo.connect(() => {
     app.use(
