@@ -22,9 +22,9 @@ jobs:
       run: |
         if ! ./checkCommit "${{ steps.commit-message.outputs.commit }}"; then
           echo "Commit message failed check"
-          echo "{COMMIT_CHECK}={1}" >> "$GITHUB_ENV"
+          echo "COMMIT_CHECK=1" >> "$GITHUB_ENV"
         else
-          echo "{COMMIT_CHECK}={0}" >> "$GITHUB_ENV"
+          echo "COMMIT_CHECK=0" >> "$GITHUB_ENV"
         fi
     
     - name: print env
