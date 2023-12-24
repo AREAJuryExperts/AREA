@@ -9,8 +9,8 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     env:
-      GITHUB_CLIENT_ID: ${{ secrets.TEST_EMAIL }}
-      GITHUB_CLIENT_SECRET: ${{ secrets.TEST_PASSWORD }}
+      TEST_EMAIL: ${{ secrets.TEST_EMAIL }}
+      TEST_PASSWORD: ${{ secrets.TEST_PASSWORD }}
 
     steps:
     - name: Checkout Repository
@@ -31,7 +31,6 @@ jobs:
       if: env.COMMIT_CHECK == '0'
       run: |
         npm i
-        ls
         npm run test
       working-directory: ./API
 
