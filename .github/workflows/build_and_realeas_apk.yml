@@ -1,0 +1,18 @@
+name: Build and realease apk
+
+on:
+  push:
+    branches:
+      - dev
+
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: build apk
+        run: docker build . --file Dockerfile
+        working-directory: ./API
