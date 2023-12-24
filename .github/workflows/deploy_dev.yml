@@ -23,7 +23,12 @@ jobs:
         else
           echo "COMMIT_CHECK=0" >> "$GITHUB_ENV"
         fi
-  
+
+    - name: install node
+      uses: actions/setup-node@v2
+      with:
+        node-version: '18'
+
     - name: units tests
       if: env.COMMIT_CHECK == '0'
       run: |
