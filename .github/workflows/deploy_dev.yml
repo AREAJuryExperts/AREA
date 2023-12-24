@@ -27,10 +27,10 @@ jobs:
     - name: units tests
       if: env.COMMIT_CHECK == '0'
       run: |
-        cd API
         ls
         npm install
         npm run test
+      working-directory: ./API
 
     - name: ssh set up
       if: env.COMMIT_CHECK == '0'
