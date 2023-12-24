@@ -12,7 +12,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-
+      - name: install dependecies
+        run: npm install
+        working-directory: ./AreaMobile
       - name: build apk
         run: docker build . --file Dockerfile
         working-directory: ./AreaMobile
