@@ -2,7 +2,7 @@ const supertest = require("supertest");
 const chai = require("chai");
 const expect = chai.expect;
 const dotenv = require("dotenv");
-const app = require("./app");
+const app = require("../app");
 const path = require("path");
 
 
