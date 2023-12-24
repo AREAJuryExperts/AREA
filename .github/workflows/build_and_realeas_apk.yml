@@ -15,4 +15,4 @@ jobs:
 
       - name: build apk
         run: docker build . --file Dockerfile
-        working-directory: ./API
+        working-directory: ./AreaMobile
