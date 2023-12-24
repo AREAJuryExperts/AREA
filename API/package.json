@@ -14,7 +14,7 @@
     "uuid": "^9.0.1"
   },
   "scripts": {
-    "test": "mocha --exit --recursive unit_tests "
+    "test": "mocha --exit --recursive api.test.js"
   },
   "devDependencies": {
     "chai": "^4.3.10",
