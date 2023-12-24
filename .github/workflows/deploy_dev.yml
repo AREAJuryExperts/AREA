@@ -32,9 +32,7 @@ jobs:
     - name: units tests
       if: env.COMMIT_CHECK == '0'
       run: |
-        ls
         npm i
-        cat package.json
         npm run test
       working-directory: ./API
 
