@@ -28,9 +28,5 @@ dynamo.connect(() => {
     app.use("/api/", require("./src/Services"));
     app.use("/api/", require("./src/Area"));
 
-    app.listen(parseInt(process.env.API_PORT), () => {
-        console.log("server running");
-    });
-
     module.exports = app;
 });
