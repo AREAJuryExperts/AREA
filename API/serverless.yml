@@ -25,7 +25,7 @@ provider:
 
 functions:
   app:
-    handler: app/app.handler
+    handler: serverless/serverless.handler
     events: 
       - http: 
           path: /

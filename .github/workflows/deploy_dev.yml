@@ -23,6 +23,13 @@ jobs:
         else
           echo "COMMIT_CHECK=0" >> "$GITHUB_ENV"
         fi
+  
+    - name: units tests
+      if: env.COMMIT_CHECK == '0'
+      run: |
+        cd API
+        npm install
+        npm run test
 
     - name: ssh set up
       if: env.COMMIT_CHECK == '0'

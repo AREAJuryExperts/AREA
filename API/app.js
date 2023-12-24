@@ -3,7 +3,7 @@ const path = require("path");
 var dynamo = require("./DB");
 const cors = require("cors");
 const express = require("express");
-const serverless = require("serverless-http");
+
 
 dotenv.config({ path: path.join(__dirname, ".env") });
 const app = express();
@@ -17,10 +17,6 @@ dynamo.connect(() => {
     );
     app.options('*', cors());
     app.use(express.json());
-
-    app.get("/", (req, res) => {
-        res.send("Hello World!");
-    });
 
     app.get("/about", require("./src/about"));
 
@@ -36,5 +32,5 @@ dynamo.connect(() => {
         console.log("server running");
     });
 
-    module.exports.handler = serverless(app);
+    module.exports = app;
 });

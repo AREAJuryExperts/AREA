@@ -6,7 +6,7 @@ const { Client, GatewayIntentBits, Partials } = require("discord.js");
 
 var client_ = null;
 
-var services_ = {};
+let services_ = {};
 
 var discordClient_ = null;
 
