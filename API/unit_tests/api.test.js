@@ -4,7 +4,6 @@ const expect = chai.expect;
 const dotenv = require("dotenv");
 const app = require("../app");
 const path = require("path");
-const exp = require("constants");
 
 dotenv.config({ path: path.join(__dirname, "../.env") });
 

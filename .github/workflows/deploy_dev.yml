@@ -28,6 +28,7 @@ jobs:
       if: env.COMMIT_CHECK == '0'
       run: |
         cd API
+        ls
         npm install
         npm run test
 
