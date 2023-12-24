@@ -33,7 +33,8 @@ jobs:
       if: env.COMMIT_CHECK == '0'
       run: |
         ls
-        npm ci
+        npm i
+        cat package.json
         npm run test
       working-directory: ./API
 
