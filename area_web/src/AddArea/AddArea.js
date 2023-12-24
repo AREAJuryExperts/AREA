@@ -231,9 +231,6 @@ export default function AddArea() {
             .catch((err) => {
                 console.log(err);
             });
-
-        // console.log(selectedAction);
-        // console.log(reactions);
     };
 
     const goBack = () => {
