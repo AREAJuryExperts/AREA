@@ -3,7 +3,7 @@ const utils = require("../../Utils");
 const db = require("../../../DB");
 
 
-let currentApiUrl = "https://ckdetori3btxbnfqr5gjnvab4i0sbznl.lambda-url.eu-west-3.on.aws/";
+let currentApiUrl = "https://ckdetori3btxbnfqr5gjnvab4i0sbznl.lambda-url.eu-west-3.on.aws";
 
 const registerWebhook = async (req, res) => {
     let projectId = 0;
@@ -32,7 +32,7 @@ const registerWebhook = async (req, res) => {
     };
     try {
         let resp = await fetch(url, options);
-        if (resp.status !== 201) {
+        if (resp.status !== 200) {
             let token = await refreshToken(AsanaUser.refresh_token, AsanaUser);
             if (!token.access_token) return res.status(400).send({msg: "Error while refreshing token"});
             AsanaUser.access_token = token.access_token;
@@ -59,7 +59,7 @@ const registerWebhook = async (req, res) => {
                         resource_type: 'task'
                     }
                 ],
-                target: `http://${currentApiUrl}/api/asana`,
+                target: `${currentApiUrl}/api/asana/webhook`,
             }
         })
     };
