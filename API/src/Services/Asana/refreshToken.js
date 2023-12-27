@@ -41,4 +41,4 @@ const refreshToken = async (refreshToken, user) => {
 }
 
 
-module.exports = { refreshToken};
+module.exports = refreshToken;
