@@ -30,7 +30,10 @@ const getUserByDiscordId = async (id) => {
 const webHook = async (req, res) => {
     let message = req.body;
     let user = await getUserByDiscordId(message.author.id);
-    if (user == null) return;
+    if (user == null) {
+        res.status(400).send({ msg: "Invalid message" });
+        return;
+    }
     if (message.channel.type == 1) {
         await router("discordReceiveMp", user);
     }
