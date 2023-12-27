@@ -28,5 +28,6 @@ dynamo.connect(() => {
     app.use("/api/", require("./src/Services"));
     app.use("/api/", require("./src/Area"));
 
-    module.exports = app;
 });
+
+module.exports = app;
