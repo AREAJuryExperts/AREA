@@ -14,10 +14,11 @@ const PostArea = async (req, res) => {
         return;
     }
 
-    if (req.body.connected) {
+
+    if (req.user.connected) {
         let found = false;
-        for(let i = 0; i < req.body.connected.length; ++i) {
-            if (req.body.connected[i] === req.body.app) {
+        for(let i = 0; i < req.user.connected.length; ++i) {
+            if (req.user.connected[i] === req.body.app) {
                 found = true;
                 break;
             }

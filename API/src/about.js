@@ -1,7 +1,7 @@
 const db = require("./../DB");
 
 const about = async (req, res) => {
-    let services = db.services();
+    let services = JSON.parse(JSON.stringify(db.services()));
 
     services.forEach((service) => {
         service.name = service.app;
@@ -29,7 +29,6 @@ const about = async (req, res) => {
             services: services,
         },
     };
-
     res.send(out);
 };
 

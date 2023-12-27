@@ -21,7 +21,7 @@ const refreshBearerToken = async (refreshToken) => {
         return {};
     }
     let data = await res.json();
-    if (!eventData.data)
+    if (!data)
         return {};
     return {access_token : data.access_token};
 }
@@ -35,10 +35,10 @@ const refreshToken = async (refreshToken, user) => {
     newUser.access_token = newBearerToken.access_token;
     await dynamo.client().put({
         TableName: "AsanaUsers",
-        Item: asanaUser,
+        Item: newUser,
     }).promise();
     return newBearerToken;
 }
 
 
-module.exports = { refreshToken};
+module.exports = refreshToken;

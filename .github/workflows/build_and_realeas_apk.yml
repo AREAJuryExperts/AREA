@@ -1,0 +1,20 @@
+name: Build and realease apk
+
+on:
+  push:
+    branches:
+      - dev
+
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: install dependecies
+        run: npm install
+        working-directory: ./AreaMobile
+      - name: build apk
+        run: docker build . --file Dockerfile
+        working-directory: ./AreaMobile

@@ -8,12 +8,49 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    env:
+      CI: false
+      DB_ACCESS_KEY: ${{ secrets.DB_ACCESS_KEY }}
+      DB_SECRET_KEY: ${{ secrets.DB_SECRET_KEY }}
+      API_PORT: ${{ secrets.API_PORT }}
+      GMAIL_USER: ${{ secrets.GMAIL_USER }}
+      GMAIL_PASS: ${{ secrets.GMAIL_PASS }}
+      SECRET: ${{ secrets.SECRET }}
+      WEB_URL: ${{ secrets.WEB_URL }}
+      DISCORD_CLIENT_ID: ${{ secrets.DISCORD_CLIENT_ID }}
+      DISCORD_CLIENT_SECRET: ${{ secrets.DISCORD_CLIENT_SECRET }}
+      DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
+      TRELLO_KEY: ${{ secrets.TRELLO_KEY }}
+      GITHUB_CLIENT_ID: ${{ secrets.GITHUB_CLIENT_ID }}
+      GITHUB_CLIENT_SECRET: ${{ secrets.GITHUB_CLIENT_SECRET }}
+      DEV: "true"
+      TEST_EMAIL: ${{ secrets.TEST_EMAIL }}
+      TEST_PASSWORD: ${{ secrets.TEST_PASSWORD }}
 
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v2
 
-    - name: ssh
+    - name: get last commit message
+      run: echo "COMMIT_MESSAGE=$(git log -1 --pretty=%B)" >> "$GITHUB_ENV"
+
+    - name: test commit message
+      run: |
+        if ! ./checkCommit "${{ env.COMMIT_MESSAGE }}"; then
+          echo "COMMIT_CHECK=1" >> "$GITHUB_ENV"
+        else
+          echo "COMMIT_CHECK=0" >> "$GITHUB_ENV"
+        fi
+
+    - name: units tests
+      if: env.COMMIT_CHECK == '0'
+      run: |
+        npm i
+        npm run test
+      working-directory: ./API
+
+    - name: ssh set up
+      if: env.COMMIT_CHECK == '0'
       run: |
         mkdir -p ~/.ssh
         echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
@@ -22,4 +59,5 @@ jobs:
         chmod 644 ~/.ssh/known_hosts
 
     - name: execute
+      if: env.COMMIT_CHECK == '0'
       run: ssh -o "StrictHostKeyChecking=no" ec2-user@${{ secrets.SSH_HOST }} "./install.sh"

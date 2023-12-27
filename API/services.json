@@ -55,7 +55,7 @@
     {
         "app" : "Github",
         "icon" : "GithubLogo.png",
-        "authUrl" : "https://github.com/login/oauth/authorize?client_id=1ed7db428103fa43e40a&redirect_uri=https://d3lyxkfr0ujo0d.cloudfront.net/confirmGithub&scope=read:user,user:email,repo",
+        "authUrl" : "https://github.com/login/oauth/authorize?client_id=e04da26f689238f5487b&redirect_uri=https://d3lyxkfr0ujo0d.cloudfront.net/confirmGithub&scope=read:user,user:email,repo",
         "actions" : [
             {
                 "displayName" : "Repository created",

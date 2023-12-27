@@ -33,7 +33,7 @@ const AsanaCreateProject = async (user, projectName = "testReactionAs", projectI
                 if (!token.access_token) return null;
                 AsanaUser.access_token = token.access_token;
                 res = await fetch(url, options);
-                if (res.status !== 201) return null;
+                if (res.status !== 200) return null;
             }
             let data = await res.json();
             projectId = data.data[0].id;
@@ -48,4 +48,4 @@ const AsanaCreateProject = async (user, projectName = "testReactionAs", projectI
     method : "POST", body : JSON.stringify({data : {name : projectName, workspace : projectId}})})
 };
 
-module.exports = { AsanaCreateProject};
+module.exports = AsanaCreateProject;
