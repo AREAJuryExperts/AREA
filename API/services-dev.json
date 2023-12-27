@@ -99,7 +99,7 @@
     {
         "app" : "Google",
         "icon" : "Google.png",
-        "authUrl" : "https://accounts.google.com/o/oauth2/auth?client_id=403121110510-3bngdn4539epr1lsukguqijeess63f4v.apps.googleusercontent.com&redirect_uri=http://localhost:3000/confirmGoogle&response_type=code&scope=https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/calendar",
+        "authUrl" : "https://accounts.google.com/o/oauth2/auth?client_id=403121110510-3bngdn4539epr1lsukguqijeess63f4v.apps.googleusercontent.com&redirect_uri=http://area.david-benistant.com/confirmGoogle&response_type=code&scope=https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/calendar",
         "actions" : [],
         "reactions" : []
     }
