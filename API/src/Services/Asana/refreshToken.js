@@ -21,9 +21,9 @@ const refreshBearerToken = async (refreshToken) => {
         return {};
     }
     let data = await res.json();
-    if (!eventData.data)
+    if (!data.data)
         return {};
-    return {access_token : data.access_token};
+    return {access_token : data.data.access_token};
 }
 
 const refreshToken = async (refreshToken, user) => {
