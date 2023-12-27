@@ -1,4 +1,4 @@
-const { refreshToken} = require("./refreshToken");
+const refreshToken = require("./refreshToken");
 const utils = require("../../Utils");
 const db = require("../../../DB");
 
