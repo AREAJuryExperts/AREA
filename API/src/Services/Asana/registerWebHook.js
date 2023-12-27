@@ -32,7 +32,7 @@ const registerWebhook = async (req, res) => {
     };
     try {
         let resp = await fetch(url, options);
-        if (resp.status !== 201) {
+        if (resp.status !== 200) {
             let token = await refreshToken(AsanaUser.refresh_token, AsanaUser);
             if (!token.access_token) return res.status(400).send({msg: "Error while refreshing token"});
             AsanaUser.access_token = token.access_token;
