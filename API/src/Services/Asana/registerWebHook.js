@@ -3,7 +3,7 @@ const utils = require("../../Utils");
 const db = require("../../../DB");
 
 
-let currentApiUrl = "https://ckdetori3btxbnfqr5gjnvab4i0sbznl.lambda-url.eu-west-3.on.aws/";
+let currentApiUrl = "https://ckdetori3btxbnfqr5gjnvab4i0sbznl.lambda-url.eu-west-3.on.aws";
 
 const registerWebhook = async (req, res) => {
     let projectId = 0;
@@ -59,7 +59,7 @@ const registerWebhook = async (req, res) => {
                         resource_type: 'task'
                     }
                 ],
-                target: `http://${currentApiUrl}/api/asana`,
+                target: `${currentApiUrl}/api/asana/webhook`,
             }
         })
     };
