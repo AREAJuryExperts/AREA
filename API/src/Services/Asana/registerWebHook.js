@@ -52,7 +52,6 @@ const registerWebhook = async (req, res) => {
         method: 'POST',
         headers: {accept: 'application/json', 'content-type': 'application/json', authorization: `Bearer ${AsanaUser.access_token}`},
         body: JSON.stringify({
-            data: {
                 resource: projectId,
                 filters: [
                     {
@@ -60,7 +59,6 @@ const registerWebhook = async (req, res) => {
                     }
                 ],
                 target: `http://${currentApiUrl}/api/asana`,
-            }
         })
     };
     try {
