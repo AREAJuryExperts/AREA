@@ -34,27 +34,22 @@ var webHookToken = "";
 
 
 const postWebhook = async (req, res) => {
-    if (req.headers["x-hook-secret"]) {
-        console.log("This is a new webhook");
-        webHookToken = req.headers["x-hook-secret"];
+    // if (req.headers["x-hook-secret"]) {
+    //     console.log("This is a new webhook");
+    //     webHookToken = req.headers["x-hook-secret"];
     
-        res.setHeader("X-Hook-Secret", webHookToken);
-        return res.sendStatus(200);
-    }
-    if (req.headers["x-hook-signature"]) {
-        // const computedSignature = crypto
-        //   .createHmac("SHA256", webHookToken)
-        //   .update(JSON.stringify(req.body))
-        //   .digest("hex");
-    
-        // if (!crypto.timingSafeEqual(Buffer.from(req.headers["x-hook-signature"]),Buffer.from(computedSignature)))
-        //     return res.sendStatus(401);
-        console.log(`Events on ${Date()}:`);
-        console.log(req.body.events);
-        await router("trelloUpdateCard", user);
-        return res.sendStatus(200);
-    }
-    return res.sendStatus(400);
+    //     res.setHeader("X-Hook-Secret", webHookToken);
+    //     return res.sendStatus(200);
+    // }
+    // if (req.headers["x-hook-signature"]) {
+    //     console.log(`Events on ${Date()}:`);
+    //     console.log(req.body.events);
+    //     return res.sendStatus(200);
+    // }
+    // await router("AsanaAction", user);
+    console.log(req.body);
+    return res.sendStatus(200).json({ msg: "Request valid" });
+    // return res.sendStatus(400).json({ msg: "Bad request" });
 }
 
 module.exports = postWebhook;
