@@ -32,10 +32,11 @@ const refreshToken = async (refreshToken, user) => {
         return {}
     }
     let newUser = user;
+    console.log("newBearerToken", newUser);
     newUser.access_token = newBearerToken.access_token;
     await dynamo.client().put({
         TableName: "AsanaUsers",
-        Item: asanaUser,
+        Item: newUser,
     }).promise();
     return newBearerToken;
 }
