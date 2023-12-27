@@ -5,7 +5,7 @@ const AsanaCreateProject = async (user, projectName = "testReactionAs", projectI
 
     let params = {
         TableName: "AsanaUsers",
-        IndexName: "userId",
+        IndexName: "user_id",
         KeyConditionExpression: "user_id = :n",
         ExpressionAttributeValues: {
             ":n": user.id,
