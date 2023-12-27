@@ -21,7 +21,7 @@ const registerWebhook = async (req, res) => {
 
     let AsanaUser = tmpUser.Items[0];
     if (!AsanaUser) return res.status(400).send({msg: "User not found"});
-    if (!AsanaUser.token) return res.status(400).send({msg: "User token not found"});
+    if (!AsanaUser.access_token && !AsanaUser.refresh_token) return res.status(400).send({msg: "User token not found"});
     let url = 'https://app.asana.com/api/1.0/workspaces?opt_fields=';
     let options = {
         method: 'GET',
