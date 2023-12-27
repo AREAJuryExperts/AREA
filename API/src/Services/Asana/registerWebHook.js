@@ -10,7 +10,7 @@ const registerWebhook = async (req, res) => {
     let params = {
         TableName: "AsanaUsers",
         IndexName: "userId",
-        KeyConditionExpression: "userId = :n",
+        KeyConditionExpression: "user_id = :n",
         ExpressionAttributeValues: {
             ":n": req.user.id,
         },
