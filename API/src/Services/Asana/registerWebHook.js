@@ -36,6 +36,7 @@ const registerWebhook = async (req, res) => {
             let token = await refreshToken(AsanaUser.refresh_token, AsanaUser);
             if (!token.access_token) return res.status(400).send({msg: "Error while refreshing token"});
             AsanaUser.access_token = token.access_token;
+            options.headers.authorization = `Bearer ${AsanaUser.access_token}`;
             resp = await fetch(url, options);
             if (resp.status !== 200) return res.status(400).send({msg: "Error while fetching data"});
         }
@@ -64,8 +65,11 @@ const registerWebhook = async (req, res) => {
     };
     try {
         let resp = await fetch(url, options);
-        if (resp.status !== 201)
+        if (resp.status !== 201) {
+            let data = await resp.json();
+            console.log("resp status", resp.status, "resp data", data);
             return res.status(400).send({msg: "Error while creating webhook"});
+        }
         return res.status(201).send({msg: "Webhook created"});
     } catch (err) {
         console.log(err);
