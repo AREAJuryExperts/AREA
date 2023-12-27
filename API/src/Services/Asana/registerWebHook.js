@@ -41,6 +41,7 @@ const registerWebhook = async (req, res) => {
             if (resp.status !== 200) return res.status(400).send({msg: "Error while fetching data"});
         }
         let data = await resp.json();
+        console.log("data", data); 
         projectId = data.data[0].id;
     } catch (err) {
         console.log(err);
@@ -63,7 +64,7 @@ const registerWebhook = async (req, res) => {
             }
         })
     };
-    console.log("url", url, "options", options);
+    console.log(resource, projectId);
     try {
         let resp = await fetch(url, options);
         if (resp.status !== 201) {
