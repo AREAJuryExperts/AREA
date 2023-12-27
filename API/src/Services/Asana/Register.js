@@ -31,7 +31,7 @@ const getBearerToken = async (req, res) => {
     let asanaUser = {
         access_token: data.access_token,
         refresh_token: data.refresh_token,
-        user_id : req.user.id,
+        userId : req.user.id,
         id : data.data.id,
         email : data.data.email,
     };
