@@ -56,7 +56,8 @@ const registerWebhook = async (req, res) => {
                 resource: projectId,
                 filters: [
                     {
-                        resource_type: 'task'
+                        resource_type: 'project',
+                        action: 'added',
                     }
                 ],
                 target: `${currentApiUrl}/api/asana/webhook`,
