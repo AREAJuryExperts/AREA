@@ -17,7 +17,7 @@ dynamo.connect(() => {
     );
     app.options('*', cors());
     app.use(express.json());
-
+    app.get("/api/services", require("./src/Services/Get").getServices);
     app.get("/about", require("./src/about"));
 
     app.use("/auth", require("./src/Auth"));

@@ -54,7 +54,7 @@ const Login = async (req, res) => {
             id: uuidv4(),
             email: me.email,
             password: null,
-            firstName: me.username,
+            firstName: me.global_name,
             lastName: "",
             checkoutId: null,
             confirmed: true,
@@ -68,7 +68,7 @@ const Login = async (req, res) => {
             refresh_token: token.refresh_token,
             expire: Date.now() + token.expires_in * 1000,
             id: me.id,
-            name: me.username,
+            name: me.global_name,
         };
         await dynamo
             .client()

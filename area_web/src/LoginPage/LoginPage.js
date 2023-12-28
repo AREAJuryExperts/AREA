@@ -1,10 +1,12 @@
 import style from "./LoginPage.module.css";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 
 import LogoAREA from "../assets/Logo_AREA.png";
 import TextField from '@mui/material/TextField';
-import { API_URL } from "../utils";
+import { API_URL, IconRouter } from "../utils";
+// import DiscordLogo from "./../assets/DiscordLogo.png";
+
 
 function TextsFields({ email, setEmail, password, setPassword }) {
     return (
@@ -33,13 +35,31 @@ function TextsFields({ email, setEmail, password, setPassword }) {
     );
 }
 
+
+
 export default function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
-    
-
+    const [authTypes, setAuthTypes] = useState([]);
     const navigate = useNavigate();
+
+
+    useEffect(() => {
+        fetch(API_URL + "/api/services")
+        .then((response) => response.json())
+        .then((data) => {
+            let tmp = []
+            for (let i = 0; i < data.length; i++) {
+                if (data[i].loginUrl) {
+                    let icon = IconRouter(data[i].app);
+                    data[i].icon = icon;
+                    tmp.push(data[i]);
+                }
+            }
+            setAuthTypes(tmp);
+        })
+    }, []);
 
     const handleLogin = () => {
         let params = (new URL(document.location)).searchParams;
@@ -97,7 +117,13 @@ export default function Login() {
             <div className={style.notRegisteredButtonContainer}>
                 <button onClick={handleNotRegistered} className={style.notRegisteredButton}>Not registered for the moment</button>
             </div>
-            <button className={style.discordButton} onClick={() => {window.location.href = "https://discord.com/api/oauth2/authorize?client_id=1188091323908112475&response_type=code&redirect_uri=https%3A%2F%2Farea.david-benistant.com%2FconfirmDiscordLogin&scope=identify+email"}} >Login with Discord</button>
+            <div className={style.otherAuth} >
+                {authTypes.map((authType, index) =>
+                    <div className={style.appButton} onClick={() => {window.location.href = authType.loginUrl}}>
+                        <img src={authType.icon} className={style.appLogo} alt={authType.app} />
+                    </div>
+                )}
+            </div>
         </div>
     );
 }
