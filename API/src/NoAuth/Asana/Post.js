@@ -251,28 +251,17 @@ let secret = "";
 
 const postWebhook = async (req, res) => {
     let user;
-    if (!req.body.data) return res.sendStatus(400).json({ msg: "Bad request" })
-    for (let i in req.body.data) {
-        if (!user && req.body.data[i].user) {
-            user = await getUserByAsanaId(req.body.data[i].user.gid);
-        }
-        if (req.body.data[i].type == "task" && req.body.data[i].action == "added") {
-            await router("AsanaAction", user);
-            break;
-        }
+    if (req.body.data) {
+      for (let i in req.body.data) {
+          if (!user && req.body.data[i].user) {
+              user = await getUserByAsanaId(req.body.data[i].user.gid);
+          }
+          if (req.body.data[i].type == "task" && req.body.data[i].action == "added") {
+              await router("AsanaAction", user);
+              break;
+          }
+      }
     }
-    // if (req.headers["x-hook-secret"]) {
-    //     console.log("This is a new webhook");
-    //     webHookToken = req.headers["x-hook-secret"];
-    
-    //     res.setHeader("X-Hook-Secret", webHookToken);
-    //     return res.sendStatus(200);
-    // }
-    // if (req.headers["x-hook-signature"]) {
-    //     console.log(`Events on ${Date()}:`);
-    //     console.log(req.body.events);
-    //     return res.sendStatus(200);
-    // }
     if (req.headers["x-hook-secret"])
       secret = req.headers["x-hook-secret"];
     res.setHeader("X-Hook-Secret", secret);
