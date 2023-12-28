@@ -3,7 +3,6 @@ const dynamo = require("../../../DB");
 const request = require("../../Services/Discord/request");
 const getUserByDiscordId = require("./UserByDiscord");
 
-
 const Login = async (req, res) => {
     try {
         utils.checkArgs(req.body, ["code"]);
@@ -11,6 +10,8 @@ const Login = async (req, res) => {
         res.status(err.status).send(err.msg);
         return;
     }
+
+    console.log(req.body.code);
 
     const data = {
         client_id: process.env.DISCORD_CLIENT_ID,
@@ -44,16 +45,15 @@ const Login = async (req, res) => {
         let user = await getUserByDiscordId(me.id);
 
         if (user) {
-            return res.status(200).send({ msg: "ok", jwt: utils.encodeToken(user) });
+            return res
+                .status(200)
+                .send({ msg: "ok", jwt: utils.encodeToken(user) });
         }
 
         user = {
             id: uuidv4(),
             email: me.email,
-            password: bcrypt.hashSync(
-                req.body.password,
-                bcrypt.genSaltSync(10)
-            ),
+            password: null,
             firstName: me.username,
             lastName: "",
             checkoutId: null,
@@ -84,10 +84,11 @@ const Login = async (req, res) => {
                 Item: discordUsr,
             })
             .promise();
-        return res.status(200).send({ msg: "ok", jwt: utils.encodeToken(user) });
+        return res
+            .status(200)
+            .send({ msg: "ok", jwt: utils.encodeToken(user) });
     }
     res.status(400).send({ msg: "Invalid code" });
 };
-
 
 module.exports = Login;
