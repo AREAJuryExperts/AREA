@@ -10,7 +10,7 @@ export let API_URL = "https://area.david-benistant.com:8080";
 export const IconRouter = (app) => {
     if (app === "Discord") return DiscordLogo;
     if (app === "Trello") return TrelloLogo;
-    if (app === "GitHub") return GithubLogo;
+    if (app === "Github") return GithubLogo;
     if (app === "Asana") return AsanaLogo;
     if (app === "Google") return GoogleLogo;
     return null;
