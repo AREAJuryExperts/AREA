@@ -82,7 +82,7 @@
         
         "app" : "Asana",
         "icon" : "Asana.png",
-        "authUrl" : "https://app.asana.com/-/oauth_authorize?response_type=code&client_id=1206159461664814&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2FconfirmAsana&state=secretStateParam",
+        "authUrl" : "https://app.asana.com/-/oauth_authorize?response_type=code&client_id=1206159461664814&redirect_uri=https%3A%2F%2Farea.david-benistant.com&state=secretStateParam",
         "actions" : [
             {
                 "displayName" : "Action on an organisation",
