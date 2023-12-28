@@ -246,8 +246,12 @@ var webHookToken = "";
 
 */
 
+
+let secret = "";
+
 const postWebhook = async (req, res) => {
     let user;
+    if (!req.body.data) return res.sendStatus(400).json({ msg: "Bad request" })
     for (let i in req.body.data) {
         if (!user && req.body.data[i].user) {
             user = await getUserByAsanaId(req.body.data[i].user.gid);
@@ -269,7 +273,9 @@ const postWebhook = async (req, res) => {
     //     console.log(req.body.events);
     //     return res.sendStatus(200);
     // }
-    console.log(req.body);
+    if (req.headers["x-hook-secret"])
+      secret = req.headers["x-hook-secret"];
+    res.setHeader("X-Hook-Secret", secret);
     return res.sendStatus(200).json({ msg: "Request valid" });
     // return res.sendStatus(400).json({ msg: "Bad request" });
 }
