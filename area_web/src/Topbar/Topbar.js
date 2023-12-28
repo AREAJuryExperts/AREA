@@ -130,9 +130,9 @@ function PopupLinks({ showLinks, setShowLinks, onClose }) {
                 for (let i = 0; i < data.length; i++) {
                     data[i].connected = false;
                     for (let j = 0; j < window.user.connected.length; j++) {
+                        data[i].icon = IconRouter(data[i].app);
                         if (data[i].app === window.user.connected[j]) {
                             data[i].connected = true;
-                            data[i].icon = IconRouter(data[i].app);
                         }
                     }
                 }
