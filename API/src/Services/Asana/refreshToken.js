@@ -17,7 +17,8 @@ const refreshBearerToken = async (refreshToken) => {
     formBody = formBody.join("&");
     let res = await fetch("https://app.asana.com/-/oauth_token", {method : "POST", headers : { 'Content-Type': 'application/x-www-form-urlencoded'}, body : formBody})
     if (!res.ok) {
-        console.log("Refresh Token failed")
+        let data = await res.json();
+        console.log("Refresh Token failed", data)
         return {};
     }
     let data = await res.json();
