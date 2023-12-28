@@ -265,7 +265,8 @@ const postWebhook = async (req, res) => {
     if (req.headers["x-hook-secret"])
       secret = req.headers["x-hook-secret"];
     console.log("secret", secret);
-    return res.status(200).json({ msg: "Request valid" }).header("X-Hook-Secret", secret);
+    res.header("X-Hook-Secret", secret)
+    return res.status(200).json({ msg: "Request valid" });
 }
 
 module.exports = postWebhook;
