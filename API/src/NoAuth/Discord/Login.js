@@ -1,6 +1,7 @@
 const utils = require("../../Utils");
 const dynamo = require("../../../DB");
 const request = require("../../Services/Discord/request");
+const { v4: uuidv4 } = require("uuid");
 const getUserByDiscordId = require("./UserByDiscord");
 
 const Login = async (req, res) => {
