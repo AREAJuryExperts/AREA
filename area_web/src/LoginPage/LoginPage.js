@@ -97,7 +97,7 @@ export default function Login() {
             <div className={style.notRegisteredButtonContainer}>
                 <button onClick={handleNotRegistered} className={style.notRegisteredButton}>Not registered for the moment</button>
             </div>
-            <button className={style.discordButton} onClick={() => {window.location.href = "https://discord.com/api/oauth2/authorize?client_id=1188091323908112475&response_type=code&redirect_uri=http%3A%2F%2Farea.david-benistant.com%2FconfirmDiscordLogin&scope=identify+email"}} >Login with Discord</button>
+            <button className={style.discordButton} onClick={() => {window.location.href = "https://discord.com/api/oauth2/authorize?client_id=1188091323908112475&response_type=code&redirect_uri=https%3A%2F%2Farea.david-benistant.com%2FconfirmDiscordLogin&scope=identify+email"}} >Login with Discord</button>
         </div>
     );
 }
