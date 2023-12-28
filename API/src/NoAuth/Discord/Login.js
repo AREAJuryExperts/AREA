@@ -29,7 +29,6 @@ const Login = async (req, res) => {
         },
     });
     token = await token.json();
-
     if (token.access_token) {
         let me = await fetch("https://discord.com/api/users/@me", {
             headers: {
