@@ -50,6 +50,6 @@ const GithubCreateNewRepo = async (user, repoName = "testReaction") => {
     }
 };
 
-    // await fetch(`https://api.github.com/orgs/AREAJuryExperts/repos/?name=${repoName}&token=${githubUser.token}`, {method: "POST"})
 
 module.exports = { GithubCreateNewRepo };
+
