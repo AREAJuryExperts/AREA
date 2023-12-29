@@ -42,10 +42,10 @@ const AsanaCreateProject = async (user, projectName = "Project" + Math.floor(Mat
         }
 
     }
-    let url = `https://app.asana.com/api/1.0/projects`;
+    let url = `https://app.asana.com/api/1.0/workspaces/${projectId}/projects`;
     try {
         let lastres = await fetch(url, {headers : {accept: 'application/json', authorization: `Bearer ${AsanaUser.access_token}`}, 
-        method : "POST", body : JSON.stringify({data : {name : projectName, workspace : projectId}})})
+        method : "POST", body : JSON.stringify({data : {name : projectName, color: 'light-red'}})})
         if (lastres.status !== 201) {
             let mydata = await lastres.text();
             console.log(mydata);
