@@ -41,18 +41,18 @@ const postWebhook = async (req, res) => {
     let user;
     let secret = "";
     console.log(req.body);
-    if (req.body.data) {
-      for (let i in req.body.data) {
-          if (!user && req.body.data[i].user) {
-              user = await getUserByAsanaId(req.body.data[i].user.gid);
+    if (req.body.events) {
+      for (let i in req.body.events) {
+          if (!user && req.body.events[i].user) {
+              user = await getUserByAsanaId(req.body.events[i].user.gid);
               if (!user.asanaUser || !user.user)
                 return res.status(400).send({msg: "User not found"});
           }
-          if (req.body.data[i].type === "project" && req.body.data[i].action === "added") {
+          if (req.body.events[i].action === "added") {
               await router("ProjectCreated", user.user);
               break;
           }
-          if (req.body.data[i].type === "project" && (req.body.data[i].action === "removed" || req.body.data[i].action === "deleted")) {
+          if ((req.body.events[i].action === "removed" || req.body.events[i].action === "deleted")) {
             await router("ProjectRemoved", user.user);
             break;
         }
