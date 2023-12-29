@@ -10,7 +10,7 @@ function ConfirmAsana() {
             let res = await fetch(API_URL + "/api/asana/register?code=" + urlParams.get('code'), {method : "POST", headers : {"Authorization" : token}})
             let data = await res.json();
             try {
-                let webhook = await fetch(API_URL + "/api/asana/registerWebHook", {method : "POST", headers : {"Authorization" : token}})
+                let webhook = await fetch(API_URL + "/api/asana/regsiterWebhook", {method : "POST", headers : {"Authorization" : token}})
                 let webhookData = await webhook.json();
                 console.log("webhookData ", webhookData);
             } catch(err) {
