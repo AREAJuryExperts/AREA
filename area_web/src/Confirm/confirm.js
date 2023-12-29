@@ -27,7 +27,7 @@ function Confirm() {
         })
             .then((res) => res.json())
             .then((data) => {
-                if (data.msg === "ok") {
+                if (data.msg === "ok" || data.msg === "User already confirmed") {
                     window.location.href = "/";
                 }
             });
