@@ -19,8 +19,8 @@ const GithubCreateNewRepo = async (user, repoName = "testReaction") => {
     console.log("tmpUser.Items[0]:", tmpUser.Items[0])
 
     let githubUser = tmpUser.Items[0];
-    if (!githubUser) return null;
-    if (!githubUser.token) return null;
+    // if (!githubUser) return null;
+    // if (!githubUser.access_token) return null;
 
     const apiUrl = "https://api.github.com/orgs/AREAJuryExperts/repos";
     const completeRepoName = `${repoName}-${getRandomRepoID()}`;
@@ -28,13 +28,13 @@ const GithubCreateNewRepo = async (user, repoName = "testReaction") => {
         name: completeRepoName,
         private: false,
     };
-
+    console.log("gh user found: ", githubUser.access_token);
     try {
         let response = await fetch(apiUrl, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                Authorization: `Bearer ${githubUser.token}`,
+                Authorization: `Bearer ${githubUser.access_token}`,
             },
             body: JSON.stringify(data),
         });
