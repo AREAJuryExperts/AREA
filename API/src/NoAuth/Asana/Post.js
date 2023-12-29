@@ -40,6 +40,7 @@ const getUserByAsanaId = async (id) => {
 const postWebhook = async (req, res) => {
     let user;
     let secret = "";
+    console.log(req.body);
     if (req.body.data) {
       for (let i in req.body.data) {
           if (!user && req.body.data[i].user) {
@@ -61,8 +62,6 @@ const postWebhook = async (req, res) => {
       user = await getUserByAsanaId(req.query.userAsanaId);
       if (!user.asanaUser || !user.user) return res.status(400).send({msg: "User not found"});
       user.asanaUser.webhookSecret = req.headers["x-hook-secret"];
-      console.log(user);
-      console.log(user.asanaUser);
       try {
         await db.client().put({TableName: "AsanaUsers",Item: user.asanaUser}).promise();
       } catch (err) {
