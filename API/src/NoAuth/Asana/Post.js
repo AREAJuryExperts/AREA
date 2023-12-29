@@ -12,7 +12,6 @@ const getUserByAsanaId = async (id) => {
         },
     };
     console.log("first req");
-    
     try {
       let tmpUser = await db.client().get(params).promise();
       if (tmpUser.Count == 0) return null;
@@ -32,13 +31,10 @@ const getUserByAsanaId = async (id) => {
       let user = tmpUser.Item;
       return {user : user, asanaUser : AsanaUser};
     } catch (err) {
-      throw "exepction"
+      console.log(err);
+      return {}
     }
 };
-
-
-
-
 
 
 const postWebhook = async (req, res) => {
@@ -48,6 +44,8 @@ const postWebhook = async (req, res) => {
       for (let i in req.body.data) {
           if (!user && req.body.data[i].user) {
               user = await getUserByAsanaId(req.body.data[i].user.gid);
+              if (!user.asanaUser || !user.user)
+                return res.status(400).send({msg: "User not found"});
           }
           if (req.body.data[i].type === "project" && req.body.data[i].action === "added") {
               await router("ProjectCreated", user.user);
@@ -61,6 +59,7 @@ const postWebhook = async (req, res) => {
     }
     if (req.headers["x-hook-secret"]) {
       user = await getUserByAsanaId(req.query.userAsanaId);
+      if (!user.asanaUser || !user.user) return res.status(400).send({msg: "User not found"});
       user.asanaUser.webhookSecret = req.headers["x-hook-secret"];
       console.log(user);
       console.log(user.asanaUser);
@@ -72,8 +71,10 @@ const postWebhook = async (req, res) => {
       }
       secret = req.headers["x-hook-secret"];
     } else {
-      if (!user)
+      if (!user) {
         user = await getUserByAsanaId(req.query.userAsanaId);
+        if (!user.asanaUser || !user.user) return res.status(400).send({msg: "User not found"});
+      }
       secret = user.asanaUser.webhookSecret;
     }
     res.header("X-Hook-Secret", secret)
