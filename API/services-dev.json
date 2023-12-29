@@ -27,7 +27,7 @@
     {
         "app" : "Trello",
         "icon" : "TrelloLogo.png",
-        "authUrl" : "https://trello.com/1/authorize?expiration=never&name=Area&scope=read,write&response_type=token&key=5514e3ab1f2a77b0fac7475c09686a05&redirect_uri=http://area.david-benistant.com/confirmTrello",
+        "authUrl" : "https://trello.com/1/authorize?expiration=never&name=Area&scope=read,write&response_type=token&key=5514e3ab1f2a77b0fac7475c09686a05&redirect_uri=https://area.david-benistant.com/confirmTrello",
         "actions" : [
             {
                 "displayName" : "Card created",
@@ -56,7 +56,7 @@
     {
         "app" : "Github",
         "icon" : "GithubLogo.png",
-        "authUrl" : "https://github.com/login/oauth/authorize?client_id=1ed7db428103fa43e40a&redirect_uri=http://area.david-benistant.com/confirmGithub&scope=read:user,user:email,repo",
+        "authUrl" : "https://github.com/login/oauth/authorize?client_id=1ed7db428103fa43e40a&redirect_uri=https://area.david-benistant.com/confirmGithub&scope=read:user,user:email,repo",
         "actions" : [
             {
                 "displayName" : "Repository created",
