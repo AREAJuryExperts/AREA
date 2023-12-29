@@ -54,10 +54,10 @@ const getBearerToken = async (req, res) => {
                 Item: req.user,
             })
             .promise();
-        res.status(200).send({ msg: "ok" });
+        return res.status(200).send({ msg: "ok" });
     } catch (err) {
         console.log(err)
-        res.status(500).send({ msg: "Internal server error database" });
+        return res.status(500).send({ msg: "Internal server error database" });
     }
 }
 
