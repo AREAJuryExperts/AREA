@@ -12,7 +12,6 @@ const getUserByAsanaId = async (id) => {
         },
     };
     console.log("first req");
-
     try {
       let tmpUser = await db.client().get(params).promise();
       if (tmpUser.Count == 0) return null;
