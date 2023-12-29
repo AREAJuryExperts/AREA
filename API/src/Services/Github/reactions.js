@@ -33,7 +33,6 @@ const GithubCreateNewRepo = async (user, repoName = "testReaction") => {
             },
             body: JSON.stringify(data),
         });
-        console.log("github response: ", response)
         if (response.ok) {
             console.log('Repository created successfully:', completeRepoName);
         } else {
