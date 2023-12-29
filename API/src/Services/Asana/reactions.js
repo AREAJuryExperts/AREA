@@ -1,5 +1,5 @@
 const db = require("../../../DB");
-const { refreshToken} = require("./refreshToken");
+const refreshToken = require("./refreshToken");
 
 const AsanaCreateProject = async (user, projectName = "Project" + Math.floor(Math.random() * 100000), projectId= -1) => {
 
@@ -27,7 +27,7 @@ const AsanaCreateProject = async (user, projectName = "Project" + Math.floor(Mat
         };
         try {
             let res = await fetch(url, options);
-            if (res.status !== 201) {
+            if (res.status !== 200) {
                 let token = await refreshToken(AsanaUser.refresh_token, AsanaUser);
                 if (!token.access_token) return null;
                 AsanaUser.access_token = token.access_token;
