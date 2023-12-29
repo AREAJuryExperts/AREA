@@ -54,6 +54,7 @@ const postWebhook = async (req, res) => {
     if (req.headers["x-hook-secret"]) {
       user = await getUserByAsanaId(req.query.userAsanaId);
       user.asanaUser.webhookSecret = req.headers["x-hook-secret"];
+      console.log(user);
       try {
         await dynamo.client().put({TableName: "AsanaUsers",Item: user.asanaUser}).promise();
       } catch (err) {
