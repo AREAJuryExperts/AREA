@@ -34,16 +34,13 @@ const getReaction = async (action, user) => {
 const router = async (action, user) => {
     let reactions = await getReaction(action, user);
 
-    console.log(reactions);
     if (!reactions) return;
     for (let i = 0; i < reactions.length; i++) {
         if (reactions[i].reaction === "discordSendMp")
             await discordSendMp(user);
         if (reactions[i].reaction === "trelloCreateNewBoard")
             await TrelloCreateNewBoard(user);
-        console.log(reactions[i].reaction)
         if (reactions[i].reaction === "GithubCreateNewRepo") {
-            console.log("GithubCreateNewRepo")
             await GithubCreateNewRepo(user);
         }
         if (reactions[i].reaction === "AsanaCreateNewProject")
