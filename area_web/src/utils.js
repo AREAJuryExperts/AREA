@@ -3,9 +3,9 @@ import TrelloLogo from "./assets/TrelloLogo.png";
 import GithubLogo from "./assets/GithubLogo.png";
 import AsanaLogo from "./assets/Asana.png";
 import GoogleLogo from "./assets/Google.png";
+import info from "./infos.json";
 
-export let API_URL = "https://area.david-benistant.com:8080";
-
+export let API_URL = info.API_URL;
 
 export const IconRouter = (app) => {
     if (app === "Discord") return DiscordLogo;
