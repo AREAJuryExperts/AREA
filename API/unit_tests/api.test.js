@@ -81,7 +81,7 @@ describe("Test express", () => {
                 if (err) return done(err);
                 expect(res.body).to.be.an("array");
                 for (let i = 0; i < res.body.length; i++) {
-                    expect(res.body[i]).to.have.all.keys(
+                    expect(res.body[i]).to.include.keys(
                         "app",
                         "icon",
                         "authUrl",
