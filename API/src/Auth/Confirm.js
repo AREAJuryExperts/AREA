@@ -27,6 +27,7 @@ const confirm = async (req, res) => {
     }
     let user = tmpUser.Item;
     
+    console.log(user);
     if (user.checkoutId == null) {
         res.status(400).json({ msg: "Invalid checkoutId" });
         return;
