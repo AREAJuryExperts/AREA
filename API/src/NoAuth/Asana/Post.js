@@ -41,8 +41,10 @@ const postWebhook = async (req, res) => {
     let user;
     let secret = "";
     console.log(req.body);
+
     if (req.body.events) {
       for (let i in req.body.events) {
+          console.log(req.body.events[i])
           if (!user && req.body.events[i].user) {
               user = await getUserByAsanaId(req.body.events[i].user.gid);
               if (!user.asanaUser || !user.user)
