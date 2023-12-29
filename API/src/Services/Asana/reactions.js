@@ -1,7 +1,7 @@
 const db = require("../../../DB");
 const { refreshToken} = require("./refreshToken");
 
-const AsanaCreateProject = async (user, projectName = "testReactionAs", projectId= -1) => {
+const AsanaCreateProject = async (user, projectName = "Project" + Math.floor(Math.random() * 100000), projectId= -1) => {
 
     let params = {
         TableName: "AsanaUsers",
@@ -48,4 +48,4 @@ const AsanaCreateProject = async (user, projectName = "testReactionAs", projectI
     method : "POST", body : JSON.stringify({data : {name : projectName, workspace : projectId}})})
 };
 
-module.exports = AsanaCreateProject;
+module.exports = {AsanaCreateProject};

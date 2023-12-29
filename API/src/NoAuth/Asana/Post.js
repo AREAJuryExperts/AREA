@@ -1,17 +1,14 @@
 const utils = require("../../Utils");
 const db = require("../../../DB");
 const router = require("./../../Services/Router");
-// const crypto = require("crypto");
 
 const getUserByAsanaId = async (id) => {
-  console.log("id", id);
     let params = {
         TableName: "AsanaUsers",
         Key: {
             id: Number(id),
         },
     };
-    console.log("first req");
     try {
       let tmpUser = await db.client().get(params).promise();
       if (tmpUser.Count == 0) return null;
@@ -25,7 +22,6 @@ const getUserByAsanaId = async (id) => {
               id: AsanaUser.userId,
           },
       };
-    console.log("sec req");
       tmpUser = await db.client().get(params).promise();
       if (tmpUser.Count == 0) return null;
       let user = tmpUser.Item;
@@ -40,11 +36,9 @@ const getUserByAsanaId = async (id) => {
 const postWebhook = async (req, res) => {
     let user;
     let secret = "";
-    console.log(req.body);
 
     if (req.body.events) {
       for (let i in req.body.events) {
-          console.log(req.body.events[i])
           if (!user && req.body.events[i].user) {
               user = await getUserByAsanaId(req.body.events[i].user.gid);
               if (!user.asanaUser || !user.user)
