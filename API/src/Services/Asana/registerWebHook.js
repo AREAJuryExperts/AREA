@@ -58,9 +58,17 @@ const registerWebhook = async (req, res) => {
                     {
                         resource_type: 'project',
                         action: 'added',
+                    },
+                    {
+                        resource_type: 'project',
+                        action: 'removed',
+                    },
+                    {
+                        resource_type: 'project',
+                        action: 'deleted',
                     }
                 ],
-                target: `${currentApiUrl}/api/asana/webhook`,
+                target: `${currentApiUrl}/api/asana/webhook?userAsanaId=${AsanaUser.id}`,
             }
         })
     };
