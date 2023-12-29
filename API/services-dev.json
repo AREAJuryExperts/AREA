@@ -111,9 +111,8 @@
     {
         "app" : "Jira",
         "icon" : "Jira.png",
-        "authUrl" : "",
+        "authUrl" : "https://google.com",
         "actions" : [],
         "reactions" : []
     }
-
 ]
