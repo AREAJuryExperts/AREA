@@ -46,6 +46,7 @@ const AsanaCreateProject = async (user, projectName = "Project" + Math.floor(Mat
     let url = `https://app.asana.com/api/1.0/projects`;
     fetch(url, {headers : {accept: 'application/json', authorization: `Bearer ${AsanaUser.access_token}`}, 
     method : "POST", body : JSON.stringify({data : {name : projectName, workspace : projectId}})})
+    return "not null"
 };
 
 module.exports = {AsanaCreateProject};

@@ -43,8 +43,10 @@ const router = async (action, user) => {
         if (reactions[i].reaction === "GithubCreateNewRepo") {
             await GithubCreateNewRepo(user);
         }
-        if (reactions[i].reaction === "AsanaCreateNewProject")
-            await AsanaCreateProject(user);
+        if (reactions[i].reaction === "AsanaCreateNewProject") {
+            let ab = await AsanaCreateProject(user);
+            console.log("ab", ab);
+        }
     }
 }
 
