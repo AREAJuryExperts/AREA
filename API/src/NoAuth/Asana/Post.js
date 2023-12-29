@@ -54,8 +54,10 @@ const postWebhook = async (req, res) => {
     if (req.headers["x-hook-secret"]) {
       user = await getUserByAsanaId(req.query.userAsanaId);
       user.asanaUser.webhookSecret = req.headers["x-hook-secret"];
+      console.log(user);
+      console.log(user.asanaUser);
       try {
-        await dynamo.client().put({TableName: "AsanaUsers",Item: user.asanaUser}).promise();
+        await db.client().put({TableName: "AsanaUsers",Item: user.asanaUser}).promise();
       } catch (err) {
         console.error(err);
         return res.status(500).send({msg: "Internal server error database"});
