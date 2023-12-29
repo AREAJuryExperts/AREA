@@ -34,6 +34,7 @@ const getBearerToken = async (req, res) => {
         userId : req.user.id,
         id : data.data.id,
         email : data.data.email,
+        webhookSecret : "empty"
     };
 
     try {
