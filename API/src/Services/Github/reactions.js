@@ -1,5 +1,9 @@
 const db = require("../../../DB");
 
+const getRandomRepoID = () => {
+    Math.floor(Math.random() * 10000);
+};
+
 const GithubCreateNewRepo = async (user, repoName = "testReaction") => {
 
     let params = {
@@ -17,7 +21,24 @@ const GithubCreateNewRepo = async (user, repoName = "testReaction") => {
     if (!githubUser) return null;
     if (!githubUser.token) return null;
 
-    await fetch(`https://api.github.com/orgs/AREAJuryExperts/repos/?name=${repoName}&token=${githubUser.token}`, {method: "POST"})
+    const apiUrl = "https://api.github.com/orgs/AREAJuryExperts/repos";
+    const completeRepoName = `${repoName}-${getRandomRepoID()}`;
+    let data = {
+        name: completeRepoName,
+        private: false,
+    };
+
+    let response = await fetch(apiUrl, {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${githubUser.token}`,
+        },
+        body: JSON.stringify(data),
+    });
+
+    // await fetch(`https://api.github.com/orgs/AREAJuryExperts/repos/?name=${repoName}&token=${githubUser.token}`, {method: "POST"})
 
 };
 
