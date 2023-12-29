@@ -7,8 +7,10 @@ function ConfirmAsana() {
         let token = localStorage.getItem("jwt");
         const urlParams = new URLSearchParams(window.location.search);
         try {
-            const res = await fetch(API_URL + "/api/asana/register?code=" + urlParams.get('code'), {method : "POST", headers : {"Authorization" : token}})
-            const data = await res.json();
+            let res = await fetch(API_URL + "/api/asana/register?code=" + urlParams.get('code'), {method : "POST", headers : {"Authorization" : token}})
+            let data = await res.json();
+            await fetch(API_URL + "/api/asana/registerWebHook", {method : "POST", headers : {"Authorization" : token}})
+            window.location.href = "/";
             console.log(data);
             return;
         } catch (err) {
