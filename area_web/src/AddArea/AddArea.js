@@ -198,7 +198,7 @@ export default function AddArea() {
                 setAreas(newData);
             })
             .catch((err) => {
-                console.log(err);
+                console.error(err);
             });
     }, [window.user]);
 

@@ -23,7 +23,7 @@ const getBearerToken = async (req, res) => {
         'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'},
         method : "POST", mode : 'cors', body : formBody})
     if (!requ.ok) {
-        console.log("Error cannot get a token")
+        console.error("Error cannot get a token")
         return res.status(400).send({ "msg": "Error cannot get a token" })
     }
     const data = await requ.json();

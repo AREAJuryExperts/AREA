@@ -12,8 +12,6 @@ const Login = async (req, res) => {
         return;
     }
 
-    console.log(req.body.code);
-
     const data = {
         client_id: process.env.DISCORD_CLIENT_ID,
         client_secret: process.env.DISCORD_CLIENT_SECRET,

@@ -30,7 +30,7 @@ module.exports = {
                 throw "No services.json";
             }
         } catch (err) {
-            console.log(err);
+            console.error(err);
             process.exit(1);
         }
         callback();

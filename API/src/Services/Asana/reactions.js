@@ -38,7 +38,7 @@ const AsanaCreateProject = async (user, projectName = "testReactionAs", projectI
             let data = await res.json();
             projectId = data.data[0].id;
         } catch (err) {
-            console.log(err);
+            console.error(err);
             return null;
         }
 

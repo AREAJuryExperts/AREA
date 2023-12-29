@@ -60,7 +60,6 @@ const register = async (req, res) => {
         "&checkoutId=" +
         user.checkoutId;
 
-    console.log(checkoutUrl);
     var transporter = nodemailer.createTransport({
         service: "gmail",
         auth: {
