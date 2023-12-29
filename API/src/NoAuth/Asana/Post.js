@@ -4,28 +4,35 @@ const router = require("./../../Services/Router");
 // const crypto = require("crypto");
 
 const getUserByAsanaId = async (id) => {
+  console.log("id", id);
     let params = {
         TableName: "AsanaUsers",
         Key: {
             id: id,
         },
     };
-    let tmpUser = await db.client().get(params).promise();
-    if (tmpUser.Count == 0) return null;
-
-    let AsanaUser = tmpUser.Item;
-    if (!AsanaUser) return null;
-    if (!AsanaUser.userId) return null;
-    params = {
-        TableName: "Users",
-        Key: {
-            id: AsanaUser.userId,
-        },
-    };
-    tmpUser = await db.client().get(params).promise();
-    if (tmpUser.Count == 0) return null;
-    let user = tmpUser.Item;
-    return {user : user, asanaUser : AsanaUser};
+    console.log("first req");
+    try {
+      let tmpUser = await db.client().get(params).promise();
+      if (tmpUser.Count == 0) return null;
+  
+      let AsanaUser = tmpUser.Item;
+      if (!AsanaUser) return null;
+      if (!AsanaUser.userId) return null;
+      params = {
+          TableName: "Users",
+          Key: {
+              id: AsanaUser.userId,
+          },
+      };
+    console.log("sec req");
+      tmpUser = await db.client().get(params).promise();
+      if (tmpUser.Count == 0) return null;
+      let user = tmpUser.Item;
+      return {user : user, asanaUser : AsanaUser};
+    } catch (err) {
+      throw "exepction"
+    }
 };
 
 
