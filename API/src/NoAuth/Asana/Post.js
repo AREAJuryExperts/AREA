@@ -57,7 +57,7 @@ const postWebhook = async (req, res) => {
       console.log(user);
       console.log(user.asanaUser);
       try {
-        await dynamo.client().put({TableName: "AsanaUsers",Item: user.asanaUser}).promise();
+        await db.client().put({TableName: "AsanaUsers",Item: user.asanaUser}).promise();
       } catch (err) {
         console.log(err);
         return res.status(500).send({msg: "Internal server error database"});
