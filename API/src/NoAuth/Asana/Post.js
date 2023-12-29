@@ -8,7 +8,7 @@ const getUserByAsanaId = async (id) => {
     let params = {
         TableName: "AsanaUsers",
         Key: {
-            id: id,
+            id: Number(id),
         },
     };
     console.log("first req");
