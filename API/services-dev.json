@@ -111,7 +111,7 @@
     {
         "app" : "Jira",
         "icon" : "Jira.png",
-        "authUrl" : "https://google.com",
+        "authUrl" : "https://auth.atlassian.com/authorize?audience=api.atlassian.com&client_id=JDQosRjKdnJpfC1LEK6wsII2oxr2KArF&scope=read%3Ajira-work%20manage%3Ajira-project%20manage%3Ajira-configuration%20read%3Ajira-user%20write%3Ajira-work%20manage%3Ajira-webhook%20manage%3Ajira-data-provider&redirect_uri=https%3A%2F%2Farea.david-benistant.com%2FconfirmJira&state=${YOUR_USER_BOUND_VALUE}&response_type=code&prompt=consent",
         "actions" : [],
         "reactions" : []
     }
