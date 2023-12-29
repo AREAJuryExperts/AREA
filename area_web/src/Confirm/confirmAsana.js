@@ -16,7 +16,7 @@ function ConfirmAsana() {
             } catch(err) {
                 console.log(err);
             }
-            // window.location.href = "/";
+            window.location.href = "/";
             console.log(data);
             return;
         } catch (err) {
