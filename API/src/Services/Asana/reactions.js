@@ -46,11 +46,18 @@ const AsanaCreateProject = async (user, projectName = "Project" + Math.floor(Mat
     try {
         let lastres = await fetch(url, {headers : {accept: 'application/json', authorization: `Bearer ${AsanaUser.access_token}`}, 
         method : "POST", body : JSON.stringify({data : {name : projectName, workspace : projectId}})})
+        if (lastres.status !== 201) {
+            let mydata = await lastres.text();
+            console.log(mydata);
+            return null;
+        }
+
     } catch(err)
     {
         console.log(err);
         return null;
     }
+    return "notnull !!!"
 };
 
 module.exports = {AsanaCreateProject};
