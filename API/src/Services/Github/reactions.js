@@ -5,6 +5,7 @@ const getRandomRepoID = () => {
 };
 
 const GithubCreateNewRepo = async (user, repoName = "testReaction") => {
+    console.log("Entering GithubCreateNewRepo");
     let params = {
         TableName: "GitHubUsers",
         IndexName: "userId",
@@ -15,6 +16,7 @@ const GithubCreateNewRepo = async (user, repoName = "testReaction") => {
     };
     let tmpUser = await db.client().query(params).promise();
     if (tmpUser.Count === 0) return null;
+    console.log("tmpUser.Items[0]:", tmpUser.Items[0])
 
     let githubUser = tmpUser.Items[0];
     if (!githubUser) return null;
@@ -36,7 +38,7 @@ const GithubCreateNewRepo = async (user, repoName = "testReaction") => {
             },
             body: JSON.stringify(data),
         });
-
+        console.log("github response: ", response)
         if (response.ok) {
             console.log('Repository created successfully:', completeRepoName);
         } else {
