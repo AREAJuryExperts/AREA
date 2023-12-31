@@ -14,7 +14,7 @@ import ConfirmDiscord from "./Confirm/confirmDiscord";
 import ConfirmGithub from "./Confirm/confirmGithub";
 import ConfirmAsana from "./Confirm/confirmAsana";
 import ConfirmDiscordLogin from "./Confirm/confirmDiscordLogin";
-
+import confirmJira from "./Confirm/confirmJira";
 
 
 function App() {
@@ -31,6 +31,7 @@ function App() {
                 <Route path="/confirmGithub" element={<ConfirmGithub />} />
                 <Route path="/confirmAsana" element={<ConfirmAsana />} />
                 <Route path="/waitingConfirmation" element={<WaitingPage />} />
+                <Route path="/confirmJira" element={<WaitingPage />} />
             </Routes>
         </Router>
     );

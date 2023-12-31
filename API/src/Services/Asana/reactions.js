@@ -19,33 +19,34 @@ const AsanaCreateProject = async (user, projectName = "Project" + Math.floor(Mat
     if (projectId === -1) {
         let url = 'https://app.asana.com/api/1.0/workspaces?opt_fields=';
         let options = {
-          method: 'GET',
-          headers: {
+            method: 'GET',
+            headers: {
             accept: 'application/json',
             authorization: `Bearer ${AsanaUser.access_token}`
-          }
+            }
         };
         try {
-            let res = await fetch(url, options);
-            if (res.status !== 200) {
+            let resp = await fetch(url, options);
+            if (resp.status !== 200) {
                 let token = await refreshToken(AsanaUser.refresh_token, AsanaUser);
                 if (!token.access_token) return null;
                 AsanaUser.access_token = token.access_token;
-                res = await fetch(url, options);
-                if (res.status !== 200) return null;
+                options.headers.authorization = `Bearer ${AsanaUser.access_token}`;
+                resp = await fetch(url, options);
+                if (resp.status !== 200) return null;
             }
-            let data = await res.json();
-            projectId = data.data[0].id;
+            let data = await resp.json(); 
+            projectId = data.data[0].gid;
         } catch (err) {
             console.log(err);
             return null;
         }
 
     }
-    let url = `https://app.asana.com/api/1.0/projects`;
+    let url = `https://app.asana.com/api/1.0/workspaces/${projectId}/projects`;
     try {
         let lastres = await fetch(url, {headers : {accept: 'application/json', authorization: `Bearer ${AsanaUser.access_token}`}, 
-        method : "POST", body : JSON.stringify({data : {name : projectName, workspace : projectId}})})
+        method : "POST", body : JSON.stringify({data : {name : projectName, color: 'light-red'}})})
         if (lastres.status !== 201) {
             let mydata = await lastres.text();
             console.log(mydata);
