@@ -15,7 +15,6 @@ jobs:
       AWS_REGION: 'us-east-1'
       S3_BUCKET: 'areafront'
       DISTRIBUTION_ID : "E2JMDNRDATLF7E"
-      # GITHUB_TOKEN: ${{ secrets.GH_PAT }}
 
     steps:
     - uses: actions/checkout@v2
@@ -46,40 +45,34 @@ jobs:
         git config --global user.email 'email@example.com'
         git remote set-url origin git@github.com:AREAJuryExperts/AREA.git
         git add ./area_web/src/infos.json
-        git commit -m "AUTO COMMIT: update infos.json"
+        git commit -m "AUTO COMMIT update infos.json"
         git push
-      
-    - name: Commit changes
-      if: env.INFOS_CHECK == '0'
-      run: echo "pass"
 
+    - name: install dependecies
+      if: env.COMMIT_CHECK == '0'
+      run: npm install
+      working-directory: ./area_web
 
+    - name: build
+      if: env.COMMIT_CHECK == '0'
+      run: npm run build
+      working-directory: ./area_web
 
-    # - name: install dependecies
-    #   if: env.COMMIT_CHECK == '0'
-    #   run: npm install
-    #   working-directory: ./area_web
+    - name: deploy
+      if: env.COMMIT_CHECK == '0'
+      run: |
+        aws s3 sync ./area_web/build s3://$S3_BUCKET --delete
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_DEFAULT_REGION: ${{ env.AWS_REGION }}
 
-    # - name: build
-    #   if: env.COMMIT_CHECK == '0'
-    #   run: npm run build
-    #   working-directory: ./area_web
-
-    # - name: deploy
-    #   if: env.COMMIT_CHECK == '0'
-    #   run: |
-    #     aws s3 sync ./area_web/build s3://$S3_BUCKET --delete
-    #   env:
-    #     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-    #     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-    #     AWS_DEFAULT_REGION: ${{ env.AWS_REGION }}
-
-    # - name: refresh cloudfront
-    #   if: env.COMMIT_CHECK == '0'
-    #   run: |
-    #     aws cloudfront create-invalidation --distribution-id $DISTRIBUTION_ID --paths "/*"
-    #   env:
-    #     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-    #     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-    #     AWS_DEFAULT_REGION: ${{ env.AWS_REGION }}
+    - name: refresh cloudfront
+      if: env.COMMIT_CHECK == '0'
+      run: |
+        aws cloudfront create-invalidation --distribution-id $DISTRIBUTION_ID --paths "/*"
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_DEFAULT_REGION: ${{ env.AWS_REGION }}
 
