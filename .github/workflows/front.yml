@@ -15,7 +15,7 @@ jobs:
       AWS_REGION: 'us-east-1'
       S3_BUCKET: 'areafront'
       DISTRIBUTION_ID : "E2JMDNRDATLF7E"
-      GITHUB_TOKEN: ${{ secrets.GH_PAT }}
+      # GITHUB_TOKEN: ${{ secrets.GH_PAT }}
 
     steps:
     - uses: actions/checkout@v2
@@ -39,6 +39,9 @@ jobs:
     - name: Commit changes
       if: env.INFOS_CHECK == '1'
       run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
         git config --global user.name 'AUTOMATED DEPLOYMENT'
         git config --global user.email 'email@example.com'
         git add ./area_web/src/infos.json
