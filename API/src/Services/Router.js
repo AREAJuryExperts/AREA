@@ -40,10 +40,13 @@ const router = async (action, user) => {
             await discordSendMp(user);
         if (reactions[i].reaction === "trelloCreateNewBoard")
             await TrelloCreateNewBoard(user);
-        if (reactions[i].reaction === "GithubCreateNewRepo")
+        if (reactions[i].reaction === "GithubCreateNewRepo") {
             await GithubCreateNewRepo(user);
-        if (reactions[i].reaction === "AsanaCreateNewProject")
-            await AsanaCreateProject(user);
+        }
+        if (reactions[i].reaction === "AsanaCreateNewProject") {
+            let ab = await AsanaCreateProject(user);
+            console.log("ab", ab);
+        }
     }
 }
 

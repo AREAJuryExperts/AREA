@@ -8,7 +8,7 @@ const getBearerToken = async (req, res) => {
         "grant_type": "authorization_code",
         "client_id": process.env.ASANA_CLIENT_ID,
         "client_secret": process.env.ASANA_CLIENT_SECRET,
-        "redirect_uri": "http://localhost:3000/confirmAsana",
+        "redirect_uri": process.env.ASANA_REDIRECT_URI,
         "code": req.query.code,
     };
     var formBody = [];
@@ -34,6 +34,7 @@ const getBearerToken = async (req, res) => {
         userId : req.user.id,
         id : data.data.id,
         email : data.data.email,
+        webhookSecret : "empty"
     };
 
     try {
@@ -53,10 +54,10 @@ const getBearerToken = async (req, res) => {
                 Item: req.user,
             })
             .promise();
-        res.status(200).send({ msg: "ok" });
+        return res.status(200).send({ msg: "ok" });
     } catch (err) {
         console.log(err)
-        res.status(500).send({ msg: "Internal server error database" });
+        return res.status(500).send({ msg: "Internal server error database" });
     }
 }
 

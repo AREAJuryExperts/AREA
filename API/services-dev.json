@@ -83,7 +83,7 @@
         
         "app" : "Asana",
         "icon" : "Asana.png",
-        "authUrl" : "https://app.asana.com/-/oauth_authorize?response_type=code&client_id=1206159461664814&redirect_uri=https%3A%2F%2Farea.david-benistant.com&state=secretStateParam",
+        "authUrl" : "https://app.asana.com/-/oauth_authorize?response_type=code&client_id=1206159461664814&redirect_uri=https%3A%2F%2Farea.david-benistant.com%2FconfirmAsana&state=secretStateParam",
         "actions" : [
             {
                 "displayName" : "A project is created",
@@ -105,6 +105,13 @@
         "app" : "Google",
         "icon" : "Google.png",
         "authUrl" : "https://accounts.google.com/o/oauth2/auth?client_id=403121110510-3bngdn4539epr1lsukguqijeess63f4v.apps.googleusercontent.com&redirect_uri=http://area.david-benistant.com/confirmGoogle&response_type=code&scope=https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/calendar",
+        "actions" : [],
+        "reactions" : []
+    },
+    {
+        "app" : "Jira",
+        "icon" : "Jira.png",
+        "authUrl" : "https://auth.atlassian.com/authorize?audience=api.atlassian.com&client_id=JDQosRjKdnJpfC1LEK6wsII2oxr2KArF&scope=read%3Ajira-work%20manage%3Ajira-project%20manage%3Ajira-configuration%20read%3Ajira-user%20write%3Ajira-work%20manage%3Ajira-webhook%20manage%3Ajira-data-provider&redirect_uri=https%3A%2F%2Farea.david-benistant.com%2FconfirmJira&state=${YOUR_USER_BOUND_VALUE}&response_type=code&prompt=consent",
         "actions" : [],
         "reactions" : []
     }

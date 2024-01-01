@@ -10,7 +10,7 @@ const Register = async (req, res) => {
     }
 
     let data = await fetch("https://accounts.google.com/o/oauth2/auth", {
-        method: "GET",
+        method: "POST",
         headers: {
             "Content-Type": "application/x-www-form-urlencoded",
             Accept: "application/json",
