@@ -44,6 +44,7 @@ jobs:
         git add ./area_web/src/infos.json
         git commit -m "AUTO COMMIT: update infos.json"
         git push
+      
     - name: Commit changes
       if: env.COMMIT_CHECK == '0'
       run: echo "pass"
