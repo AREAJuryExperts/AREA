@@ -28,9 +28,9 @@ jobs:
     - name: test infos.json
       run: |
         if ! ./checkApiUrl ; then
-          echo "INFOS_CHECK=1" >> "$GITHUB_ENV"
-        else
           echo "INFOS_CHECK=0" >> "$GITHUB_ENV"
+        else
+          echo "INFOS_CHECK=1" >> "$GITHUB_ENV"
         fi
 
     - name: Commit changes
