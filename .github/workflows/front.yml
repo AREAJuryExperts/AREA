@@ -34,10 +34,10 @@ jobs:
         fi
 
     - name: debug
-      run: echo $GITHUB_ENV
+      run: echo env.COMMIT_CHECK
 
     - name: Commit changes
-      if: env.COMMIT_CHECK == '1'
+      if: env.INFOS_CHECK == '1'
       run: |
         git config --global user.name 'AUTOMATED DEPLOYMENT'
         git config --global user.email 'email@example.com'
@@ -46,7 +46,7 @@ jobs:
         git push
       
     - name: Commit changes
-      if: env.COMMIT_CHECK == '0'
+      if: env.INFOS_CHECK == '0'
       run: echo "pass"
 
 
