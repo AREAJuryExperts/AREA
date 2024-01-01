@@ -8,7 +8,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import LinkIcon from "@mui/icons-material/Link";
 import CheckIcon from "@mui/icons-material/Check";
 import Popup from "../Components/PopupInfosCard";
-import { API_URL } from "../utils";
+import { API_URL, IconRouter } from "../utils";
 import { useNavigate } from "react-router-dom";
 
 function InfosUser({ showInfos, setShowInfos, onClose }) {
@@ -130,6 +130,7 @@ function PopupLinks({ showLinks, setShowLinks, onClose }) {
                 for (let i = 0; i < data.length; i++) {
                     data[i].connected = false;
                     for (let j = 0; j < window.user.connected.length; j++) {
+                        data[i].icon = IconRouter(data[i].app);
                         if (data[i].app === window.user.connected[j]) {
                             data[i].connected = true;
                         }
@@ -175,7 +176,7 @@ function PopupLinks({ showLinks, setShowLinks, onClose }) {
                             }}
                         >
                             <img
-                                src={`/icons/${item.icon}`}
+                                src={item.icon}
                                 alt={item.app}
                                 className={style.listItemLogo}
                             />

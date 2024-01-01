@@ -5,7 +5,7 @@ const refreshBearerToken = async (refreshToken) => {
         "grant_type": "refresh_token",
         "client_id": process.env.ASANA_CLIENT_ID,
         "client_secret": process.env.ASANA_CLIENT_SECRET,
-        "redirect_uri": "http://localhost:3000/confirmAsana",
+        "redirect_uri": process.env.ASANA_REDIRECT_URI,
         "refresh_token": refreshToken,
     };
     let formBody = [];
@@ -17,7 +17,9 @@ const refreshBearerToken = async (refreshToken) => {
     formBody = formBody.join("&");
     let res = await fetch("https://app.asana.com/-/oauth_token", {method : "POST", headers : { 'Content-Type': 'application/x-www-form-urlencoded'}, body : formBody})
     if (!res.ok) {
-        console.log("Refresh Token failed")
+        // let data = await res.text();
+        // console.log("Refresh Token failed", data)
+        console.log(details)
         return {};
     }
     let data = await res.json();

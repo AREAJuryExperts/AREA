@@ -1,6 +1,6 @@
+
 import React, {useEffect} from "react";
 import { API_URL } from "../utils";
-
 function getQueryParams() {
     let queryParams = {};
     let queryString = window.location.search.substring(1);
@@ -11,32 +11,33 @@ function getQueryParams() {
     }
     return queryParams;
 }
-
-function Confirm() {
+function ConfirmDiscordLogin() {
     useEffect(() => {
-        let params = getQueryParams();
-        fetch( API_URL + "/auth/confirm", {
+        let query = getQueryParams();
+        let code = query.code;
+        fetch( API_URL + "/api/discord/login", {
             method: "POST",
             headers: {
-                "Content-Type": "application/json",
+                "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                userId: params.userId,
-                checkoutId: params.checkoutId,
+                code : code
             }),
         })
             .then((res) => res.json())
             .then((data) => {
-                if (data.msg === "ok" || data.msg === "User already confirmed") {
+                if (data.msg === "ok") {
+                    localStorage.setItem("jwt", data.jwt);
                     window.location.href = "/";
                 }
+                if (data.msg === "Invalid code") {
+                    window.location.href = "/login";
+                }
             });
-        
-        
     }, []);
 
     return (<></>)
 }
 
-export default Confirm;
+export default ConfirmDiscordLogin;
 

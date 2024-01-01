@@ -8,12 +8,10 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-import DiscordLogo from "../assets/DiscordLogo.png";
-import TrelloLogo from "../assets/TrelloLogo.png";
-import GithubLogo from "../assets/GithubLogo.png";
+
 import IMG from "../assets/IMG....png";
 import PopupWoverlay from "../Components/PopupInfosCard";
-import { API_URL } from "../utils";
+import { API_URL, IconRouter } from "../utils";
 
 const label = { inputProps: { "aria-label": "Switch demo" } };
 
@@ -439,11 +437,11 @@ function ListContainer({ item }) {
     );
 }
 
-const IconRouter = (app) => {
-    if (app === "Discord") return DiscordLogo;
-    if (app === "Trello") return TrelloLogo;
-    if (app === "Github") return GithubLogo;
-};
+// const IconRouter = (app) => {
+//     if (app === "Discord") return DiscordLogo;
+//     if (app === "Trello") return TrelloLogo;
+//     if (app === "Github") return GithubLogo;
+// };
 
 export default function HorizontalList() {
     const [infos, setInfos] = useState([]);

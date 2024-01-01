@@ -1,6 +1,7 @@
 const utils = require("../../Utils");
 const dynamo = require("../../../DB");
 const request = require("./request");
+const getUserByDiscordId = require("./../../NoAuth/Discord/UserByDiscord");
 
 const Register = async (req, res) => {
     try {
@@ -52,6 +53,12 @@ const Register = async (req, res) => {
                     return
                 }
 
+                let tmpUser = await getUserByDiscordId(me.id);
+                if (tmpUser) {
+                    res.status(400).send({ msg: "Discord account already connected" });
+                    return;
+                }
+
                 discordUsr.id = me.id;
                 discordUsr.name = me.global_name;
                 await dynamo
@@ -74,10 +81,9 @@ const Register = async (req, res) => {
                 return
             }
             res.status(400).send({ msg: "Invalid code" });
-            
         })
         .catch((err) => {
-            console.log(err);
+            console.error(err);
         });
 };
 

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 //Import for navigation through pages
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -13,7 +13,9 @@ import ConfirmTrello from "./Confirm/confirmTrello";
 import ConfirmDiscord from "./Confirm/confirmDiscord";
 import ConfirmGithub from "./Confirm/confirmGithub";
 import ConfirmAsana from "./Confirm/confirmAsana";
-
+import ConfirmDiscordLogin from "./Confirm/confirmDiscordLogin";
+import confirmJira from "./Confirm/confirmJira";
+import ConfirmGoogle from "./Confirm/confirmGoogle";
 
 function App() {
     return (
@@ -25,9 +27,12 @@ function App() {
                 <Route path="/confirm" element={<Confirm />} />
                 <Route path="/confirmTrello" element={<ConfirmTrello />} />
                 <Route path="/confirmDiscord" element={<ConfirmDiscord />} />
+                <Route path="/confirmDiscordLogin" element={<ConfirmDiscordLogin />} />
                 <Route path="/confirmGithub" element={<ConfirmGithub />} />
+                <Route path="/confirmGoogle" element={<ConfirmGoogle />} />
                 <Route path="/confirmAsana" element={<ConfirmAsana />} />
                 <Route path="/waitingConfirmation" element={<WaitingPage />} />
+                <Route path="/confirmJira" element={<WaitingPage />} />
             </Routes>
         </Router>
     );

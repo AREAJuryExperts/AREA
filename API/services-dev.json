@@ -2,7 +2,8 @@
     {
         "app" : "Discord",
         "icon" : "DiscordLogo.png",
-        "authUrl" : "https://discord.com/api/oauth2/authorize?client_id=1188091323908112475&response_type=code&redirect_uri=http%3A%2F%2Farea.david-benistant.com%2FconfirmDiscord&scope=identify+email",
+        "authUrl" : "https://discord.com/api/oauth2/authorize?client_id=1188091323908112475&response_type=code&redirect_uri=https%3A%2F%2Farea.david-benistant.com%2FconfirmDiscord&scope=identify+email",
+        "loginUrl" : "https://discord.com/api/oauth2/authorize?client_id=1188091323908112475&response_type=code&redirect_uri=https%3A%2F%2Farea.david-benistant.com%2FconfirmDiscordLogin&scope=identify+email",
         "actions" : [
             {
                 "displayName" : "Send a private message to the bot",
@@ -26,7 +27,7 @@
     {
         "app" : "Trello",
         "icon" : "TrelloLogo.png",
-        "authUrl" : "https://trello.com/1/authorize?expiration=never&name=Area&scope=read,write&response_type=token&key=5514e3ab1f2a77b0fac7475c09686a05&redirect_uri=http://area.david-benistant.com/confirmTrello",
+        "authUrl" : "https://trello.com/1/authorize?expiration=never&name=Area&scope=read,write&response_type=token&key=5514e3ab1f2a77b0fac7475c09686a05&redirect_uri=https://area.david-benistant.com/confirmTrello",
         "actions" : [
             {
                 "displayName" : "Card created",
@@ -55,7 +56,7 @@
     {
         "app" : "Github",
         "icon" : "GithubLogo.png",
-        "authUrl" : "https://github.com/login/oauth/authorize?client_id=1ed7db428103fa43e40a&redirect_uri=http://area.david-benistant.com/confirmGithub&scope=read:user,user:email,repo",
+        "authUrl" : "https://github.com/login/oauth/authorize?client_id=1ed7db428103fa43e40a&redirect_uri=https://area.david-benistant.com/confirmGithub&scope=read:user,user:email,repo",
         "actions" : [
             {
                 "displayName" : "Repository created",
@@ -82,11 +83,15 @@
         
         "app" : "Asana",
         "icon" : "Asana.png",
-        "authUrl" : "https://app.asana.com/-/oauth_authorize?response_type=code&client_id=1206159461664814&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2FconfirmAsana&state=secretStateParam",
+        "authUrl" : "https://app.asana.com/-/oauth_authorize?response_type=code&client_id=1206159461664814&redirect_uri=https%3A%2F%2Farea.david-benistant.com%2FconfirmAsana&state=secretStateParam",
         "actions" : [
             {
-                "displayName" : "Action on an organisation",
-                "code" : "AsanaAction"
+                "displayName" : "A project is created",
+                "code" : "ProjectCreated"
+            },
+            {
+                "displayName" : "A project as been removed or deleted",
+                "code" : "ProjectRemoved"
             }
         ],
         "reactions" : [
@@ -99,7 +104,14 @@
     {
         "app" : "Google",
         "icon" : "Google.png",
-        "authUrl" : "https://accounts.google.com/o/oauth2/auth?client_id=403121110510-3bngdn4539epr1lsukguqijeess63f4v.apps.googleusercontent.com&redirect_uri=http://localhost:3000/confirmGoogle&response_type=code&scope=https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/calendar",
+        "authUrl" : "https://accounts.google.com/o/oauth2/auth?client_id=403121110510-3bngdn4539epr1lsukguqijeess63f4v.apps.googleusercontent.com&redirect_uri=http://area.david-benistant.com/confirmGoogle&response_type=code&scope=https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/calendar",
+        "actions" : [],
+        "reactions" : []
+    },
+    {
+        "app" : "Jira",
+        "icon" : "Jira.png",
+        "authUrl" : "https://auth.atlassian.com/authorize?audience=api.atlassian.com&client_id=JDQosRjKdnJpfC1LEK6wsII2oxr2KArF&scope=read%3Ajira-work%20manage%3Ajira-project%20manage%3Ajira-configuration%20read%3Ajira-user%20write%3Ajira-work%20manage%3Ajira-webhook%20manage%3Ajira-data-provider&redirect_uri=https%3A%2F%2Farea.david-benistant.com%2FconfirmJira&state=${YOUR_USER_BOUND_VALUE}&response_type=code&prompt=consent",
         "actions" : [],
         "reactions" : []
     }

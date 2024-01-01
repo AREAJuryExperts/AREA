@@ -26,7 +26,10 @@ const confirm = async (req, res) => {
         return;
     }
     let user = tmpUser.Item;
-    
+    if (user.confirmed) {
+        res.status(400).json({ msg: "User already confirmed" });
+        return; 
+    }
     if (user.checkoutId == null) {
         res.status(400).json({ msg: "Invalid checkoutId" });
         return;

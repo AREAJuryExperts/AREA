@@ -13,7 +13,7 @@ import github from "../assets/GithubLogo.png";
 import x from "../assets/Logo_AREA.png";
 
 import Popup from "../Components/PopupInfosCard";
-import { API_URL } from "../utils";
+import { API_URL, IconRouter } from "../utils";
 
 function ListItemsChooseReaction({ item, setReactions, reactions }) {
     const [checkedState, setCheckedState] = useState(
@@ -64,7 +64,7 @@ function ListItemsChooseReaction({ item, setReactions, reactions }) {
         <div className={style.listItemContainer}>
             <div className={style.headerRowList}>
                 <img
-                    src={`/icons/${item.icon}`}
+                    src={item.icon}
                     alt={item.app}
                     className={style.listItemLogo}
                 />
@@ -85,7 +85,7 @@ function ListItemsChooseReaction({ item, setReactions, reactions }) {
                 >
                     <div style={{ display: "flex", justifyContent: "center" }}>
                         <img
-                            src={`/icons/${item.icon}`}
+                            src={item.icon}
                             alt={item.app}
                             className={style.listItemLogo}
                         />
@@ -127,7 +127,7 @@ function ListItemsChooseAction({
         <div className={style.listItemContainer}>
             <div className={style.headerRowList}>
                 <img
-                    src={`/icons/${item.icon}`}
+                    src={item.icon}
                     alt={item.app}
                     className={style.listItemLogo}
                 />
@@ -150,7 +150,7 @@ function ListItemsChooseAction({
                 >
                     <div style={{ display: "flex", justifyContent: "center" }}>
                         <img
-                            src={`/icons/${item.icon}`}
+                            src={item.icon}
                             alt={item.app}
                             className={style.listItemLogo}
                         />
@@ -189,6 +189,7 @@ export default function AddArea() {
                     for (let i = 0; i < data.length; i++) {
                         for (let j = 0; j < window.user.connected.length; j++) {
                             if (data[i].app === window.user.connected[j]) {
+                                data[i].icon = IconRouter(data[i].app);
                                 newData.push(data[i])
                             }
                         }
@@ -197,7 +198,7 @@ export default function AddArea() {
                 setAreas(newData);
             })
             .catch((err) => {
-                console.log(err);
+                console.error(err);
             });
     }, [window.user]);
 
@@ -297,7 +298,7 @@ export default function AddArea() {
                                 </button>
                                 <span className={style.actionSelected}>
                                     <img
-                                        src={`/icons/${selectedActionLogo}`}
+                                        src={selectedActionLogo}
                                         alt={selectedAction.displayName}
                                         className={style.listItemLogo}
                                     />{" "}
