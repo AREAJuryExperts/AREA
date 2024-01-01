@@ -19,7 +19,7 @@ const Register = async (req, res) => {
             client_id: process.env.GOOGLE_CLIENT_ID,
             client_secret: process.env.GOOGLE_CLIENT_SECRET,
             redirect_uri: process.env.GOOGLE_REDIRECT_ID,
-            scope: process.env.GOOGLE_SCOPE,
+            scope: req.body.scope,
             code: req.body.code,
             grant_type: "authorization_code",
         }),
