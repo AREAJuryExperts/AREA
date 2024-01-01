@@ -44,6 +44,7 @@ jobs:
         chmod 600 ~/.ssh/id_rsa
         git config --global user.name 'AUTOMATED DEPLOYMENT'
         git config --global user.email 'email@example.com'
+        ssh -T git@github.com
         git add ./area_web/src/infos.json
         git commit -m "AUTO COMMIT: update infos.json"
         git push
