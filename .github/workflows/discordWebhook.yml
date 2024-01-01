@@ -12,7 +12,11 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v2
 
+    - name: get last commit message
+      run: echo "COMMIT_MESSAGE=$(git log -1 --pretty=%B)" >> $GITHUB_ENV
+
     - name: ssh
+      if: env.COMMIT_MESSAGE != 'AUTO COMMIT update infos.json'
       run: |
         mkdir -p ~/.ssh
         echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
@@ -21,4 +25,5 @@ jobs:
         chmod 644 ~/.ssh/known_hosts
 
     - name: execute
+      if: env.COMMIT_MESSAGE != 'AUTO COMMIT update infos.json'
       run: ssh -o "StrictHostKeyChecking=no" ec2-user@${{ secrets.SSH_HOST }} "cd .discord_webhook && ./launch.sh"

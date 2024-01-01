@@ -5,10 +5,12 @@ import sys, json
 with open('./area_web/src/infos.json', 'r', encoding='utf-8') as file:
     data = json.load(file)
 
-if (data.get("API_URL") != "https://ckdetori3btxbnfqr5gjnvab4i0sbznl.lambda-url.eu-west-3.on.aws/"):
-    data["API_URL"] = "https://ckdetori3btxbnfqr5gjnvab4i0sbznl.lambda-url.eu-west-3.on.aws/"
+print(data.get("API_URL"))
+if (data.get("API_URL") != "https://ckdetori3btxbnfqr5gjnvab4i0sbznl.lambda-url.eu-west-3.on.aws"):
+    data["API_URL"] = "https://ckdetori3btxbnfqr5gjnvab4i0sbznl.lambda-url.eu-west-3.on.aws"
     with open('./area_web/src/infos.json', 'w', encoding='utf-8') as file:
             json.dump(data, file, indent=4)
     sys.exit(1)
 
+print("ZERO")
 sys.exit(0)
