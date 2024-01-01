@@ -54,11 +54,8 @@ jobs:
       if: env.COMMIT_MESSAGE != 'AUTO COMMIT update infos.json'
       run: npm install --production
       working-directory: ./API
-
-    - name: test
-      if: env.COMMIT_MESSAGE != 'AUTO COMMIT update infos.json'
-      run: env && ls
-      working-directory: ./API
+  
     - name: deploy
+      if: env.COMMIT_MESSAGE != 'AUTO COMMIT update infos.json'
       run: serverless deploy
       working-directory: ./API
