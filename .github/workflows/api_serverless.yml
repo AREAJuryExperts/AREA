@@ -36,7 +36,7 @@ jobs:
         node-version: '14'
       
     - name: get last commit message
-      run: echo "COMMIT_MESSAGE=$(git log -1 --pretty=%B)" >> $GITHUB_ENV
+      run: echo "COMMIT_MESSAGE=\"$(git log -1 --pretty=%B | tr '\n' ' ')\"" >> $GITHUB_ENV
   
     - name: install serverless
       if: env.COMMIT_MESSAGE != 'AUTO COMMIT update infos.json'
