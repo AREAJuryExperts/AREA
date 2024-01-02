@@ -1,7 +1,8 @@
-import React from 'react';
+import { API_URL } from "../utils";
+import React, {useEffect} from 'react';
 
 
-export default function confirmJira({})
+export default function ConfirmJira({})
 {
     const getBearerToken = async () => {
         let token = localStorage.getItem("jwt");
