@@ -184,6 +184,7 @@ export default function AddArea() {
         })
             .then((response) => response.json())
             .then(async (data) => {
+                console.log("data => ", data);
                 let newData = []
                 if (window.user && window.user.connected) {
                     for (let i = 0; i < data.length; i++) {
@@ -196,6 +197,7 @@ export default function AddArea() {
                     }
                 }
                 setAreas(newData);
+                console.log("newData => ", newData);
             })
             .catch((err) => {
                 console.error(err);
@@ -239,7 +241,9 @@ export default function AddArea() {
         setSelectedAction(null);
         setProgression(0)
     }
+
     console.log("available areas => ", areas);
+
     return (
         <>
             <div className={style.buttonAddArea}>
