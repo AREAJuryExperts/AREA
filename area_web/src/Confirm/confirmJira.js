@@ -10,7 +10,7 @@ export default function ConfirmJira({})
         try {
             let res = await fetch(API_URL + "/api/jira/register?code=" + urlParams.get('code'), {method : "POST", headers : {"Authorization" : token}})
             let data = await res.json();
-            // window.location.href = "/";
+            window.location.href = "/";
             console.log(data);
             return;
         } catch (err) {

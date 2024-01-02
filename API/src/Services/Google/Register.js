@@ -3,7 +3,7 @@ const dynamo = require("../../../DB");
 
 const Register = async (req, res) => {
     try {
-        utils.checkArgs(req.body, ["code"]);
+        utils.checkArgs(req.body, ["access_token", "scope"]);
     } catch (err) {
         res.status(err.status).send(err.msg);
         return;

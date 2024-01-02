@@ -21,12 +21,10 @@ const getBearerToken = async (req, res) => {
     if (!requ.ok) {
         let txt = await requ.json();
         console.log("text", txt)
-
         console.log("Error cannot get a token status", requ.status)
         return res.status(400).send({ "msg": "Error cannot get a token" })
     }
     const data = await requ.json();
-    console.log(data)
     let jiraUser = {
         access_token: data.access_token,
         userId : req.user.id,
