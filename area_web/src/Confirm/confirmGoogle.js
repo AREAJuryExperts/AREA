@@ -5,10 +5,10 @@ import { API_URL } from "../utils";
 function ConfirmGoogle() {
     useEffect(() => {
         let params = (new URL(document.location)).searchParams;
-        let code = params.get("code");
+        let access_token = params.get("access_token");
         let scope = params.get("scope");
 
-        if (!code) return;
+        if (!access_token) return;
         fetch( API_URL + "/api/google/register", {
             method: "POST",
             headers: {
@@ -16,7 +16,7 @@ function ConfirmGoogle() {
                 Authorization: `Bearer ${localStorage.getItem("jwt")}`,
             },
             body: JSON.stringify({
-                code: code,
+                access_token: access_token,
                 scope: scope
             }),
         })
