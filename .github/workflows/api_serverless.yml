@@ -34,27 +34,28 @@ jobs:
       uses: actions/setup-node@v2
       with:
         node-version: '14'
-
+      
+    - name: get last commit message
+      run: echo "COMMIT_MESSAGE=\"$(git log -1 --pretty=%B | tr '\n' ' ')\"" >> $GITHUB_ENV
+  
     - name: install serverless
+      if: env.COMMIT_MESSAGE != 'AUTO COMMIT update infos.json  '
       run: npm install -g serverless
 
     - name: configure aws
+      if: env.COMMIT_MESSAGE != 'AUTO COMMIT update infos.json  '
       uses: aws-actions/configure-aws-credentials@v1
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: ${{ secrets.AWS_REGION }}
 
-    - name: go to api
-      run: cd API
-
     - name: install dependencies
+      if: env.COMMIT_MESSAGE != 'AUTO COMMIT update infos.json  '
       run: npm install --production
       working-directory: ./API
-
-    - name: test
-      run: env && ls
-      working-directory: ./API
+  
     - name: deploy
+      if: env.COMMIT_MESSAGE != 'AUTO COMMIT update infos.json  '
       run: serverless deploy
       working-directory: ./API

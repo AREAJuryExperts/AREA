@@ -38,7 +38,7 @@ const AsanaCreateProject = async (user, projectName = "Project" + Math.floor(Mat
             let data = await resp.json(); 
             projectId = data.data[0].gid;
         } catch (err) {
-            console.log(err);
+            console.error(err);
             return null;
         }
 

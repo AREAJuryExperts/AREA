@@ -4,7 +4,6 @@ const discordSendMp = async (
     user,
     message = "An action have been triggered"
 ) => {
-    console.log(user);
     if (!user || !user.id) {
         return;
     }

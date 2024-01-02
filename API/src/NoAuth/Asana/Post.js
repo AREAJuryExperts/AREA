@@ -61,7 +61,7 @@ const postWebhook = async (req, res) => {
       try {
         await db.client().put({TableName: "AsanaUsers",Item: user.asanaUser}).promise();
       } catch (err) {
-        console.log(err);
+        console.error(err);
         return res.status(500).send({msg: "Internal server error database"});
       }
       secret = req.headers["x-hook-secret"];

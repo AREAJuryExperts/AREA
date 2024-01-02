@@ -136,7 +136,7 @@ describe("Test express", () => {
                 expect(res.body.msg).to.equal("ok");
                 expect(res.body.data).to.be.an("array");
                 if (res.body.data.length > 1)
-                    console.log("[WARNING] More than one area found");
+                    console.error("[WARNING] More than one area found");
                 expect(res.body.data).to.have.lengthOf.at.least(1);
                 areaId = res.body.data[0].id;
                 done();

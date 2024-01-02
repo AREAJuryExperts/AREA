@@ -83,7 +83,7 @@ const Register = async (req, res) => {
             res.status(400).send({ msg: "Invalid code" });
         })
         .catch((err) => {
-            console.log(err);
+            console.error(err);
         });
 };
 
