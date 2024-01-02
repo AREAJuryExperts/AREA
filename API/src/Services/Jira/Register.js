@@ -13,9 +13,11 @@ const getBearerToken = async (req, res) => {
         "redirect_uri": process.env.JIRA_REDIRECT_URI,
     }
     const requ = await fetch("https://auth.atlassian.com/oauth/token", {
-        headers : {"Access-Control-Allow-Origin" : "*",
-        'Content-Type': 'Content-Type: application/json'},
-        method : "POST", body : JSON.stringify(formBody)})
+        headers : {
+            'Content-Type': 'application/json;charset=UTF-8'
+        },
+        method : "POST", 
+        body : JSON.stringify(formBody)})
     if (!requ.ok) {
         let txt = await requ.text();
         console.log("text", txt)
