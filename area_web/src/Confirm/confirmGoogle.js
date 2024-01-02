@@ -1,7 +1,6 @@
 import React, {useEffect} from "react";
 import { API_URL } from "../utils";
 
-
 function ConfirmGoogle() {
     useEffect(() => {
         let access_token = window.location.hash.substring(1).split('&')
@@ -30,7 +29,6 @@ function ConfirmGoogle() {
                     window.location.href = "/login?redirect=" + redirect;
                 }
             });
-
     }, []);
 
     return (<></>)
