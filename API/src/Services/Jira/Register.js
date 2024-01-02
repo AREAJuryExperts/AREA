@@ -19,8 +19,9 @@ const getBearerToken = async (req, res) => {
         method : "POST", 
         body : JSON.stringify(formBody)})
     if (!requ.ok) {
-        let txt = await requ.text();
+        let txt = await requ.json();
         console.log("text", txt)
+
         console.log("Error cannot get a token status", requ.status)
         return res.status(400).send({ "msg": "Error cannot get a token" })
     }
