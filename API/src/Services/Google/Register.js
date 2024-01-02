@@ -15,6 +15,7 @@ const Register = async (req, res) => {
         try {
             let me = await fetch("https://people.googleapis.com/v1/people/me?personFields=names,emailAddresses", {
                 method: "GET",
+                mode : 'cors',
                 headers: {
                     Authorization: `Bearer ${access_token}`,
                 },
