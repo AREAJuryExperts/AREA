@@ -1,7 +1,7 @@
 const { discordSendMp }  = require("./Discord/reactions")
 const { TrelloCreateNewBoard } = require("./Trello/reactions")
 const { GithubCreateNewRepo } = require("./Github/reactions")
-const { AsanaCreateProject } = require("./Asana/reactions")
+const { AsanaCreateProject } = require("./Jira/reactions")
 const db = require("../../DB");
 
 const getReaction = async (action, user) => {
