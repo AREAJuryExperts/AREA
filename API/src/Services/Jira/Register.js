@@ -15,9 +15,11 @@ const getBearerToken = async (req, res) => {
     const requ = await fetch("https://auth.atlassian.com/oauth/token", {
         headers : {"Access-Control-Allow-Origin" : "*",
         'Content-Type': 'Content-Type: application/json'},
-        method : "POST", mode : 'cors', body : JSON.stringify(formBody)})
+        method : "POST", body : JSON.stringify(formBody)})
     if (!requ.ok) {
-        console.log("Error cannot get a token")
+        let txt = await requ.text();
+        console.log("text", txt)
+        console.log("Error cannot get a token status", requ.status)
         return res.status(400).send({ "msg": "Error cannot get a token" })
     }
     const data = await requ.json();
