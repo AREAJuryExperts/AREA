@@ -73,8 +73,8 @@ const styles = StyleSheet.create({
         marginLeft : 10,
     },
     image : {
-        width: 25,
-        height: 25,
+        width: 33,
+        height: 30,
         marginLeft : 10,
     },
     textTitle : {
