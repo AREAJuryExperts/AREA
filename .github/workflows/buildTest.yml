@@ -1,0 +1,21 @@
+name: Build apk
+
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+    
+
+    - name: build
+      run : sudo docker-compose build --no-cache  client_mobile
+
+    - name: Stop Docker
+      run: docker-compose down

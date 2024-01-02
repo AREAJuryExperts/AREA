@@ -5,9 +5,8 @@ ENV PATH /app/node_modules/.bin:$PATH
 ENV EXPO_TOKEN=${EAS_CRED}
 ENV EAS_NO_VCS=1
 COPY package.json ./
-COPY package-lock.json ./
 RUN npm install -g npm@10.2.5
-RUN npm i --silent
+RUN npm i
 RUN npx expo install expo-checkbox
 RUN npm install -g eas-cli
 RUN yes | sdkmanager --update
