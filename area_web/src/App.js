@@ -1,9 +1,7 @@
 import React from "react";
 
-//Import for navigation through pages
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-//Pages
 import LoginPage from "./LoginPage/LoginPage";
 import HomePage from "./HomePage/HomePage";
 import RegisterPage from "./RegisterPage/RegisterPage";
