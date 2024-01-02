@@ -8,14 +8,17 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
+    env:
+      GH_TOKEN: ${{ secrets.GH_TOKEN }}
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v2
     
+    - name: login github
+      run: echo "${{ secrets.GH_TOKEN }}" | gh auth login --with-token
 
-    - name: build
-      run : sudo docker-compose build --no-cache  client_mobile
+    # - name: build
+    #   run : sudo docker-compose build --no-cache  client_mobile
 
-    - name: Stop Docker
-      run: docker-compose down
+    # - name: Stop Docker
+    #   run: docker-compose down

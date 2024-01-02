@@ -8,6 +8,7 @@ const about = async (req, res) => {
         delete service.app;
         delete service.icon;
         delete service.authUrl;
+        delete service.loginUrl;
         service.actions.forEach((action) => {
             action.name = action.displayName;
             delete action.displayName;
