@@ -9,35 +9,14 @@ const Register = async (req, res) => {
         return;
     }
 
-    const data = await fetch("https://oauth2.googleapis.com/token", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-            Accept: "application/json",
-        },
-        body: new URLSearchParams({
-            client_id: process.env.GOOGLE_CLIENT_ID,
-            client_secret: process.env.GOOGLE_CLIENT_SECRET,
-            redirect_uri: process.env.GOOGLE_REDIRECT_ID,
-            scope: req.body.scope,
-            code: req.body.code,
-            grant_type: "authorization_code",
-        }),
-    });
+    const {scope, access_token} = req.body;
 
-    if (data.status != 200) {
-        res.status(data.status).send({ msg: "Invalid code" });
-        return;
-    }
-
-    data = await data.json();
-    if (data.access_token) {
-        let me = null;
+    if (access_token) {
         try {
-            me = await fetch("https://people.googleapis.com/v1/people/me", {
+            let me = await fetch("https://people.googleapis.com/v1/people/me", {
                 method: "GET",
                 headers: {
-                    Authorization: `Bearer ${data.access_token}`,
+                    Authorization: `Bearer ${access_token}`,
                 },
             });
 
@@ -53,7 +32,8 @@ const Register = async (req, res) => {
         }
         let googleUser = {
             userId: req.user.id,
-            access_token: data.access_token,
+            access_token: access_token,
+            scope: scope,
             id: me.id,
             login: me.login,
         };
