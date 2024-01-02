@@ -1,9 +1,9 @@
-const express = require("express");
-const router = express.Router();
+// const express = require("express");
+// const router = express.Router();
 
 
-router.post("/regsiterWebhook", require("../Asana/registerWebHook"));
-router.post("/register", require("./Register"));
+// router.post("/regsiterWebhook", require("../Asana/registerWebHook"));
+// router.post("/register", require("./Register"));
 
 
 module.exports = router;
