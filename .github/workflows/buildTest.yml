@@ -28,6 +28,14 @@ jobs:
       if: env.COMMIT_CHECK == '0'
       run: |
         echo "VERSION=$(cat version.txt)" >> $GITHUB_ENV
+    
+    - name: build
+      if: env.COMMIT_CHECK == '0'
+      run : |
+        sudo docker-compose build --no-cache  client_mobile
+        mkdir build
+        sudo docker cp $(docker-compose ps -q client_mobile):/build/client.apk ./build/
+        ls build
 
     - name: login github
       if: env.COMMIT_CHECK == '0'
@@ -37,7 +45,7 @@ jobs:
     - name: do release
       if: env.COMMIT_CHECK == '0'
       run: |
-        gh release create ${{ env.VERSION }} -t ${{ env.VERSION }} -n ${{ env.VERSION }} -R AREAJuryExperts/AREA 
+        gh release create ${{ env.VERSION }} -t ${{ env.VERSION }} -n ${{ env.VERSION }} -a ./build/* -R AREAJuryExperts/AREA 
 
 
     # - name: build
