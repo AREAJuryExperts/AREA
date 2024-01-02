@@ -13,7 +13,7 @@ const Register = async (req, res) => {
 
     if (access_token) {
         try {
-            let me = await fetch("https://people.googleapis.com/v1/people/me", {
+            let me = await fetch("https://people.googleapis.com/v1/people/me?personFields=names,emailAddresses", {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${access_token}`,
