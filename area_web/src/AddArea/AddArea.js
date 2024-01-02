@@ -239,9 +239,7 @@ export default function AddArea() {
         setSelectedAction(null);
         setProgression(0)
     }
-
     console.log("available areas => ", areas);
-
     return (
         <>
             <div className={style.buttonAddArea}>
