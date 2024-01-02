@@ -240,6 +240,8 @@ export default function AddArea() {
         setProgression(0)
     }
 
+    console.log("available areas => ", areas);
+
     return (
         <>
             <div className={style.buttonAddArea}>
