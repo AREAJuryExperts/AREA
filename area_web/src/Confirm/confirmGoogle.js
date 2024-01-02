@@ -4,9 +4,10 @@ import { API_URL } from "../utils";
 
 function ConfirmGoogle() {
     useEffect(() => {
-        let params = (new URL(document.location)).searchParams;
-        let access_token = params.get("access_token");
-        let scope = params.get("scope");
+        let access_token = window.location.hash.substring(1).split('&')
+            .find(param => param.startsWith('access_token='))?.split('=')[1];
+        let scope = window.location.hash.substring(1).split('&')
+            .find(param => param.startsWith('scope='))?.split('=')[1];
 
         if (!access_token) return;
         fetch( API_URL + "/api/google/register", {
