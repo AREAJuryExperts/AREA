@@ -32,9 +32,10 @@ jobs:
     - name: build
       if: env.COMMIT_CHECK == '0'
       run : |
-        sudo docker-compose build --no-cache  client_mobile
-        mkdir build
-        sudo docker cp $(docker-compose ps -q client_mobile):/build/client.apk ./build/
+        cd AreaMobile
+        sudo docker build -t build . --file Dockerfile --build-arg EAS_CRED=vnVJu-U6lbRAW-Wx7Z8CP3hSk9Qa5KyHsBqKfPkN --no-cache
+        sudo docker run build
+        sudo docker ps
         ls build
 
     - name: login github
