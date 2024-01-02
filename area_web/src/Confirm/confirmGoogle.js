@@ -17,6 +17,7 @@ function ConfirmGoogle() {
             },
             body: JSON.stringify({
                 code: code,
+                scope: scope
             }),
         })
             .then((res) => res.json())
