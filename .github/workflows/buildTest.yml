@@ -13,8 +13,32 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v2
     
+    - name: get last commit message
+      run: echo "COMMIT_MESSAGE=\"$(git log -1 --pretty=%B | tr '\n' ' ')\"" >> $GITHUB_ENV
+
+    - name: test commit message
+      run: |
+        if ! ./detectRelease ${{ env.COMMIT_MESSAGE }}; then
+          echo "COMMIT_CHECK=1" >> "$GITHUB_ENV"
+        else
+          echo "COMMIT_CHECK=0" >> "$GITHUB_ENV"
+        fi
+
+    - name: set vetsion
+      if: env.COMMIT_CHECK == '0'
+      run: |
+        echo "VERSION=$(cat version.txt)" >> $GITHUB_ENV
+
     - name: login github
-      run: echo "${{ secrets.GH_TOKEN }}" | gh auth login --with-token
+      if: env.COMMIT_CHECK == '0'
+      run: |
+      echo "${{ secrets.GH_TOKEN }}" | gh auth login --with-token
+    
+    - name: do release
+      if: env.COMMIT_CHECK == '0'
+      run: |
+        gh release create ${{ env.VERSION }} -t ${{ env.VERSION }} -n ${{ env.VERSION }} -R AREAJuryExperts/AREA 
+
 
     # - name: build
     #   run : sudo docker-compose build --no-cache  client_mobile
