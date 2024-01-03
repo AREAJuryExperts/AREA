@@ -29,8 +29,12 @@ const getBearerToken = async (req, res) => {
         access_token: data.access_token,
         userId : req.user.id,
         id : req.user.id,
+        refresh_token: data.refresh_token,
     };
-
+    if (!jiraUser.access_token || !jiraUser.refresh_token) {
+        console.log("Error cannot get a token", data);
+        return res.status(400).send({ msg: "Error cannot get a token" });
+    }
     try {
         await dynamo
             .client()
