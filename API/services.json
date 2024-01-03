@@ -102,7 +102,7 @@
     {
         "app" : "Google",
         "icon" : "Google.png",
-        "authUrl" : "https://accounts.google.com/o/oauth2/auth?client_id=403121110510-3bngdn4539epr1lsukguqijeess63f4v.apps.googleusercontent.com&redirect_uri=https://area.david-benistant.com/confirmGoogle&response_type=token&scope=https://www.googleapis.com/auth/drive%20https://www.googleapis.com/auth/calendar%20https://www.googleapis.com/auth/contacts.readonly%20profile",
+        "authUrl" : "https://accounts.google.com/o/oauth2/auth?client_id=403121110510-3bngdn4539epr1lsukguqijeess63f4v.apps.googleusercontent.com&redirect_uri=https://area.david-benistant.com/confirmGoogle&response_type=token&scope=https://www.googleapis.com/auth/drive%20https://www.googleapis.com/auth/calendar%20https://www.googleapis.com/auth/contacts.readonly%20profile%20https://www.googleapis.com/auth/youtube%20https://www.googleapis.com/auth/gmail",
         "actions" : [],
         "reactions" : []
     },
