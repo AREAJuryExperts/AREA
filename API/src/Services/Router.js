@@ -2,6 +2,7 @@ const { discordSendMp }  = require("./Discord/reactions")
 const { TrelloCreateNewBoard } = require("./Trello/reactions")
 const { GithubCreateNewRepo } = require("./Github/reactions")
 const { AsanaCreateProject } = require("./Jira/reactions")
+const { JiraCreateProject } = require("./Jira/reactions")
 const db = require("../../DB");
 
 const getReaction = async (action, user) => {
@@ -40,13 +41,12 @@ const router = async (action, user) => {
             await discordSendMp(user);
         if (reactions[i].reaction === "trelloCreateNewBoard")
             await TrelloCreateNewBoard(user);
-        if (reactions[i].reaction === "GithubCreateNewRepo") {
+        if (reactions[i].reaction === "GithubCreateNewRepo")
             await GithubCreateNewRepo(user);
-        }
-        if (reactions[i].reaction === "AsanaCreateNewProject") {
-            let ab = await AsanaCreateProject(user);
-            console.log("ab", ab);
-        }
+        if (reactions[i].reaction === "AsanaCreateNewProject")
+            await AsanaCreateProject(user);
+        if (reactions[i].reaction === "JiraCreateNewProject")
+            await JiraCreateProject(user);
     }
 }
 

@@ -1,10 +1,10 @@
 const db = require("../../../DB");
-const refreshToken = require("../Asana/refreshToken");
+// const refreshToken = require("../Jira/refreshToken");
 
-const AsanaCreateProject = async (user, projectName = "Project" + Math.floor(Math.random() * 100000), projectId= -1) => {
+const JiraCreateProject = async (user, sprintName = "Sprint " + Math.floor(Math.random() * 100000), scopeId = -1) => {
 
     let params = {
-        TableName: "AsanaUsers",
+        TableName: "JiraUsers",
         IndexName: "userId",
         KeyConditionExpression: "userId = :n",
         ExpressionAttributeValues: {
@@ -13,52 +13,60 @@ const AsanaCreateProject = async (user, projectName = "Project" + Math.floor(Mat
     };
     let tmpUser = await db.client().query(params).promise();
     if (tmpUser.Count === 0) return null;
-    let AsanaUser = tmpUser.Items[0];
-    if (!AsanaUser) return null;
-    if (!AsanaUser.access_token) return null;
-    if (projectId === -1) {
-        let url = 'https://app.asana.com/api/1.0/workspaces?opt_fields=';
-        let options = {
-            method: 'GET',
-            headers: {
-            accept: 'application/json',
-            authorization: `Bearer ${AsanaUser.access_token}`
-            }
-        };
-        try {
-            let resp = await fetch(url, options);
-            if (resp.status !== 200) {
-                let token = await refreshToken(AsanaUser.refresh_token, AsanaUser);
-                if (!token.access_token) return null;
-                AsanaUser.access_token = token.access_token;
-                options.headers.authorization = `Bearer ${AsanaUser.access_token}`;
-                resp = await fetch(url, options);
-                if (resp.status !== 200) return null;
-            }
-            let data = await resp.json(); 
-            projectId = data.data[0].gid;
-        } catch (err) {
-            console.log(err);
-            return null;
+    let JiraUser = tmpUser.Items[0];
+    if (!JiraUser) return null;
+    if (!JiraUser.access_token) return null;
+    let resScopes = await fetch("https://api.atlassian.com/oauth/token/accessible-resources", {
+        method: "GET",
+        headers: {
+            Authorization: "Bearer " + JiraUser.access_token,
+        },
+    });
+    if (resScopes.status !== 200) {
+        let data = await resScopes.text();
+        console.log("scopes failed with a status", resScopes.status , "data", data);
+        return null
+    };
+    let scopesData = await resScopes.json();
+    for (let i in scopesData)
+        if (scopesData[i].name !== "actionreaction") {
+            scopeId = scopesData[i].id;
+            break;
         }
-
-    }
-    let url = `https://app.asana.com/api/1.0/workspaces/${projectId}/projects`;
-    try {
-        let lastres = await fetch(url, {headers : {accept: 'application/json', authorization: `Bearer ${AsanaUser.access_token}`}, 
-        method : "POST", body : JSON.stringify({data : {name : projectName, color: 'light-red'}})})
-        if (lastres.status !== 201) {
-            let mydata = await lastres.text();
-            console.log(mydata);
-            return null;
-        }
-
-    } catch(err)
-    {
-        console.log(err);
+    if (scopeId === -1) {
+        console.log("Scope id null");
         return null;
     }
-    return "notnull !!!"
+    let resBoard = await fetch(`https://api.atlassian.com/ex/jira/${scopeId}/rest/agile/1.0/board`);
+    if (resBoard.status !== 200) {
+        let data = await resBoard.text();
+        console.log("board failed with a status", resBoard.status , "data", data);
+        return null
+    };
+    let boardData = await resBoard.json();
+    let boardId = boardData.values[0].id;
+    let date = new Date();
+    let endDate = new Date();
+    endDate.setDate(endDate.getDate() + 14);
+    let resSprint = await fetch(`https://api.atlassian.com/ex/jira/${scopeId}/rest/agile/1.0/board/${boardId}/sprint`, {
+        method: "POST",
+        headers: {
+            Authorization: "Bearer " + JiraUser.access_token,
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            name: sprintName,
+            originBoardId: boardId,
+            goal: "Created by ActionReaction " + sprintName,
+            endDate: date.toISOString(),
+            startDate: "2024-01-01T15:22:00.000+10:00"
+        }),
+    });
+    if (resSprint.status !== 201) {
+        let data = await resSprint.text();
+        console.log("sprint failed with a status", resSprint.status , "data", data);
+        return null
+    }
 };
 
-module.exports = {AsanaCreateProject};
+module.exports = {JiraCreateProject};
