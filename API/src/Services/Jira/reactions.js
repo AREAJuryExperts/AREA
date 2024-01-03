@@ -1,7 +1,7 @@
 const db = require("../../../DB");
 const refreshToken = require("../Jira/refreshToken");
 
-const JiraCreateSprint = async (user, sprintName = "Sprint " + Math.floor(Math.random() * 100000), scopeId = -1) => {
+const JiraCreateSprint = async (user, sprintName = "Sprint " + Math.floor(Math.random() * 100000), scopeId = "b2da904e-e0b4-42d0-aa33-6218219ba69f") => {
     console.log("JiraCreateProject");
     let params = {
         TableName: "JiraUsers",
@@ -42,7 +42,7 @@ const JiraCreateSprint = async (user, sprintName = "Sprint " + Math.floor(Math.r
     let scopesData = await resScopes.json();
     for (let i in scopesData)
         if (scopesData[i].name !== "actionreaction") {
-            scopeId = scopesData[i].id;
+            // scopeId = scopesData[i].id;
             break;
         }
     if (scopeId === -1) {
