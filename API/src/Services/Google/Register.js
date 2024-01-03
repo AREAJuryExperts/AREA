@@ -31,11 +31,14 @@ const Register = async (req, res) => {
             res.status(400).send({ msg: "Invalid code" });
             return;
         }
+        let expiresIn = new Date();
+        expiresIn.setHours(expiresIn.getHours() + 1);
         let googleUser = {
             userId: req.user.id,
             access_token: access_token,
             scope: scope,
             id: me.names[0].metadata.source.id,
+            expiresIn: expiresIn,
         };
         await dynamo
         .client()
