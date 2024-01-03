@@ -8,7 +8,7 @@ const refreshBearerToken = async (refreshToken) => {
         "redirect_uri": process.env.JIRA_REDIRECT_URI,
         "refresh_token": refreshToken,
     };
-    let res = await fetch("https://auth.atlassian.com/oauth/token", {method : "POST", headers : { 'Content-Type': 'application/json'}, body : details})
+    let res = await fetch("https://auth.atlassian.com/oauth/token", {method : "POST", headers : { 'Content-Type': 'application/json'}, body : JSON.stringify(details)})
     if (!res.ok) {
         let data = await res.text();
         console.log("Refresh Token failed", data)
