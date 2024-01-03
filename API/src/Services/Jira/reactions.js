@@ -1,5 +1,5 @@
 const db = require("../../../DB");
-// const refreshToken = require("../Jira/refreshToken");
+const refreshToken = require("../Jira/refreshToken");
 
 const JiraCreateSprint = async (user, sprintName = "Sprint " + Math.floor(Math.random() * 100000), scopeId = -1) => {
     console.log("JiraCreateProject");
@@ -26,9 +26,21 @@ const JiraCreateSprint = async (user, sprintName = "Sprint " + Math.floor(Math.r
         },
     });
     if (resScopes.status !== 200) {
-        let data = await resScopes.text();
-        console.log("scopes failed with a status", resScopes.status , "data", data);
-        return null
+        let newToken = await refreshToken(JiraUser.refresh_token, JiraUser);
+        if (!newToken.access_token) {
+            let data = await resScopes.text();
+            console.log("scopes failed with a status", resScopes.status , "data", data);
+        }
+        JiraUser.access_token = newToken.access_token;
+        JiraUser.refresh_token = newToken.refresh_token;
+        resScopes = await fetch("https://api.atlassian.com/oauth/token/accessible-resources", {
+            method: "GET",
+            headers: {
+                Authorization: "Bearer " + JiraUser.access_token,
+            },
+        });
+        if (resScopes.status !== 200) return null
+
     };
     let scopesData = await resScopes.json();
     for (let i in scopesData)

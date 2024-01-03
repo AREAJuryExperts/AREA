@@ -1,6 +1,5 @@
 const utils = require("../../Utils");
 const dynamo = require("../../../DB");
-// const request = require("./request");
 
 
 const getBearerToken = async (req, res) => {
