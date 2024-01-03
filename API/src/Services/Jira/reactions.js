@@ -13,12 +13,9 @@ const JiraCreateSprint = async (user, sprintName = "Sprint " + Math.floor(Math.r
     };
     let tmpUser = await db.client().query(params).promise();
     if (tmpUser.Count === 0) return null;
-    console.log("tmpUser", tmpUser);
     let JiraUser = tmpUser.Items[0];
     if (!JiraUser) return null;
-    console.log("JiraUser", JiraUser);
     if (!JiraUser.access_token) return null;
-    console.log("JiraUser.access_token", JiraUser.access_token);
     let resScopes = await fetch("https://api.atlassian.com/oauth/token/accessible-resources", {
         method: "GET",
         headers: {
@@ -52,7 +49,12 @@ const JiraCreateSprint = async (user, sprintName = "Sprint " + Math.floor(Math.r
         console.log("Scope id null");
         return null;
     }
-    let resBoard = await fetch(`https://api.atlassian.com/ex/jira/${scopeId}/rest/agile/1.0/board`);
+    let resBoard = await fetch(`https://api.atlassian.com/ex/jira/${scopeId}/rest/agile/1.0/board`, {
+        method: "GET",
+        headers: {
+            Authorization: "Bearer " + JiraUser.access_token,
+        },
+    });
     if (resBoard.status !== 200) {
         let data = await resBoard.text();
         console.log("board failed with a status", resBoard.status , "data", data);
