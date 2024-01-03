@@ -75,8 +75,8 @@ const JiraCreateSprint = async (user, sprintName = "Sprint " + Math.floor(Math.r
             name: sprintName,
             originBoardId: boardId,
             goal: "Created by ActionReaction " + sprintName,
-            endDate: date.toISOString(),
-            startDate: endDate.toISOString(),
+            endDate: endDate.toISOString(),
+            startDate: date.toISOString(),
         }),
     });
     if (resSprint.status !== 201) {
