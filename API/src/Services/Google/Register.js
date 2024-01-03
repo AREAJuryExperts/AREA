@@ -38,7 +38,7 @@ const Register = async (req, res) => {
             access_token: access_token,
             scope: scope,
             id: me.names[0].metadata.source.id,
-            expiresIn: expiresIn,
+            expiresIn: expiresIn.toDateString(),
         };
         await dynamo
         .client()
