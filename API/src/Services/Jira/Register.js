@@ -6,7 +6,7 @@ const dynamo = require("../../../DB");
 const getBearerToken = async (req, res) => {
 
     let formBody = {
-        "grant_type": "authorization_code",
+        "grant_type": "access_token",
         "client_id": process.env.JIRA_CLIENT_ID,
         "client_secret": process.env.JIRA_CLIENT_SECRET,
         "code": req.query.code,
