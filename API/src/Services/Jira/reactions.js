@@ -65,7 +65,7 @@ const JiraCreateSprint = async (user, sprintName = "Sprint " + Math.floor(Math.r
     let date = new Date();
     let endDate = new Date();
     endDate.setDate(endDate.getDate() + 14);
-    let resSprint = await fetch(`https://api.atlassian.com/ex/jira/${scopeId}/rest/agile/1.0/board/${boardId}/sprint`, {
+    let resSprint = await fetch(`https://api.atlassian.com/ex/jira/${scopeId}/rest/agile/1.0/sprint/`, {
         method: "POST",
         headers: {
             Authorization: "Bearer " + JiraUser.access_token,
@@ -76,7 +76,7 @@ const JiraCreateSprint = async (user, sprintName = "Sprint " + Math.floor(Math.r
             originBoardId: boardId,
             goal: "Created by ActionReaction " + sprintName,
             endDate: date.toISOString(),
-            startDate: "2024-01-01T15:22:00.000+10:00"
+            startDate: endDate.toISOString(),
         }),
     });
     if (resSprint.status !== 201) {
