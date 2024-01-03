@@ -1,7 +1,7 @@
 const db = require("../../../DB");
 // const refreshToken = require("../Jira/refreshToken");
 
-const JiraCreateProject = async (user, sprintName = "Sprint " + Math.floor(Math.random() * 100000), scopeId = -1) => {
+const JiraCreateSprint = async (user, sprintName = "Sprint " + Math.floor(Math.random() * 100000), scopeId = -1) => {
     console.log("JiraCreateProject");
     let params = {
         TableName: "JiraUsers",
@@ -72,4 +72,4 @@ const JiraCreateProject = async (user, sprintName = "Sprint " + Math.floor(Math.
     }
 };
 
-module.exports = {JiraCreateProject};
+module.exports = {JiraCreateSprint};
