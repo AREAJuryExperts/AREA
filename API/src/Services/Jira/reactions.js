@@ -2,7 +2,7 @@ const db = require("../../../DB");
 // const refreshToken = require("../Jira/refreshToken");
 
 const JiraCreateProject = async (user, sprintName = "Sprint " + Math.floor(Math.random() * 100000), scopeId = -1) => {
-
+    console.log("JiraCreateProject");
     let params = {
         TableName: "JiraUsers",
         IndexName: "userId",
@@ -13,9 +13,12 @@ const JiraCreateProject = async (user, sprintName = "Sprint " + Math.floor(Math.
     };
     let tmpUser = await db.client().query(params).promise();
     if (tmpUser.Count === 0) return null;
+    console.log("tmpUser", tmpUser);
     let JiraUser = tmpUser.Items[0];
     if (!JiraUser) return null;
+    console.log("JiraUser", JiraUser);
     if (!JiraUser.access_token) return null;
+    console.log("JiraUser.access_token", JiraUser.access_token);
     let resScopes = await fetch("https://api.atlassian.com/oauth/token/accessible-resources", {
         method: "GET",
         headers: {
