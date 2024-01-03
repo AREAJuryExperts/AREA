@@ -75,6 +75,10 @@
             {
                 "displayName" : "Create new repository",
                 "code" : "GithubCreateNewRepo"
+            },
+            {
+                "displayName" : "Create new issue",
+                "code" : "GithubCreateNewIssue"
             }
         ]
     },
