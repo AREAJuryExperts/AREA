@@ -43,6 +43,8 @@ jobs:
 
         eas build --platform android --local --non-interactive --profile preview
         mv *.apk client.apk
+        mkdir build
+        mv client.apk build/client.apk
 
     - name: login github
       if: env.COMMIT_CHECK == '0'
