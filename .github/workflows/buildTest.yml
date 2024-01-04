@@ -45,6 +45,7 @@ jobs:
         mv *.apk client.apk
         mkdir build
         mv client.apk build/client.apk
+        ls -la build
 
     - name: login github
       if: env.COMMIT_CHECK == '0'
