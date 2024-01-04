@@ -152,14 +152,6 @@ function InformationsOnPopup({ item, itemLogo }) {
 }
 
 function CardTop({ item, itemLogo }) {
-
-   // const handleKeyDown = (event, checked, setChecked) => {
-  //      if (event.key === 'Enter') {
-   //         setChecked(!checked);
-    //    }
-   // };
-
-  
     const [active, setActive] = useState(item.isActive);
     const toggleSwitch = (event) => {
         fetch(API_URL + "/api/area", {
@@ -418,6 +410,7 @@ function ListContainer({ item }) {
                                     ? style.locationInCardsSelected
                                     : style.locationInCards
                             }
+                            onClick={() => setStartIndex(index)}
                         />
                     ))}
                     <IconButton
@@ -436,12 +429,6 @@ function ListContainer({ item }) {
         </div>
     );
 }
-
-// const IconRouter = (app) => {
-//     if (app === "Discord") return DiscordLogo;
-//     if (app === "Trello") return TrelloLogo;
-//     if (app === "Github") return GithubLogo;
-// };
 
 export default function HorizontalList() {
     const [infos, setInfos] = useState([]);

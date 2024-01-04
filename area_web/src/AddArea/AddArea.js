@@ -204,6 +204,7 @@ export default function AddArea() {
         setOpen(!open);
         setReactions([]);
         setSelectedAction(null);
+        setProgression(0);
     };
 
     const handleSubmit = () => {
