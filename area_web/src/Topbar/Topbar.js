@@ -20,6 +20,7 @@ function InfosUser({ showInfos, setShowInfos, onClose }) {
     }, []);
 
     const logout = () => {
+        localStorage.removeItem("jwt");
         navigate("/login");
     };
 
@@ -127,6 +128,7 @@ function PopupLinks({ showLinks, setShowLinks, onClose }) {
         })
             .then((response) => response.json())
             .then(async (data) => {
+                console.log(data);
                 for (let i = 0; i < data.length; i++) {
                     data[i].connected = false;
                     for (let j = 0; j < window.user.connected.length; j++) {

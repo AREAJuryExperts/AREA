@@ -56,7 +56,7 @@ export default function DisplayActions({ Area, setStep, setAction, areaIndex, me
                 <TouchableOpacity key={index} onPress={() => {return active ? handlePress(index) : ''}}>
                     <View style={containerStyle(index)}>
                         <View style={{ flexDirection: "row" }}>
-                            <Image source={Area.icon} style={{ width: 35, height: 35, marginTop: 10, marginLeft: 15 }} />
+                            <Image source={Area.icon} style={{ width: 38, height: 35, marginTop: 10, marginLeft: 15 }} />
                             <Text style={{ marginTop: 15, marginLeft: 15 }}>{action.displayName}</Text>
                         </View>
                         <MaterialCommunityIcons name='chevron-right' size={45} color="#F3F2F8" />

@@ -148,7 +148,7 @@ export default function HomePage({ setCurrentScreen}) {
                         return (
                             <View style={{ width: '100%', borderBottomColor : 'black', borderBottomWidth : 2, padding : 10}} key={index}>
                                 <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 20 }}>
-                                <Image source={line.img} style={{ width: 30, height: 30}} />
+                                <Image source={line.img} style={{ width: 35, height: 32}} />
                                     <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#000', marginLeft : 10 }}>{line.title}</Text>
                                 </View>
                                 <Carousel

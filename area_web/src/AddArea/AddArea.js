@@ -23,11 +23,6 @@ function ListItemsChooseReaction({ item, setReactions, reactions }) {
     );
 
     const handleCheckboxChange = (index) => {
-        // const updatedCheckedState = checkedState.map((item, idx) =>
-        //     idx === index ? {'status' : !item.status, 'code' : item.code} : item
-
-        // );
-
         let elem = null;
         let newCheckedState = checkedState;
         for (let i = 0; i < newCheckedState.length; i++) {
@@ -106,6 +101,9 @@ function ListItemsChooseAction({
     setSelectedAction,
     setSelectedActionLogo,
 }) {
+    if (item.actions.length <= 0)
+        return <></>;
+
     const handleClick = (action) => {
         let actionOut = {
             code: action.code,

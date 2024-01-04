@@ -1,0 +1,57 @@
+name: Build apk
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      EXPO_TOKEN: "vnVJu-U6lbRAW-Wx7Z8CP3hSk9Qa5KyHsBqKfPkN"
+      EAS_NO_VCS: 1
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+    
+    - name: get last commit message
+      run: echo "COMMIT_MESSAGE=\"$(git log -1 --pretty=%B | tr '\n' ' ')\"" >> $GITHUB_ENV
+
+    - name: test commit message
+      run: |
+        if ! ./detectRelease ${{ env.COMMIT_MESSAGE }}; then
+          echo "COMMIT_CHECK=1" >> "$GITHUB_ENV"
+        else
+          echo "COMMIT_CHECK=0" >> "$GITHUB_ENV"
+        fi
+
+    - name: set vetsion
+      if: env.COMMIT_CHECK == '0'
+      run: |
+        echo "VERSION=$(cat version.txt)" >> $GITHUB_ENV
+    
+    - name: build
+      if: env.COMMIT_CHECK == '0'
+      run : |
+        cd AreaMobile
+        npm i
+        npx expo install expo-checkbox
+        npm install -g eas-cli
+        rm client.apk || true
+        eas build --platform android --local --non-interactive --profile preview
+        mv *.apk client.apk
+        mkdir build
+        mv client.apk build/client.apk
+
+    - name: login github
+      if: env.COMMIT_CHECK == '0'
+      run: |
+        echo "${{ secrets.GH_TOKEN }}" | gh auth login --with-token
+    
+    - name: do release
+      if: env.COMMIT_CHECK == '0'
+      run: |
+        gh release create ${{ env.VERSION }} ./build/* --generate-notes  -R AREAJuryExperts/AREA 
+      working-directory: ./AreaMobile

@@ -1,3 +1,3 @@
-const ApiRoute = "http://35.180.174.148:8080"
+const ApiRoute = "https://ckdetori3btxbnfqr5gjnvab4i0sbznl.lambda-url.eu-west-3.on.aws"
 
 export default ApiRoute;

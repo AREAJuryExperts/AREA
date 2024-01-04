@@ -45,25 +45,15 @@ const postWebhook = async (req, res) => {
             return;
         }
         if (actionType == "deleted") {
-            await router("githubDeleted", user);
+            await router("GithubDeletedRepo", user);
             return;
         }
     }
 
     if (githubEvent == "push") {
-        await router("githubPush", user);
+        await router("GithubPushMade", user);
         return;
     }
-
-    // if (githubEvent == "create") {
-    //     router("githubCreate", user);
-    // }
-
-    // if (githubEvent == "pull_request") {
-    //     let actionType = data.action;
-    //     if (actionType == "opened") router("githubPullRequest", user);
-    //     if (actionType == "closed") router("githubPullRequest", user);
-    // }
 
     res.status(201).json({ message: "Data received and processed" });
 }

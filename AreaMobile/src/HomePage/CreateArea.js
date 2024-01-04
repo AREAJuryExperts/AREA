@@ -122,7 +122,7 @@ export default function CreateArea({ showCreateArea, setShowCreateArea, setCurre
                         <Text style={styles.title}>Choose reaction∙s</Text>
                         <View style={{flexDirection: "row", flexWrap: "wrap"}}>
                             <Text style={styles.subTitle}>Action selected: </Text>
-                            <Image source={Areas[action[0]].icon} style={{ width: 20, height: 20, marginTop: 15, marginLeft: 5 }} />
+                            <Image source={Areas[action[0]].icon} style={{ width: 30, height: 30, marginTop: 5, marginLeft: 5, marginBottom : 10 }} />
                             <Text style={{ fontSize: 18, marginLeft: 10, marginTop: 10 }}>
                                 {Areas[action[0]].actions[action[1]].displayName.length > 18
                                 ? Areas[action[0]].actions[action[1]].displayName.substring(0, truncateReaction(Areas[action[0]].actions[action[1]].displayName))
