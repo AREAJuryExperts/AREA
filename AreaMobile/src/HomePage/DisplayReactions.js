@@ -79,7 +79,7 @@ export default function DisplayReactions({ Area, setReactions, me }) {
                     <View style={containerStyle(index)}>
                         <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
                             <View style={{ flexDirection: "row" }}>
-                                <Image source={Area.icon} style={{ width: 35, height: 35, marginTop: 10, marginLeft: 15 }} />
+                                <Image source={Area.icon} style={{ width: 38, height: 35, marginTop: 10, marginLeft: 15, marginBottom : 5 }} />
                                 <Text style={{ marginTop: 15, marginLeft: 15 }}>{reaction.displayName}</Text>
                             </View>
                             <Checkbox value={checked[index]} onValueChange={() => handlePress(index, reaction)} style={{ marginRight: 15 }} />

@@ -8,6 +8,6 @@ router.use("/github/", require("./Github"));
 router.use("/trello/", require("./Trello"));
 router.get("/me", require("./Get").getMe);
 router.use("/google/", require("./Google"));
-
+router.use("/jira/", require("./Jira"));
 
 module.exports = router;

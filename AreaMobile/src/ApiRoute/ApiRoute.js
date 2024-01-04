@@ -1,3 +1,3 @@
-const ApiRoute = "http://35.180.174.148:8080"
+const ApiRoute = "https://area.david-benistant.com:8080"
 
 export default ApiRoute;
