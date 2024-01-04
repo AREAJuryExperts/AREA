@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, StatusBar, TextInput, TouchableOpacity, Keyboard, ScrollView} from 'react-native';
+import { StyleSheet, Text, View, StatusBar, TextInput, TouchableOpacity, Keyboard, ScrollView, Dimensions} from 'react-native';
 import React, {useState, useEffect, useRef} from 'react';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import Logo from '../../assets/logo.svg';
@@ -23,7 +23,6 @@ export default function LoginPage({setCurrentScreen, registerInfo, setRegisterIn
     const keyboardDidHideListener = Keyboard.addListener(
       'keyboardDidHide',
       () => {
-        console.log("Keyboard hidden");
         onRemoveKeyboard();
       }
     );
@@ -125,8 +124,8 @@ const styles = StyleSheet.create({
     paddingBottom: 100,
     paddingLeft: 75,
     paddingRight: 75,
-    height: '100%',
-    width : '100%'
+    width : '100%',
+    height: Dimensions.get("window").height * 2.25
   },
   passwordContainer: { 
     flexDirection: 'row', 

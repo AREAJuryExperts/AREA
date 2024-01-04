@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 import { API_URL } from "../utils";
-
+import Redirect from "./Redirect";
 
 function Confirm() {
     useEffect(() => {
@@ -21,7 +21,8 @@ function Confirm() {
             .then((res) => res.json())
             .then((data) => {
                 if (data.msg === "ok" || data.msg === "Already connected") {
-                    window.location.href = "/";
+                    if (localStorage.getItem("isMobile") !== "true")
+                        window.location.href = "/";
                 } else {
                     let redirect = window.location.href;
                     window.location.href = "/login?redirect=" + redirect;
@@ -30,7 +31,7 @@ function Confirm() {
 
     }, []);
 
-    return (<></>)
+    return (<Redirect/>)
 }
 
 export default Confirm;

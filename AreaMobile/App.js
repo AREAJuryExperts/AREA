@@ -3,10 +3,16 @@ import LoginPage from './src/LoginPage/LoginPage';
 import HomePage from './src/HomePage/HomePage';
 import RegisterPage from './src/RegisterPage/RegisterPage';
 import * as SecureStore from 'expo-secure-store';
+import * as Linking from 'expo-linking';
 
+const prefix = Linking.createURL('/');
 export default function App() {
+  const linking = {
+    prefixes: [prefix],
+  };
   const [currentScreen, setCurrentScreen] = useState('');
   const [registerInfo, setRegisterInfo] = useState('');
+  const [deepLinkReceived, setDeepLinkReceived] = useState(false);
   useEffect(() => {
     SecureStore.getItemAsync("AreaToken").then((token) => {
       if (token) {
@@ -16,12 +22,33 @@ export default function App() {
         setCurrentScreen('login');
     })
   }, []);
+  useEffect(() => {
+    console.log('Deep link received value updated to', deepLinkReceived);
+  }, [deepLinkReceived]);
+  useEffect(() => {
+    const handleDeepLink = event => {
+        setDeepLinkReceived(!deepLinkReceived);
+        let url = event.url;
+        if (url.includes("jwt")) {
+          let jwt = url.split("jwt=")[1];
+          console.log('jwt', jwt);
+          // SecureStore.setItemAsync("AreaToken", jwt).then(() => {
+          //   setCurrentScreen('home');
+          // })
+        }
+    };
+    Linking.getInitialURL().then((url) => {
+      if (url) handleDeepLink({ url });
+    });
+    // Add event listener for incoming links
+    Linking.addEventListener('url', handleDeepLink);
+}, []);
   return (
     <>
       {
         (currentScreen === 'login' && <LoginPage setCurrentScreen={setCurrentScreen} registerInfo={registerInfo} setRegisterInfo={setRegisterInfo}/>) ||
         (currentScreen === 'register' && <RegisterPage setCurrentScreen={setCurrentScreen} setRegisterInfo={setRegisterInfo}/>) ||
-        (currentScreen === 'home' && <HomePage setCurrentScreen={setCurrentScreen}/>)
+        (currentScreen === 'home' && <HomePage setCurrentScreen={setCurrentScreen} deepLinkReceived={deepLinkReceived}/>)
       }
     </>
   )
