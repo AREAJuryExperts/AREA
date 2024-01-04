@@ -15,7 +15,7 @@ import ServiceConnexions from '../ServiceConnexions/ServiceConnexions';
 
 const backColor = "#fff";
 
-export default function HomePage({ setCurrentScreen}) {
+export default function HomePage({ setCurrentScreen, deepLinkReceived}) {
     const [lines, setLines] = useState([]);
     const [activeIndex, setActiveIndex] = useState([0, 0, 0]);
     const [userDetailsVisible, setUserDetailsVisible] = useState(false);
@@ -43,7 +43,7 @@ export default function HomePage({ setCurrentScreen}) {
     }
     useEffect(() => {
         setMeInfo();
-    }, [refreshMe]);
+    }, [refreshMe, deepLinkReceived]);
     const deleteCard = (x, y) => {
         let oldLine = Array.from(lines);
         oldLine[x].content.splice(y, y + 1);
@@ -151,29 +151,31 @@ export default function HomePage({ setCurrentScreen}) {
                                 <Image source={line.img} style={{ width: 35, height: 32}} />
                                     <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#000', marginLeft : 10 }}>{line.title}</Text>
                                 </View>
-                                <Carousel
-                                    mode="parallax"
-                                    modeConfig={{
-                                    parallaxScrollingScale: 0.9,
-                                    parallaxScrollingOffset: 1,
-                                    }}
-                                    width={width}
-                                    height={width / 2}
-                                    data={line.content}
-                                    scrollAnimationDuration={500}
-                                    onSnapToItem={(ind) => {
-                                        let oldIndex = Array.from(activeIndex);
-                                        oldIndex[index] = ind;
-                                        setActiveIndex(oldIndex)
-                                    }}
-                                    renderItem={(it) => (
-                                        <HomePageCard id={it.item.id} isSet={it.item.active} setIsSet={setIsSet} index={{x : index, y : it.index}} when={it.item.action} then={it.item.reactions} deleteCard={deleteCard} setCurrentScreen={setCurrentScreen} setRefresh={setRefreshAreas} refresh={refreshAreas}/>
-                                    )}
-                                    panGestureHandlerProps={{
-                                        activeOffsetX: [-1, 1],
-                                    }}
-                                />
-                                <Pagination activeIndex={activeIndex[index]} itemCount={line.content.length} />
+                                <View>
+                                    <Carousel
+                                        mode="parallax"
+                                        modeConfig={{
+                                        parallaxScrollingScale: 0.9,
+                                        parallaxScrollingOffset: 1,
+                                        }}
+                                        width={width}
+                                        height={width / 1.8}
+                                        data={line.content}
+                                        scrollAnimationDuration={500}
+                                        onSnapToItem={(ind) => {
+                                            let oldIndex = Array.from(activeIndex);
+                                            oldIndex[index] = ind;
+                                            setActiveIndex(oldIndex)
+                                        }}
+                                        renderItem={(it) => (
+                                            <HomePageCard id={it.item.id} isSet={it.item.active} setIsSet={setIsSet} index={{x : index, y : it.index}} when={it.item.action} then={it.item.reactions} deleteCard={deleteCard} setCurrentScreen={setCurrentScreen} setRefresh={setRefreshAreas} refresh={refreshAreas}/>
+                                        )}
+                                        panGestureHandlerProps={{
+                                            activeOffsetX: [-1, 1],
+                                        }}
+                                    />
+                                    <Pagination activeIndex={activeIndex[index]} itemCount={line.content.length} />
+                                </View>
                             </View>
                         )
                     })

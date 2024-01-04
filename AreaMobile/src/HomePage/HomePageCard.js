@@ -45,13 +45,13 @@ export default function HomePageCard({isSet, setIsSet, when, then, index, delete
 
 const styles = StyleSheet.create({
     container: {
+        height : 'auto',
         marginTop: 20,
         borderRadius: 10,
         padding: '2%',
         paddingLeft: '5%',
-        paddingRight: '5%',
+        paddingRight: '7%',
         backgroundColor: backColor,
-        width: '85%',
         shadowColor: '#000000',
         shadowOffset: { width: 15, height: 15 },
         shadowOpacity:  0.4,

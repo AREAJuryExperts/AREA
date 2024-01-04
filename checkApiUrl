@@ -2,6 +2,7 @@
 
 import sys, json
 
+out = 0
 with open('./area_web/src/infos.json', 'r', encoding='utf-8') as file:
     data = json.load(file)
 
@@ -9,6 +10,15 @@ if (data.get("API_URL") != "https://ckdetori3btxbnfqr5gjnvab4i0sbznl.lambda-url.
     data["API_URL"] = "https://ckdetori3btxbnfqr5gjnvab4i0sbznl.lambda-url.eu-west-3.on.aws"
     with open('./area_web/src/infos.json', 'w', encoding='utf-8') as file:
             json.dump(data, file, indent=4)
-    sys.exit(1)
+    out = 1
+    
+with open('./AreaMobile/src/infos.json', 'r', encoding='utf-8') as file:
+    data = json.load(file)
 
-sys.exit(0)
+if (data.get("API_URL") != "https://ckdetori3btxbnfqr5gjnvab4i0sbznl.lambda-url.eu-west-3.on.aws"):
+    data["API_URL"] = "https://ckdetori3btxbnfqr5gjnvab4i0sbznl.lambda-url.eu-west-3.on.aws"
+    with open('./AreaMobile/src/infos.json', 'w', encoding='utf-8') as file:
+            json.dump(data, file, indent=4)
+    out = 1
+
+sys.exit(out)

@@ -31,7 +31,6 @@ export default function RegisterPage({setCurrentScreen, setRegisterInfo}) {
     const keyboardDidHideListener = Keyboard.addListener(
       'keyboardDidHide',
       () => {
-        console.log("Keyboard hidden");
         onRemoveKeyboard();
       }
     );
