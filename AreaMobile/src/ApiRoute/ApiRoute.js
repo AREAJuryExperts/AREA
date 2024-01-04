@@ -1,3 +1,5 @@
-const ApiRoute = "https://area.david-benistant.com:8080"
+import info from '../infos.json'
+
+const ApiRoute = info.API_URL
 
 export default ApiRoute;
