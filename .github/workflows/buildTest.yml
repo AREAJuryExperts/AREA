@@ -40,12 +40,10 @@ jobs:
         npx expo install expo-checkbox
         npm install -g eas-cli
         rm client.apk || true
-
-        touch test.apk
+        eas build --platform android --local --non-interactive --profile preview
         mv *.apk client.apk
         mkdir build
         mv client.apk build/client.apk
-        ls -la build
 
     - name: login github
       if: env.COMMIT_CHECK == '0'
@@ -63,4 +61,3 @@ jobs:
 
     # - name: Stop Docker
     #   run: docker-compose down
-            # eas build --platform android --local --non-interactive --profile preview
