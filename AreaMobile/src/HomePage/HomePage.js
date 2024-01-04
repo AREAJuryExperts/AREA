@@ -15,7 +15,7 @@ import ServiceConnexions from '../ServiceConnexions/ServiceConnexions';
 
 const backColor = "#fff";
 
-export default function HomePage({ setCurrentScreen}) {
+export default function HomePage({ setCurrentScreen, deepLinkReceived}) {
     const [lines, setLines] = useState([]);
     const [activeIndex, setActiveIndex] = useState([0, 0, 0]);
     const [userDetailsVisible, setUserDetailsVisible] = useState(false);
@@ -43,7 +43,7 @@ export default function HomePage({ setCurrentScreen}) {
     }
     useEffect(() => {
         setMeInfo();
-    }, [refreshMe]);
+    }, [refreshMe, deepLinkReceived]);
     const deleteCard = (x, y) => {
         let oldLine = Array.from(lines);
         oldLine[x].content.splice(y, y + 1);
