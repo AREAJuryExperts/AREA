@@ -44,6 +44,7 @@ jobs:
         git config --global user.email 'email@example.com'
         git remote set-url origin git@github.com:AREAJuryExperts/AREA.git
         git add ./area_web/src/infos.json
+        git add ./AreaMobile/src/infos.json
         git commit -m "AUTO COMMIT update infos.json"
         git push
 
