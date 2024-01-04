@@ -101,7 +101,7 @@ function ListItemsChooseAction({
     setSelectedAction,
     setSelectedActionLogo,
 }) {
-    if (item.actions.length > 0)
+    if (item.actions.length <= 0)
         return <></>;
 
     const handleClick = (action) => {
