@@ -20,6 +20,7 @@ function InfosUser({ showInfos, setShowInfos, onClose }) {
     }, []);
 
     const logout = () => {
+        localStorage.removeItem("jwt");
         navigate("/login");
     };
 

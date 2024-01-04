@@ -188,7 +188,7 @@ export default function AddArea() {
                 if (window.user && window.user.connected) {
                     for (let i = 0; i < data.length; i++) {
                         for (let j = 0; j < window.user.connected.length; j++) {
-                            if (data[i].app === window.user.connected[j]) {
+                            if (data[i].app === window.user.connected[j] && data[i].actions.length > 0) {
                                 data[i].icon = IconRouter(data[i].app);
                                 newData.push(data[i])
                             }
