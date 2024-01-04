@@ -55,7 +55,7 @@ jobs:
       if: env.COMMIT_CHECK == '0'
       run: |
         gh release create ${{ env.VERSION }} ./build/* -t ${{ env.VERSION }} -n ${{ env.VERSION }}  -R AREAJuryExperts/AREA 
-
+      working-directory: ./AreaMobile
 
     # - name: build
     #   run : sudo docker-compose build --no-cache  client_mobile
