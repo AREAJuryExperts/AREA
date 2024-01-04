@@ -1,4 +1,5 @@
 const mobileUrl = "exp://10.137.158.163:8081"
+// const mobileUrl = "area://"
 
 export default function Redirect({})
 {
