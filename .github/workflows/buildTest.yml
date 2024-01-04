@@ -54,7 +54,7 @@ jobs:
     - name: do release
       if: env.COMMIT_CHECK == '0'
       run: |
-        gh release create ${{ env.VERSION }} -t ${{ env.VERSION }} -n ${{ env.VERSION }} -a ./build/* -R AREAJuryExperts/AREA 
+        gh release create ${{ env.VERSION }} ./build/* -t ${{ env.VERSION }} -n ${{ env.VERSION }}  -R AREAJuryExperts/AREA 
 
 
     # - name: build
