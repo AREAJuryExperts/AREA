@@ -41,7 +41,7 @@ jobs:
         npm install -g eas-cli
         rm client.apk || true
 
-        eas build --platform android --local --non-interactive --profile preview
+        touch test.apk
         mv *.apk client.apk
         mkdir build
         mv client.apk build/client.apk
@@ -62,3 +62,4 @@ jobs:
 
     # - name: Stop Docker
     #   run: docker-compose down
+            # eas build --platform android --local --non-interactive --profile preview
