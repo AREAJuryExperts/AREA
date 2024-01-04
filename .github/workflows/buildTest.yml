@@ -8,6 +8,9 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    env:
+      EXPO_TOKEN: "vnVJu-U6lbRAW-Wx7Z8CP3hSk9Qa5KyHsBqKfPkN"
+      EAS_NO_VCS: 1
 
     steps:
     - name: Checkout Repository
@@ -33,10 +36,13 @@ jobs:
       if: env.COMMIT_CHECK == '0'
       run : |
         cd AreaMobile
-        sudo docker build -t build . --file Dockerfile --build-arg EAS_CRED=vnVJu-U6lbRAW-Wx7Z8CP3hSk9Qa5KyHsBqKfPkN --no-cache
-        sudo docker run build
-        sudo docker ps
-        ls build
+        npm i
+        npx expo install expo-checkbox
+        npm install -g eas-cli
+        rm client.apk || true
+
+        eas build --platform android --local --non-interactive --profile preview
+        mv *.apk client.apk
 
     - name: login github
       if: env.COMMIT_CHECK == '0'

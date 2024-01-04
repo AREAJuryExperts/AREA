@@ -20,4 +20,4 @@ RUN mv client.apk build/client.apk
 FROM beevelop/android-nodejs:v2023.10.1
 WORKDIR /app
 COPY --from=build /app/ /app
-CMD (cp /app/build/client.apk /mobile || true) && sleep infinity
+CMD (cp /app/build/client.apk /mobile || true)
