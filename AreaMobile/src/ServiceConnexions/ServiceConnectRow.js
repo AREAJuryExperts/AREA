@@ -1,16 +1,20 @@
 import { Text, TouchableOpacity, Image, AppState } from 'react-native';
 import React, {useState, useEffect} from 'react';
-import * as Linking from 'expo-linking';
 import * as WebBrowser from 'expo-web-browser';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+
+const frontUrl = "http://10.137.158.163:3000"
 
 export default function ServiceConnectRow({area, me, reloadMe, setReloadMe}) {
     const [alreadyGot, setAlreadyGot] = useState(false);
     const {app, icon, authUrl} = area;
     const openService = async () => {
-      let result = await WebBrowser.openBrowserAsync(authUrl);
+        console.log(frontUrl + "/confirmMobile?redirect=" + authUrl)
+      let result = await WebBrowser.openBrowserAsync(frontUrl + "/confirmMobile?redirect=" + authUrl);
+      console.log('heelo', result);
     };
     useEffect(() => {
+      console.log('reloaded');
         if (!me)
             return;
         for (let i in me.connected) {
@@ -18,11 +22,6 @@ export default function ServiceConnectRow({area, me, reloadMe, setReloadMe}) {
                 return setAlreadyGot(true);
         }
     }, [])
-    useEffect(()=> {
-        if (AppState.currentState === 'active') {
-            setReloadMe(!reloadMe);
-        }
-    }, [AppState.currentState])
     return (
         <TouchableOpacity onPress={() => {return !alreadyGot ? openService() : ''}} 
         style={{flexDirection : 'row', alignItems : 'center', height : 'auto', width : '100%', paddingTop : 10, 

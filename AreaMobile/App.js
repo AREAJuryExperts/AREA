@@ -3,8 +3,13 @@ import LoginPage from './src/LoginPage/LoginPage';
 import HomePage from './src/HomePage/HomePage';
 import RegisterPage from './src/RegisterPage/RegisterPage';
 import * as SecureStore from 'expo-secure-store';
+import * as Linking from 'expo-linking';
 
+const prefix = Linking.createURL('/');
 export default function App() {
+  const linking = {
+    prefixes: [prefix],
+  };
   const [currentScreen, setCurrentScreen] = useState('');
   const [registerInfo, setRegisterInfo] = useState('');
   useEffect(() => {
@@ -16,6 +21,23 @@ export default function App() {
         setCurrentScreen('login');
     })
   }, []);
+  useEffect(() => {
+    const handleDeepLink = event => {
+        console.log('Deep link received:', event.url);
+        let url = event.url;
+        if (url.includes("jwt")) {
+          let jwt = url.split("jwt=")[1];
+          // SecureStore.setItemAsync("AreaToken", jwt).then(() => {
+          //   setCurrentScreen('home');
+          // })
+        }
+    };
+    Linking.getInitialURL().then((url) => {
+      if (url) handleDeepLink({ url });
+    });
+    // Add event listener for incoming links
+    Linking.addEventListener('url', handleDeepLink);
+}, []);
   return (
     <>
       {

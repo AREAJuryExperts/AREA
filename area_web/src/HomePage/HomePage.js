@@ -33,6 +33,7 @@ export default function Home() {
             <div className={style.horizontalListContainer}>
                 <HorizontalList />
             </div>
+            <a href="exp://10.137.158.163:8081?hello=true">HELLO</a>
             <AddArea />
         </div>
     );
