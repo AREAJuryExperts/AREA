@@ -123,17 +123,9 @@ export default function CreateArea({ showCreateArea, setShowCreateArea, setCurre
                         <View style={{flexDirection: "row", flexWrap: "wrap"}}>
                             <Text style={styles.subTitle}>Action selected: </Text>
                             <Image source={Areas[action[0]].icon} style={{ width: 30, height: 30, marginTop: 5, marginLeft: 5, marginBottom : 10 }} />
-                            <Text style={{ fontSize: 18, marginLeft: 10, marginTop: 10 }}>
-                                {Areas[action[0]].actions[action[1]].displayName.length > 18
-                                ? Areas[action[0]].actions[action[1]].displayName.substring(0, truncateReaction(Areas[action[0]].actions[action[1]].displayName))
-                                : Areas[action[0]].actions[action[1]].displayName}
+                            <Text style={{ fontSize: 18, marginLeft: 10, marginTop: 10, width: "40%" }} ellipsizeMode='tail' numberOfLines={2}>
+                                {Areas[action[0]].actions[action[1]].displayName}
                             </Text>
-                            {Areas[action[0]].actions[action[1]].displayName.length > 18 ?
-                              <Text style={{ fontSize: 18, marginLeft: 20 }}>
-                                {Areas[action[0]].actions[action[1]].displayName.substring(truncateReaction(Areas[action[0]].actions[action[1]].displayName) + 1)}
-                              </Text> :
-                              <></>
-                            }
                         </View>
                         {Areas.map((area, index) => (
                             <View style={{ marginBottom: 15 }} key={index}>
