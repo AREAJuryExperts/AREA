@@ -3,7 +3,7 @@ name: Build apk
 on:
   push:
     branches:
-      - dev
+      - main
 
 jobs:
   deploy:
@@ -53,11 +53,5 @@ jobs:
     - name: do release
       if: env.COMMIT_CHECK == '0'
       run: |
-        gh release create ${{ env.VERSION }} ./build/* -t ${{ env.VERSION }} -n ${{ env.VERSION }}  -R AREAJuryExperts/AREA 
+        gh release create ${{ env.VERSION }} ./build/* --generate-notes  -R AREAJuryExperts/AREA 
       working-directory: ./AreaMobile
-
-    # - name: build
-    #   run : sudo docker-compose build --no-cache  client_mobile
-
-    # - name: Stop Docker
-    #   run: docker-compose down
