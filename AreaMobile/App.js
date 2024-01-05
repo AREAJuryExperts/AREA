@@ -29,9 +29,9 @@ export default function App() {
         if (url.includes("jwt")) {
           let jwt = url.split("jwt=")[1];
           console.log('jwt', jwt);
-          // SecureStore.setItemAsync("AreaToken", jwt).then(() => {
-          //   setCurrentScreen('home');
-          // })
+          SecureStore.setItemAsync("AreaToken", jwt).then(() => {
+            setCurrentScreen('home');
+          })
         }
     };
     Linking.getInitialURL().then((url) => {

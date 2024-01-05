@@ -2,14 +2,14 @@ import { Text, TouchableOpacity, Image, AppState } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import * as WebBrowser from 'expo-web-browser';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import FrontUrl from '../ApiRoute/FrontUrl';
 
-const frontUrl = "https://area.david-benistant.com"
 
 export default function ServiceConnectRow({ area, me, reloadMe, setReloadMe }) {
     const [alreadyGot, setAlreadyGot] = useState(false);
     const { app, icon, authUrl } = area;
     const openService = async () => {
-        let result = await WebBrowser.openBrowserAsync(frontUrl + "/confirmMobile?redirect=" + authUrl);
+        let result = await WebBrowser.openBrowserAsync(FrontUrl + "/confirmMobile?redirect=" + authUrl);
     };
     useEffect(() => {
         if (!me)

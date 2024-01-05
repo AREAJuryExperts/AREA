@@ -1,3 +1,4 @@
 {
-    "API_URL": "https://area.david-benistant.com:8080"
+    "API_URL": "https://area.david-benistant.com:8080",
+    "FRONT_URL": "https://area.david-benistant.com"
 }
