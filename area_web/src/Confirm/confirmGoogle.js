@@ -1,5 +1,7 @@
 import React, {useEffect} from "react";
 import { API_URL } from "../utils";
+import {Redirect, getRedirectUrl} from "./Redirect";
+
 
 function ConfirmGoogle() {
     useEffect(() => {
@@ -23,7 +25,7 @@ function ConfirmGoogle() {
             .then((res) => res.json())
             .then((data) => {
                 if (data.msg === "ok" || data.msg === "Already connected") {
-                    window.location.href = "/";
+                    window.location.href = getRedirectUrl()
                 } else {
                     let redirect = window.location.href;
                     window.location.href = "/login?redirect=" + redirect;
@@ -31,7 +33,7 @@ function ConfirmGoogle() {
             });
     }, []);
 
-    return (<></>)
+    return (<Redirect />)
 }
 
 export default ConfirmGoogle;

@@ -23,9 +23,6 @@ export default function App() {
     })
   }, []);
   useEffect(() => {
-    console.log('Deep link received value updated to', deepLinkReceived);
-  }, [deepLinkReceived]);
-  useEffect(() => {
     const handleDeepLink = event => {
         setDeepLinkReceived(!deepLinkReceived);
         let url = event.url;

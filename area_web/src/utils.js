@@ -7,7 +7,7 @@ import JiraLogo from "./assets/Jira.png";
 import info from "./infos.json";
 
 export let API_URL = info.API_URL;
-
+export let MOBILE_HREF = info.MOBILE_HREF;
 export const IconRouter = (app) => {
     if (app === "Discord") return DiscordLogo;
     if (app === "Trello") return TrelloLogo;

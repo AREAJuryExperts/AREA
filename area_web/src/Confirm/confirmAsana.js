@@ -1,5 +1,6 @@
 import React, {useEffect} from "react";
 import { API_URL } from "../utils";
+import {Redirect, getRedirectUrl} from "./Redirect";
 
 
 function ConfirmAsana() {
@@ -16,8 +17,7 @@ function ConfirmAsana() {
             } catch(err) {
                 console.log(err);
             }
-            window.location.href = "/";
-            console.log(data);
+                window.location.href = getRedirectUrl()
             return;
         } catch (err) {
             console.log(err);
@@ -27,7 +27,7 @@ function ConfirmAsana() {
     useEffect(() => {
         getBearerToken();
     }, []);
-    return (<></>)
+    return (<Redirect />)
 }
 
 export default ConfirmAsana;
