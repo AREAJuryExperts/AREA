@@ -3,14 +3,16 @@ import React, { useState, useEffect } from 'react';
 import * as WebBrowser from 'expo-web-browser';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import FrontUrl from '../ApiRoute/FrontUrl';
-
+import * as SecureStore from 'expo-secure-store';
 
 export default function ServiceConnectRow({ area, me, reloadMe, setReloadMe }) {
     const [alreadyGot, setAlreadyGot] = useState(false);
     const { app, icon, authUrl } = area;
     const openService = async () => {
+        let jwt = await SecureStore.getItemAsync("AreaToken");
         const params = new URLSearchParams({
             redirect: authUrl,
+            jwt : jwt
           });
         let result = await WebBrowser.openBrowserAsync(FrontUrl + "/confirmMobile?" + params.toString());
     };

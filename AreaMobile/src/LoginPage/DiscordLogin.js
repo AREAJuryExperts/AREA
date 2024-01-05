@@ -4,6 +4,7 @@ import { Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import * as WebBrowser from 'expo-web-browser';
 import FrontUrl from '../ApiRoute/FrontUrl';
 import ApiRoute from '../ApiRoute/ApiRoute';
+import * as SecureStore from 'expo-secure-store';
 
 export default function DiscordLogin({}) {
     const [image, setImage] = useState(null);
@@ -36,8 +37,10 @@ export default function DiscordLogin({}) {
     }, [])
 
     const openService = async () => {
+        let jwt = await SecureStore.getItemAsync("AreaToken");
         const params = new URLSearchParams({
             redirect: authUrl,
+            jwt : jwt
           });
         let result = await WebBrowser.openBrowserAsync(FrontUrl + "/confirmMobile?" + params.toString());
     };
