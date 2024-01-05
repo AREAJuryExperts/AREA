@@ -1,5 +1,7 @@
 import React, {useState, useEffect} from "react";
-const mobileUrl = "AREA://"
+import {Redirect, getRedirectUrl} from "./Redirect";
+
+
 
 export default function ConfirmMobile({}) {
     const handleRedirect = () => {
@@ -14,6 +16,8 @@ export default function ConfirmMobile({}) {
 }
 
 // export default function ConfirmMobile({}) {
-
-//     return (<a href={mobileUrl}>OPEN MOBILE</a>)
+//     useEffect(() => {
+//         localStorage.setItem("isMobile", "true");
+//     }, [])
+//     return <Redirect />
 // }

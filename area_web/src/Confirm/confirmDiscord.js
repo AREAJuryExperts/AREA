@@ -1,6 +1,9 @@
 
 import React, {useEffect} from "react";
 import { API_URL } from "../utils";
+import {Redirect, getRedirectUrl} from "./Redirect";
+
+
 function getQueryParams() {
     let queryParams = {};
     let queryString = window.location.search.substring(1);
@@ -28,7 +31,7 @@ function ConfirmDiscord() {
             .then((res) => res.json())
             .then((data) => {
                 if (data.msg === "ok" || data.msg === "Already connected") {
-                    window.location.href = "/";
+                    window.location.href = getRedirectUrl()
                 } else {
                     let redirect = window.location.href;
                     window.location.href = "/login?redirect=" + redirect;
@@ -36,7 +39,7 @@ function ConfirmDiscord() {
             });
     }, []);
 
-    return (<></>)
+    return (<Redirect />)
 }
 
 export default ConfirmDiscord;

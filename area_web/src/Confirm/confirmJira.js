@@ -1,6 +1,7 @@
 import { API_URL } from "../utils";
 import React, {useEffect} from 'react';
-import Redirect from "./Redirect";
+import {Redirect, getRedirectUrl} from "./Redirect";
+
 
 export default function ConfirmJira({})
 {
@@ -10,8 +11,7 @@ export default function ConfirmJira({})
         try {
             let res = await fetch(API_URL + "/api/jira/register?code=" + urlParams.get('code'), {method : "POST", headers : {"Authorization" : token}})
             let data = await res.json();
-            if (localStorage.getItem("isMobile") !== "true")
-                window.location.href = "/";
+            window.location.href = getRedirectUrl()
             console.log(data);
             return;
         } catch (err) {
