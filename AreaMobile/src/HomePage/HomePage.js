@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TouchableOpacity, Image, Dimensions, BackHandler, Alert, RefreshControl, } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Image, Dimensions, BackHandler, Alert, RefreshControl } from 'react-native';
 import { ScrollView, GestureHandlerRootView } from 'react-native-gesture-handler';
 import React, { useState, useEffect } from 'react';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
@@ -151,7 +151,6 @@ export default function HomePage({ setCurrentScreen, deepLinkReceived}) {
                                 <Image source={line.img} style={{ width: 35, height: 32}} />
                                     <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#000', marginLeft : 10 }}>{line.title}</Text>
                                 </View>
-                                <View>
                                     <Carousel
                                         mode="parallax"
                                         modeConfig={{
@@ -171,21 +170,19 @@ export default function HomePage({ setCurrentScreen, deepLinkReceived}) {
                                             <HomePageCard id={it.item.id} isSet={it.item.active} setIsSet={setIsSet} index={{x : index, y : it.index}} when={it.item.action} then={it.item.reactions} deleteCard={deleteCard} setCurrentScreen={setCurrentScreen} setRefresh={setRefreshAreas} refresh={refreshAreas}/>
                                         )}
                                         panGestureHandlerProps={{
-                                            activeOffsetX: [-1, 1],
+                                            activeOffsetX: [-10, 10],
                                         }}
+                                        enabled={line.content.length > 1}
                                     />
                                     <Pagination activeIndex={activeIndex[index]} itemCount={line.content.length} />
-                                </View>
                             </View>
                         )
                     })
                 }
             </ScrollView>
-            <View style={{flexDirection : 'row', alignItems : 'center', width : '85%', display : 'flex', justifyContent : 'flex-end'}}>
-                <TouchableOpacity onPress={() => setShowCreateArea(true)} style={{borderRadius: 30, backgroundColor: "blue", width: 50, height: 50, alignItems: "center", justifyContent: "center", marginBottom : '5%'}}>
+                <TouchableOpacity onPress={() => setShowCreateArea(true)} style={{position : 'absolute', right : 10, bottom : 10, backgroundColor : 'blue', borderRadius : 150, padding : 5 }}>
                     <MaterialCommunityIcons name='plus-circle-outline' size={45} color="white" />
                 </TouchableOpacity>
-            </View>
         </GestureHandlerRootView>
     );
 }
