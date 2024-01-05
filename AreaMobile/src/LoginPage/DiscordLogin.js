@@ -21,8 +21,9 @@ export default function DiscordLogin({}) {
                 throw new Error("Error while fetching auth url" + await res.text());
             let data = await res.json();
             for (let i in data)
-                if (data[i].app === 'discord' && data[i].loginUrl) {
+                if (data[i].app === 'Discord' && data[i].loginUrl) {
                     setAuthUrl(data[i].loginUrl);
+                    console.log(data[i].loginUrl);
                     return
                 }
         } catch (e) {
@@ -35,7 +36,10 @@ export default function DiscordLogin({}) {
     }, [])
 
     const openService = async () => {
-        let result = await WebBrowser.openBrowserAsync(FrontUrl + "/confirmMobile?redirect=" + authUrl);
+        const params = new URLSearchParams({
+            redirect: authUrl,
+          });
+        let result = await WebBrowser.openBrowserAsync(FrontUrl + "/confirmMobile?" + params.toString());
     };
     return (
         <TouchableOpacity onPress={() => openService()}

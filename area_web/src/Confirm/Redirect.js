@@ -6,7 +6,8 @@ export const getRedirectUrl = () => {
     if (localStorage.getItem("isMobile") !== "true")
         return ("/")
     localStorage.removeItem("isMobile")
-    return url
+    let urlSearchParams = new URLSearchParams({jwt : localStorage.getItem("jwt")})
+    return url + "?" + urlSearchParams.toString()
 }
 
 

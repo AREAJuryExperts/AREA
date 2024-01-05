@@ -9,7 +9,10 @@ export default function ServiceConnectRow({ area, me, reloadMe, setReloadMe }) {
     const [alreadyGot, setAlreadyGot] = useState(false);
     const { app, icon, authUrl } = area;
     const openService = async () => {
-        let result = await WebBrowser.openBrowserAsync(FrontUrl + "/confirmMobile?redirect=" + authUrl);
+        const params = new URLSearchParams({
+            redirect: authUrl,
+          });
+        let result = await WebBrowser.openBrowserAsync(FrontUrl + "/confirmMobile?" + params.toString());
     };
     useEffect(() => {
         if (!me)

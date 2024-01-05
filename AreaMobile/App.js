@@ -24,6 +24,7 @@ export default function App() {
   }, []);
   useEffect(() => {
     const handleDeepLink = event => {
+      console.log('event', event);
         setDeepLinkReceived(!deepLinkReceived);
         let url = event.url;
         if (url.includes("jwt")) {
@@ -35,7 +36,7 @@ export default function App() {
         }
     };
     Linking.getInitialURL().then((url) => {
-      if (url) handleDeepLink({ url });
+      if (url) handleDeepLink(url);
     });
     // Add event listener for incoming links
     Linking.addEventListener('url', handleDeepLink);
