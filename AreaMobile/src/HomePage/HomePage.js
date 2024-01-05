@@ -138,7 +138,7 @@ export default function HomePage({ setCurrentScreen, deepLinkReceived}) {
             <CreateArea setShowCreateArea={setShowCreateArea} showCreateArea={showCreateArea} setCurrentScreen={setCurrentScreen} refresh={refreshAreas} setRefresh={setRefreshAreas} me={me}/>
             <ServiceConnexions setShow={setShowServiceConnexions} show={showServiceConnexions} me={me} refresh={refreshMe} setRefresh={setRefreshMe}/>
             <ScrollView style={{width : '100%', height : '100%'}} refreshControl={
-                <RefreshControl refreshing={showRefresh} onRefresh={() => {setShowRefresh(true);setRefreshAreas(!refreshAreas);
+                <RefreshControl refreshing={showRefresh} onRefresh={() => {setShowRefresh(true);setRefreshAreas(!refreshAreas);setRefreshMe(!refreshMe);
                     setTimeout(() => {
                         setShowRefresh(false);
                     }, 1000);}} />
