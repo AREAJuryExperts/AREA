@@ -1,5 +1,6 @@
-export const url = "exp://10.137.158.163:8081"
-// export const getRedirectUrl = "area://"
+import { MOBILE_HREF } from "../utils"
+
+export const url = MOBILE_HREF;
 
 export const getRedirectUrl = () => {
     if (localStorage.getItem("isMobile") !== "true")
