@@ -318,7 +318,6 @@ function Card({ item, itemLogo, toggleCardActive }) {
             </div>
         );
     }
-
     return (
         <div className={style.cardContainer} key={item.id}>
             <CardTop item={item} itemLogo={itemLogo} toggleCardActive={toggleCardActive} />
