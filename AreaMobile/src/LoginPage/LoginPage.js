@@ -26,7 +26,6 @@ export default function LoginPage({setCurrentScreen, registerInfo, setRegisterIn
         onRemoveKeyboard();
       }
     );
-
     return () => {
       keyboardDidHideListener.remove();
     };
@@ -63,15 +62,11 @@ export default function LoginPage({setCurrentScreen, registerInfo, setRegisterIn
         return;
     }
   }
-
   useEffect(() => {
     SecureStore.getItemAsync("AreaToken").then((token) => {
-      if (token) {
-        setCurrentScreen('home');
-      }
+      if (token) {setCurrentScreen('home');}
     })
   }, []);
-
   return (
     <ScrollView contentContainerStyle ={styles.container} scrollEnabled={false} ref={scrollRef}>
       <StatusBar barStyle="dark-content" backgroundColor={backColor}/>
@@ -85,7 +80,8 @@ export default function LoginPage({setCurrentScreen, registerInfo, setRegisterIn
       }
       <View style={styles.passwordContainer}>
         <TextInput
-          style={styles.input}
+        testID='userNameInput'
+        style={styles.input}
           onChangeText={text => setUserName(text)}
           value={userName}
           selectionColor={'#0000FF'}
@@ -94,6 +90,7 @@ export default function LoginPage({setCurrentScreen, registerInfo, setRegisterIn
       </View>
       <View style={styles.passwordContainer}>
         <TextInput
+          testID='passwordInput'
           style={styles.input}
           onChangeText={text => setPassword(text)}
           value={password}
@@ -103,13 +100,10 @@ export default function LoginPage({setCurrentScreen, registerInfo, setRegisterIn
         <MaterialCommunityIcons name={passwordVisible ? 'eye-off' : 'eye'} size={24} color="black" onPress={() => setPasswordVisible(!passwordVisible)}/>
       </View>
       {incorrectCred && <Text style={{color: 'red'}}>Incorrect credentials</Text>}
-      <TouchableOpacity onPress={() => setCurrentScreen('home')}>
-        <Text style={styles.fgtPassword}>Forgotten password</Text>
-      </TouchableOpacity>
       <TouchableOpacity onPress={() => setCurrentScreen('register')}>
         <Text style={styles.notRegistered}>Not registered yet?</Text>
       </TouchableOpacity>
-      <TouchableOpacity  onPress={() => connect()} style={styles.connectionButton}>
+      <TouchableOpacity  onPress={() => connect()} style={styles.connectionButton} testID='loginBtn'>
         <Text style={styles.connectionButtonText}>Login</Text> 
       </TouchableOpacity>
       <DiscordLogin />

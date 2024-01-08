@@ -1,0 +1,248 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Login /> renders correctly 1`] = `
+<RCTScrollView
+  contentContainerStyle={
+    {
+      "alignItems": "center",
+      "backgroundColor": "#fff",
+      "height": 3001.5,
+      "paddingBottom": 100,
+      "paddingLeft": 75,
+      "paddingRight": 75,
+      "paddingTop": 35,
+      "width": "100%",
+    }
+  }
+  scrollEnabled={false}
+>
+  <View>
+    <Mocked SVG
+      height={150}
+      width={150}
+    />
+    <View
+      style={
+        {
+          "alignItems": "center",
+          "flexDirection": "row",
+          "marginTop": 50,
+        }
+      }
+    >
+      <TextInput
+        onChangeText={[Function]}
+        placeholder="Email"
+        selectionColor="#0000FF"
+        style={
+          {
+            "borderColor": "black",
+            "borderRadius": 15,
+            "borderWidth": 2,
+            "color": "black",
+            "height": 40,
+            "marginRight": 10,
+            "paddingLeft": 10,
+            "width": "100%",
+          }
+        }
+        testID="userNameInput"
+        value=""
+      />
+      <Text />
+    </View>
+    <View
+      style={
+        {
+          "alignItems": "center",
+          "flexDirection": "row",
+          "marginTop": 50,
+        }
+      }
+    >
+      <TextInput
+        onChangeText={[Function]}
+        placeholder="Mot de passe"
+        secureTextEntry={true}
+        selectionColor="#0000FF"
+        style={
+          {
+            "borderColor": "black",
+            "borderRadius": 15,
+            "borderWidth": 2,
+            "color": "black",
+            "height": 40,
+            "marginRight": 10,
+            "paddingLeft": 10,
+            "width": "100%",
+          }
+        }
+        testID="passwordInput"
+        value=""
+      />
+      <Text />
+    </View>
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": undefined,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        {
+          "opacity": 1,
+        }
+      }
+    >
+      <Text
+        style={
+          {
+            "color": "blue",
+            "marginTop": 20,
+          }
+        }
+      >
+        Not registered yet?
+      </Text>
+    </View>
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": undefined,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        {
+          "alignItems": "center",
+          "backgroundColor": "blue",
+          "borderRadius": 25,
+          "height": 40,
+          "justifyContent": "center",
+          "marginTop": 50,
+          "opacity": 1,
+          "width": "100%",
+        }
+      }
+      testID="loginBtn"
+    >
+      <Text
+        style={
+          {
+            "color": "white",
+            "fontSize": 20,
+          }
+        }
+      >
+        Login
+      </Text>
+    </View>
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": undefined,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        {
+          "alignItems": "center",
+          "backgroundColor": "blue",
+          "borderRadius": 25,
+          "marginTop": 25,
+          "opacity": 1,
+          "padding": 5,
+          "width": "100%",
+        }
+      }
+    >
+      <Image
+        source={null}
+        style={
+          {
+            "height": 40,
+            "marginBottom": 5,
+            "marginTop": 5,
+            "width": 40,
+          }
+        }
+        tintColor="white"
+      />
+      <Text
+        style={
+          {
+            "color": "white",
+            "fontSize": 20,
+          }
+        }
+      >
+        Login with Discord
+      </Text>
+    </View>
+  </View>
+</RCTScrollView>
+`;
