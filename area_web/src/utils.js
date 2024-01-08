@@ -17,5 +17,3 @@ export const IconRouter = (app) => {
     if (app === "Jira") return JiraLogo;
     return null;
 };
-// export const API_URL = "http://localhost:8080";
-// export const API_URL = "https://ckdetori3btxbnfqr5gjnvab4i0sbznl.lambda-url.eu-west-3.on.aws";

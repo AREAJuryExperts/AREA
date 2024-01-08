@@ -14,10 +14,3 @@ export default function ConfirmMobile({}) {
     }, [])
     return (<></>)
 }
-
-// export default function ConfirmMobile({}) {
-//     useEffect(() => {
-//         localStorage.setItem("isMobile", "true");
-//     }, [])
-//     return <Redirect />
-// }

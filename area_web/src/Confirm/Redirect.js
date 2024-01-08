@@ -1,5 +1,4 @@
 export const url = "exp://10.137.158.163:8081"
-// export const getRedirectUrl = "area://"
 
 export const getRedirectUrl = () => {
     if (localStorage.getItem("isMobile") !== "true")

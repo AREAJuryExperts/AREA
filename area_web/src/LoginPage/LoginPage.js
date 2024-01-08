@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import LogoAREA from "../assets/Logo_AREA.png";
 import TextField from '@mui/material/TextField';
 import { API_URL, IconRouter } from "../utils";
-// import DiscordLogo from "./../assets/DiscordLogo.png";
 
 
 function TextsFields({ email, setEmail, password, setPassword }) {

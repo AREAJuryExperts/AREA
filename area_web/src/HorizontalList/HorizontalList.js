@@ -196,8 +196,6 @@ function CardTop({ item, itemLogo }) {
 
                     checked={active}
                     onChange={toggleSwitch}
-                    //onKeyDown={(event) => handleKeyDown(event, checked, setChecked)}
-                    //tabIndex={0} // Permet la navigation au clavier
                     {...label}
                     sx={{
                         width: 62,

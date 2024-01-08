@@ -42,7 +42,6 @@ const JiraCreateSprint = async (user, sprintName = "Sprint " + Math.floor(Math.r
     let scopesData = await resScopes.json();
     for (let i in scopesData)
         if (scopesData[i].name !== "actionreaction") {
-            // scopeId = scopesData[i].id;
             break;
         }
     if (scopeId === -1) {

@@ -48,12 +48,6 @@ const postWebhook = async (req, res) => {
         if (!user) return;
         await router("trelloUpdateCard", user);
     }
-
-    // const boardName = data.model.name;
-    // const actionType = data.action.type;
-    // const actionDate = data.action.date;
-    // const memberCreatorName = data.action.memberCreator.fullName;
-
     res.status(201).json({ message: "Data received and processed" });
 }
 
