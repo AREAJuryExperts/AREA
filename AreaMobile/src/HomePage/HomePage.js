@@ -133,7 +133,7 @@ export default function HomePage({ setCurrentScreen, deepLinkReceived}) {
       }, [refreshAreas])
 
     return (
-        <FadeInView>
+        <FadeInView left={true}>
             <GestureHandlerRootView onAccessibilityEscape={() => setCurrentScreen('login')} style={styles.container}>
                 <HomePageBar setCurrentScreen={setCurrentScreen} setModalVisible={setUserDetailsVisible} setServicesConnexionsModalVisible={setShowServiceConnexions}/>
                 <PopUpDetails showDetails={userDetailsVisible} setShowDetails={setUserDetailsVisible} setCurrentScreen={setCurrentScreen} />

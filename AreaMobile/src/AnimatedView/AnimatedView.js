@@ -1,8 +1,8 @@
 import React, {useRef, useEffect} from 'react';
 import {Text, View} from 'react-native';
-import Animated, {SlideOutRight, SlideInRight} from 'react-native-reanimated';
+import Animated, {SlideOutRight, SlideInRight, SlideOutLeft, SlideInLeft} from 'react-native-reanimated';
 
-export function FadeInView ({style, children}) {
+export function FadeInView ({style, children, left}) {
     // const fadeAnim = useRef(new Animated.Value(0)).current;
     // useEffect(() => {
     //     Animated.timing(fadeAnim, {
@@ -13,7 +13,7 @@ export function FadeInView ({style, children}) {
     // }, [fadeAnim]);
 
     return (
-    <Animated.View entering={SlideInRight} exiting={SlideOutRight}
+    <Animated.View entering={left ? SlideInLeft : SlideInRight} exiting={left ? SlideOutLeft : SlideOutRight}
         style={{
         ...style,
         }}>
