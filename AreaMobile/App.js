@@ -23,22 +23,20 @@ export default function App() {
     })
   }, []);
   useEffect(() => {
-    console.log('Deep link received value updated to', deepLinkReceived);
-  }, [deepLinkReceived]);
-  useEffect(() => {
     const handleDeepLink = event => {
+      console.log('event', event);
         setDeepLinkReceived(!deepLinkReceived);
         let url = event.url;
         if (url.includes("jwt")) {
           let jwt = url.split("jwt=")[1];
           console.log('jwt', jwt);
-          // SecureStore.setItemAsync("AreaToken", jwt).then(() => {
-          //   setCurrentScreen('home');
-          // })
+          SecureStore.setItemAsync("AreaToken", jwt).then(() => {
+            setCurrentScreen('home');
+          })
         }
     };
     Linking.getInitialURL().then((url) => {
-      if (url) handleDeepLink({ url });
+      if (url) handleDeepLink(url);
     });
     // Add event listener for incoming links
     Linking.addEventListener('url', handleDeepLink);

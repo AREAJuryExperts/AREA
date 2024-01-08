@@ -151,9 +151,12 @@ function InformationsOnPopup({ item, itemLogo }) {
     );
 }
 
-function CardTop({ item, itemLogo }) {
+function CardTop({ item, itemLogo, toggleCardActive }) {
     const [active, setActive] = useState(item.isActive);
     const toggleSwitch = (event) => {
+        const newActive = event.target.checked;
+        toggleCardActive(item.id, newActive);
+
         fetch(API_URL + "/api/area", {
             method: "PUT",
             headers: {
@@ -178,6 +181,12 @@ function CardTop({ item, itemLogo }) {
         setActive(event.target.checked);
     };
 
+    const handleKeyDown = (event) => {
+        if (event.key === 'Enter') {
+            toggleSwitch({ target: { checked: !item.isActive } });
+        }
+    };
+
     return (
         <div className={style.cardTop}>
             <div className={style.cardTopSubcontainer1}>
@@ -193,10 +202,10 @@ function CardTop({ item, itemLogo }) {
             </div>
             <div className={style.cardTopSubcontainer2}>
                 <Switch
-
-                    checked={active}
+                    checked={item.isActive}
                     onChange={toggleSwitch}
                     {...label}
+                    onKeyDown={handleKeyDown}
                     sx={{
                         width: 62,
                         height: 40,
@@ -302,7 +311,7 @@ function CardBottom({ item, itemLogo }) {
     );
 }
 
-function Card({ item, itemLogo }) {
+function Card({ item, itemLogo, toggleCardActive }) {
     if (item === null) {
         return (
             <div className={style.cardContainer}>
@@ -310,14 +319,14 @@ function Card({ item, itemLogo }) {
         );
     }
     return (
-        <div className={style.cardContainer}>
-            <CardTop item={item} itemLogo={itemLogo} />
+        <div className={style.cardContainer} key={item.id}>
+            <CardTop item={item} itemLogo={itemLogo} toggleCardActive={toggleCardActive} />
             <CardBottom item={item} itemLogo={itemLogo} />
         </div>
     );
 }
 
-function ListContainer({ item }) {
+function ListContainer({ item, toggleCardActive }) {
     const [startIndex, setStartIndex] = useState(0);
     const [displayedCards, setDisplayedCards] = useState([]);
 
@@ -329,6 +338,7 @@ function ListContainer({ item }) {
         let display = [];
         if (startIndex === 0)
             display.push(null);
+
         if (startIndex === 0 || startIndex === item.cardList.length - 1)
             cardsPerGroup = 2;
 
@@ -337,23 +347,19 @@ function ListContainer({ item }) {
                 item.cardList[i + startIndex + (startIndex > 0 ? -1 : 0)]
             );
         }
+
         for (let i = 0; i < 3 - display.length; ++i)
             display.push(null);
-
 
         setDisplayedCards(display);
     }, [startIndex, item]);
 
-
     const handleDisplayCard = (direction) => {
         setStartIndex((prevIndex) => {
             if (direction === "next") {
-                return (prevIndex + 1) % item.cardList.length;
+                return (prevIndex < item.cardList.length - 1) ? prevIndex + 1 : prevIndex;
             } else {
-                return (
-                    (prevIndex - 1 + item.cardList.length) %
-                    item.cardList.length
-                );
+                return (prevIndex > 0) ? prevIndex - 1 : prevIndex;
             }
         });
     };
@@ -362,64 +368,28 @@ function ListContainer({ item }) {
         <div className={style.listContainer}>
             <div className={style.listHeaderContainer}>
                 <div className={style.listHeader}>
-                    <img
-                        src={item.logo}
-                        alt="serviceLogo"
-                        className={style.serviceLogo}
-                    />
+                    <img src={item.logo} alt="serviceLogo" className={style.serviceLogo} />
                     <p className={style.listTitle}>{item.name}</p>
                 </div>
             </div>
             <div className={style.allListContainer}>
                 <div className={style.listBodyContainer}>
                     <div className={style.listBody}>
-                        <div
-                            className={`${style.blurEffect} ${style.left}`}
-                        ></div>
+                        <div className={`${style.blurEffect} ${style.left}`} ></div>
                         {displayedCards && displayedCards.map((cardItem, index) => (
-                            <Card
-                                key={`card-${index}`}
-                                item={cardItem}
-                                itemLogo={item.logo}
-                            />
+                            <Card key={`card-${index}`} item={cardItem} itemLogo={item.logo} toggleCardActive={toggleCardActive} />
                         ))}
-                        <div
-                            className={`${style.blurEffect} ${style.right}`}
-                        ></div>
+                        <div className={`${style.blurEffect} ${style.right}`} ></div>
                     </div>
                 </div>
                 <div className={style.locationInCardsContainer}>
-                    <IconButton
-                        size="small"
-                        style={{
-                            backgroundColor: "#252525",
-                            color: "#fff",
-                            margin: "10px",
-                        }}
-                        onClick={() => handleDisplayCard("prev")}
-                    >
+                    <IconButton size="small" style={{ backgroundColor: "#252525", color: "#fff", margin: "10px" }} onClick={() => handleDisplayCard("prev")} >
                         <ChevronLeftIcon />
                     </IconButton>
                     {item.cardList.map((cardItem, index) => (
-                        <div
-                            key={`cardIndex-${index}`}
-                            className={
-                                index === startIndex
-                                    ? style.locationInCardsSelected
-                                    : style.locationInCards
-                            }
-                            onClick={() => setStartIndex(index)}
-                        />
+                        <div key={`cardIndex-${index}`} className={ index === startIndex ? style.locationInCardsSelected : style.locationInCards } onClick={() => setStartIndex(index)} />
                     ))}
-                    <IconButton
-                        size="small"
-                        style={{
-                            backgroundColor: "#252525",
-                            color: "#fff",
-                            margin: "10px",
-                        }}
-                        onClick={() => handleDisplayCard("next")}
-                    >
+                    <IconButton size="small" style={{ backgroundColor: "#252525", color: "#fff", margin: "10px", }} onClick={() => handleDisplayCard("next")} >
                         <ChevronRightIcon />
                     </IconButton>
                 </div>
@@ -430,6 +400,19 @@ function ListContainer({ item }) {
 
 export default function HorizontalList() {
     const [infos, setInfos] = useState([]);
+
+    const toggleCardActive = (cardId, newActiveState) => {
+        let newInfos = [...infos];
+        for (let i = 0; i < newInfos.length; ++i) {
+            for (let j = 0; j < newInfos[i].cardList.length; ++j) {
+                if (newInfos[i].cardList[j].id === cardId) {
+                    newInfos[i].cardList[j].isActive = newActiveState;
+                    break;
+                }
+            }
+        }
+        setInfos(newInfos);
+    };
 
     useEffect(() => {
         fetch(API_URL + "/api/area", {
@@ -489,7 +472,7 @@ export default function HorizontalList() {
         <div className={style.mainContainerList}>
             {infos &&
                 infos.map((item, index) => (
-                    <ListContainer key={index} item={item} />
+                    <ListContainer key={index} item={item} toggleCardActive={toggleCardActive} />
                 ))}
         </div>
     );

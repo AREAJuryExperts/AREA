@@ -1,10 +1,13 @@
-export const url = "exp://10.137.158.163:8081"
+import { MOBILE_HREF } from "../utils"
+
+export const url = MOBILE_HREF;
 
 export const getRedirectUrl = () => {
     if (localStorage.getItem("isMobile") !== "true")
         return ("/")
     localStorage.removeItem("isMobile")
-    return url
+    let urlSearchParams = new URLSearchParams({jwt : localStorage.getItem("jwt")})
+    return url + "?" + urlSearchParams.toString()
 }
 
 
