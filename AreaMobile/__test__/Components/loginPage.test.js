@@ -1,30 +1,22 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import LoginPage from '../../src/LoginPage/LoginPage.js';
-import {fireEvent, cleanup, render, screen} from '@testing-library/react-native';
+import App from '../../App.js';
+import {fireEvent, cleanup, render, screen, act} from '@testing-library/react-native';
 
 afterEach(cleanup);
 
+let registerInfo = '';
+const setRegisterInfo = (info) => {
+}
 
 describe('<Login />', () => {
   it('renders correctly', async () => {
-    let registerInfo = '';
-    const setRegisterInfo = (info) => {
-    }
     const tree = renderer.create(<LoginPage registerInfo={registerInfo} setRegisterInfo={setRegisterInfo}/>).toJSON();
     expect(tree).toMatchSnapshot();
     return
   });
   it('can fill prompts and click buttons', async () => {
-        // const {getByTestId} = render(<Morpion isDayMode={true}/>);
-        // const {getByText} = screen;
-        // const foundButton = getByTestId("button00");
-        // fireEvent.press(foundButton);
-        // expect(getByText('X')).toBeTruthy();
-        // return
-    let registerInfo = '';
-    const setRegisterInfo = (info) => {
-    }
     const {getByTestId} = render(<LoginPage registerInfo={registerInfo} setRegisterInfo={setRegisterInfo}/>);
     const {getByText} = screen;
     const foundButton = getByTestId("loginBtn");
@@ -36,4 +28,14 @@ describe('<Login />', () => {
     expect(getByText('Login')).toBeTruthy();
     return
   });
+  it('can go to the register page', async () => {
+    const {getByTestId} = render(<App />);
+    const {getByText} = screen;
+    act(() => {
+      const foundButton = getByTestId("registerBtn");
+      fireEvent.press(foundButton);
+    })
+    expect(getByText('Password confirmation')).toBeTruthy();
+    return;
+  })
 });

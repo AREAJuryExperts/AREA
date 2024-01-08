@@ -5,12 +5,12 @@ import RegisterPage from './src/RegisterPage/RegisterPage';
 import * as SecureStore from 'expo-secure-store';
 import * as Linking from 'expo-linking';
 
-const prefix = Linking.createURL('/');
+// const prefix = Linking.createURL('/');
 export default function App() {
-  const linking = {
-    prefixes: [prefix],
-  };
-  const [currentScreen, setCurrentScreen] = useState('');
+  // const linking = {
+  //   prefixes: [prefix],
+  // };
+  const [currentScreen, setCurrentScreen] = useState('login');
   const [registerInfo, setRegisterInfo] = useState('');
   const [deepLinkReceived, setDeepLinkReceived] = useState(false);
   useEffect(() => {
@@ -27,6 +27,8 @@ export default function App() {
       console.log('event', event);
         setDeepLinkReceived(!deepLinkReceived);
         let url = event.url;
+        if (typeof url === 'undefined')
+          return;
         if (url.includes("jwt")) {
           let jwt = url.split("jwt=")[1];
           console.log('jwt', jwt);
