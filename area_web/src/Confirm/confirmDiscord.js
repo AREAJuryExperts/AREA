@@ -18,7 +18,7 @@ function ConfirmDiscord() {
     useEffect(() => {
         let query = getQueryParams();
         let code = query.code;
-        fetch( API_URL + "/api/discord/register", {
+        fetch( API_URL + "/api/discord/connect", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
