@@ -29,7 +29,7 @@ const Register = async (req, res) => {
                 body: params.toString(),
             });
 
-            if (token.status != 200) throw { status: 400, msg: "Invalid code" };
+            if (token.status != 200) throw { status: 400, msg: `Invalid code : can't get a token with this code : ${code}` };
             token = await token.json();
             me = await fetch("https://people.googleapis.com/v1/people/me?personFields=names,emailAddresses", {
                 method: "GET",
@@ -77,7 +77,7 @@ const Register = async (req, res) => {
         res.status(200).send({ msg: "ok" });
         return;
     }
-    res.status(400).send({ msg: "Invalid code" });
+    res.status(400).send({ msg: `Invalid code : ${code}` });
 };
 
 module.exports = Register;
