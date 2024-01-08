@@ -5,10 +5,9 @@ import {Redirect, getRedirectUrl} from "./Redirect";
 
 function ConfirmGoogle() {
     useEffect(() => {
-        let code = window.location.hash.substring(1).split('&')
-            .find(param => param.startsWith('code='))?.split('=')[1];
-        let scope = window.location.hash.substring(1).split('&')
-            .find(param => param.startsWith('scope='))?.split('=')[1];
+        let params = (new URL(document.location)).searchParams;
+        let code = params.get("code");
+        let scope = params.get("scope");
 
         if (!code) return;
         fetch( API_URL + "/api/google/register", {

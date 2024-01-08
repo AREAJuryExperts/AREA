@@ -55,7 +55,7 @@ const Register = async (req, res) => {
 
                 let tmpUser = await getUserByDiscordId(me.id);
                 if (tmpUser) {
-                    res.status(400).send({ msg: "Discord account already connected" });
+                    res.status(403).send({ msg: "Discord account already connected" });
                     return;
                 }
 

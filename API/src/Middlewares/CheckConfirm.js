@@ -20,7 +20,7 @@ const checkConfirm = async (req, res, next) => {
     }
     req.user = tmpUser.Item;
     if (!req.user.confirmed) {
-        res.status(400).json({ msg: "User not confirmed" });
+        res.status(403).json({ msg: "User not confirmed" });
         return;
     }
     next()
