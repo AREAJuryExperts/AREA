@@ -152,7 +152,6 @@ function InformationsOnPopup({ item, itemLogo }) {
 }
 
 function CardTop({ item, itemLogo, toggleCardActive }) {
-    const [active, setActive] = useState(item.isActive);
     const toggleSwitch = (event) => {
         const newActive = event.target.checked;
         toggleCardActive(item.id, newActive);
@@ -169,16 +168,10 @@ function CardTop({ item, itemLogo, toggleCardActive }) {
             }),
         })
             .then((response) => response.json())
-            .then((data) => {
-                if (data.msg === "ok") {
-                    setActive(event.target.checked);
-                }
-            })
+            .then((data) => {})
             .catch((error) => {
                 console.error("Error:", error);
             });
-
-        setActive(event.target.checked);
     };
 
     const handleKeyDown = (event) => {
@@ -255,33 +248,15 @@ function CardBottom({ item, itemLogo }) {
             <div className={style.cardTopSubcontainer1}>
                 <span className={style.cardSubtitle}>Then</span>
                 <div className={style.cardInstructionList}>
-                    {newThen.length > 0
-                        ? newThen.map((thenItem, index) => (
-                              <img
-                                  key={index}
-                                  style={{
-                                      width: "25px",
-                                      height: "auto",
-                                      marginRight: "5px",
-                                  }}
-                                  src={thenItem.serviceLogo}
-                                  alt={thenItem.serviceName}
-                              />
-                          ))
-                        : item &&
-                          item.then &&
-                          item.then.map((thenItem, index) => (
-                              <img
-                                  key={index}
-                                  style={{
-                                      width: "25px",
-                                      height: "auto",
-                                      marginRight: "5px",
-                                  }}
-                                  src={thenItem.serviceLogo}
-                                  alt={thenItem.serviceName}
-                              />
-                          ))}
+                    {newThen.length > 0 ? newThen.map((thenItem, index) => (
+                            <img key={index} style={{ width: "25px", height: "auto", marginRight: "5px" }} src={thenItem.serviceLogo} alt={thenItem.serviceName}/>
+                        )) : item && item.then && item.then.length === 1 ?
+                            <>
+                                <img style={{ width: "25px", height: "auto", marginRight: "5px" }} src={item.then[0].serviceLogo} alt={item.then[0].serviceName} />
+                                <span className={style.cardInstruction}> {item.then[0].reactionName} </span>
+                            </> : item && item.then && item.then.map((thenItem, index) => (
+                            <img key={index} style={{ width: "25px", height: "auto", marginRight: "5px" }} src={thenItem.serviceLogo} alt={thenItem.serviceName} />
+                    ))}
                 </div>
             </div>
             <div className={style.cardTopSubcontainer3}>
