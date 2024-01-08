@@ -3,6 +3,7 @@ const { TrelloCreateNewBoard } = require("./Trello/reactions")
 const { GithubCreateNewRepo, GithubCreateNewIssue } = require("./Github/reactions")
 const { AsanaCreateProject } = require("./Jira/reactions")
 const { JiraCreateSprint } = require("./Jira/reactions")
+const { GoogleCalendarCreateEvent } = require("./Google/reactions")
 const db = require("../../DB");
 
 const getReaction = async (action, user) => {
@@ -49,6 +50,8 @@ const router = async (action, user) => {
             await AsanaCreateProject(user);
         if (reactions[i].reaction === "JiraCreateSprint")
             await JiraCreateSprint(user);
+        if (reactions[i].reaction === "GoogleCalendarCreateEvent")
+            await GoogleCalendarCreateEvent(user);
     }
 }
 

@@ -1,15 +1,8 @@
 const utils = require("../../Utils");
 const dynamo = require("../../../DB");
 
-const RefreshToken = async (req, res) => {
-    try {
-        utils.checkArgs(req.body, ["user"]);
-    } catch (err) {
-        res.status(err.status).send(err.msg);
-        return;
-    }   
+const RefreshToken = async (user) => {
 
-    const { user } = req.body;
     const refresh_token = user.refresh_token;
     let token = null;
     const params = new URLSearchParams();
