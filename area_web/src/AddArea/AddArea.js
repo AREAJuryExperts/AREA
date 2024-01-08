@@ -7,11 +7,6 @@ import IconButton from "@mui/material/IconButton";
 import AddIcon from "@mui/icons-material/Add";
 import Checkbox from "@mui/joy/Checkbox";
 
-import discord from "../assets/DiscordLogo.png";
-import trello from "../assets/TrelloLogo.png";
-import github from "../assets/GithubLogo.png";
-import x from "../assets/Logo_AREA.png";
-
 import Popup from "../Components/PopupInfosCard";
 import { API_URL, IconRouter } from "../utils";
 
@@ -65,7 +60,6 @@ function ListItemsChooseReaction({ item, setReactions, reactions }) {
                 />
                 {item.app}
             </div>
-
             {item.reactions.map((reaction, index) => (
                 <div
                     className={
@@ -87,7 +81,7 @@ function ListItemsChooseReaction({ item, setReactions, reactions }) {
                         <span>{reaction.displayName}</span>
                     </div>
                     <div style={{ display: "flex", justifyContent: "center" }}>
-                        <Checkbox checked={checkedState[index].status} />
+                        <Checkbox checked={checkedState[index].status} tabIndex={0} onKeyDown={(e) => handleKeyDown(e, index)} />
                     </div>
                 </div>
             ))}
@@ -115,9 +109,9 @@ function ListItemsChooseAction({
         setProgression(1);
     };
 
-    const handleKeyDown = (event, actionName) => {
+    const handleKeyDown = (event, action) => {
         if (event.key === 'Enter') {
-            handleClick(actionName);
+            handleClick(action);
         }
     };
 
@@ -131,7 +125,6 @@ function ListItemsChooseAction({
                 />
                 {item.app}
             </div>
-
             {item.actions.map((action, index) => (
                 <div
                     className={
@@ -142,7 +135,9 @@ function ListItemsChooseAction({
                             : style.bodyListItem
                     }
                     key={index}
+                    tabIndex={0}
                     onClick={() => handleClick(action)}
+                    onKeyDown={(e) => handleKeyDown(e, action)}
                 >
                     <div style={{ display: "flex", justifyContent: "center" }}>
                         <img

@@ -115,7 +115,6 @@ function ButtonInfos({ showInfos, setShowInfos, onClose }) {
 }
 
 function PopupLinks({ showLinks, setShowLinks, onClose }) {
-    const navigate = useNavigate();
     const [links, setLinks] = useState([]);
 
     useEffect(() => {
@@ -132,11 +131,13 @@ function PopupLinks({ showLinks, setShowLinks, onClose }) {
                 for (let i = 0; i < data.length; i++) {
                     data[i].connected = false;
                     for (let j = 0; j < window.user.connected.length; j++) {
-                        data[i].icon = IconRouter(data[i].app);
                         if (data[i].app === window.user.connected[j]) {
                             data[i].connected = true;
                         }
                     }
+                }
+                for (let i = 0; i < data.length; i++) {
+                    data[i].icon = IconRouter(data[i].app);
                 }
                 setLinks(data);
             })
@@ -167,7 +168,6 @@ function PopupLinks({ showLinks, setShowLinks, onClose }) {
                                 : style.bodyListItem
                         }
                         key={index}
-                        
                         onClick={() => (!item.connected ? window.location.href = item.authUrl : 0)}
                     >
                         <div
