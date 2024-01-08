@@ -18,9 +18,12 @@ export default function Home() {
         })
             .then((response) => response.json())
             .then(async (data) => {
-                if (data.msg === "ok") {
+                if (data.msg === "ok")
                     window.user = data.data;
-                }
+                if (data.msg === "Invalid Token")
+                    window.location.href = "/login";
+                if (data.msg === "User not confirmed")
+                    window.location.href = "/waitingConfirmation";
             })
             .catch((err) => {
                 console.log(err);

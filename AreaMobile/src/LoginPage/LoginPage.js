@@ -4,7 +4,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import Logo from '../../assets/logo.svg';
 import ApiRoute from '../ApiRoute/ApiRoute';
 import * as SecureStore from 'expo-secure-store';
-
+import DiscordLogin from './DiscordLogin';
 const backColor = "#fff";
 
 export default function LoginPage({setCurrentScreen, registerInfo, setRegisterInfo}) {
@@ -112,6 +112,7 @@ export default function LoginPage({setCurrentScreen, registerInfo, setRegisterIn
       <TouchableOpacity  onPress={() => connect()} style={styles.connectionButton}>
         <Text style={styles.connectionButtonText}>Login</Text> 
       </TouchableOpacity>
+      <DiscordLogin />
     </ScrollView>
   );
 }
@@ -120,7 +121,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: backColor,
     alignItems: 'center',
-    paddingTop: 100,
+    paddingTop: 35,
     paddingBottom: 100,
     paddingLeft: 75,
     paddingRight: 75,

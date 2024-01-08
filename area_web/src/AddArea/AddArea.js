@@ -141,8 +141,6 @@ function ListItemsChooseAction({
                             ? style.bodyListItemLast
                             : style.bodyListItem
                     }
-                    // onKeyDown={(event) => handleKeyDown(event, action.actionName)}
-                    // tabIndex={0} // Permet la navigation au clavier
                     key={index}
                     onClick={() => handleClick(action)}
                 >

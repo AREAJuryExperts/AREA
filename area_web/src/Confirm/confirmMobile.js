@@ -1,11 +1,13 @@
 import React, {useState, useEffect} from "react";
-import {Redirect, getRedirectUrl} from "./Redirect";
+import {Redirect, getRedirectUrl, url} from "./Redirect";
 
 
 
 export default function ConfirmMobile({}) {
     const handleRedirect = () => {
         let urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get("jwt"))
+            localStorage.setItem("jwt", urlParams.get("jwt"));
         localStorage.setItem("isMobile", "true");
         document.location.href = urlParams.get("redirect");
     }
@@ -14,10 +16,3 @@ export default function ConfirmMobile({}) {
     }, [])
     return (<></>)
 }
-
-// export default function ConfirmMobile({}) {
-//     useEffect(() => {
-//         localStorage.setItem("isMobile", "true");
-//     }, [])
-//     return <Redirect />
-// }

@@ -1,4 +1,4 @@
-
+import { Redirect, getRedirectUrl } from "./Redirect";
 import React, {useEffect} from "react";
 import { API_URL } from "../utils";
 function getQueryParams() {
@@ -28,15 +28,16 @@ function ConfirmDiscordLogin() {
             .then((data) => {
                 if (data.msg === "ok") {
                     localStorage.setItem("jwt", data.jwt);
-                    window.location.href = "/";
+                    window.location.href = getRedirectUrl();
+                    return
                 }
                 if (data.msg === "Invalid code") {
-                    window.location.href = "/login";
+                    window.location.href = getRedirectUrl() === "/" ? "/login" : getRedirectUrl();
                 }
             });
     }, []);
 
-    return (<></>)
+    return (<Redirect />)
 }
 
 export default ConfirmDiscordLogin;
