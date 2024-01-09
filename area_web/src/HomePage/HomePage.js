@@ -1,13 +1,11 @@
 import style from "./HomePage.module.css";
 import React, {useEffect} from "react";
-
 import Topbar from "../Topbar/Topbar";
 import HorizontalList from "../HorizontalList/HorizontalList";
 import AddArea from "../AddArea/AddArea";
 import { API_URL } from "../utils";
 
 export default function Home() {
-    
     useEffect(() => {
         fetch(API_URL + "/api/me", {
             method: "GET",
@@ -39,4 +37,4 @@ export default function Home() {
             <AddArea />
         </div>
     );
-}
+};

@@ -85,9 +85,8 @@ function InfosUser({ showInfos, setShowInfos, onClose }) {
 function ButtonInfos({ showInfos, setShowInfos, onClose }) {
     function handleShowInfos() {
         setShowInfos(!showInfos);
-        if (showInfos) {
+        if (showInfos)
             onClose();
-        }
     }
 
     return (
@@ -130,15 +129,12 @@ function PopupLinks({ showLinks, setShowLinks, onClose }) {
                 console.log(data);
                 for (let i = 0; i < data.length; i++) {
                     data[i].connected = false;
-                    for (let j = 0; j < window.user.connected.length; j++) {
-                        if (data[i].app === window.user.connected[j]) {
+                    for (let j = 0; j < window.user.connected.length; j++)
+                        if (data[i].app === window.user.connected[j])
                             data[i].connected = true;
-                        }
-                    }
                 }
-                for (let i = 0; i < data.length; i++) {
+                for (let i = 0; i < data.length; i++)
                     data[i].icon = IconRouter(data[i].app);
-                }
                 setLinks(data);
             })
             .catch((err) => {
@@ -202,9 +198,8 @@ function PopupLinks({ showLinks, setShowLinks, onClose }) {
 function ButtonLinks({ showLinks, setShowLinks, onClose }) {
     function handleShowLinks() {
         setShowLinks(!showLinks);
-        if (showLinks) {
+        if (showLinks)
             onClose();
-        }
     }
 
     return (
