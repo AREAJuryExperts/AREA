@@ -2,18 +2,16 @@ const db = require("../../../DB");
 const refreshToken = require("./RefreshToken");
 
 const GoogleCalendarCreateEvent = async (user) => {
-
-    let endDate = new Date();
-    endDate.setMinutes(endDate.getMinutes() + 15);
+    const startDate = new Date();
     const event = {
         summary: 'AREA',
         description: 'An action have been triggered',
         start: {
-          dateTime: new Date(),
+          dateTime: startDate,
           timeZone: 'Europe/Paris',
         },
         end: {
-          dateTime: endDate,
+          dateTime: new Date().setMinutes(startDate.getMinutes() + 15),
           timeZone: 'Europe/Paris',
         },
     };
@@ -46,10 +44,12 @@ const GoogleCalendarCreateEvent = async (user) => {
     };
     try {
         let res = await fetch(url, options);
-        if (res.status !== 200)
-            res.status(400).send({ msg: "Error while creating an event." });
-        else
-            res.status(200).send({ msg: "ok" });
+        if (res.ok)
+            console.log('Event created successfully.');
+        else {
+            const errorData = await response.json();
+            console.error('Error creating event:', errorData);
+        }
         return null;
     } catch (err) {
         console.error(err);
