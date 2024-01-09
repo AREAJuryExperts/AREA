@@ -34,7 +34,6 @@ const RefreshToken = async (user) => {
         TableName: "GoogleUsers",
         Item: user,
     }).promise();
-    res.status(200).send({ msg: "ok" });
     return (token.access_token);
 };
 
