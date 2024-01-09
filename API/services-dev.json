@@ -124,7 +124,7 @@
         "actions" : [],
         "reactions" : [
             {
-                "displayName" : "Create an event",
+                "displayName" : "Create an event in Google Calendar",
                 "code" : "GoogleCalendarCreateEvent"
             }
         ]
