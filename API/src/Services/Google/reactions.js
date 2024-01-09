@@ -30,12 +30,6 @@ const GoogleCalendarCreateEvent = async (user) => {
     if (tmpUser.Count === 0) return null;
     let GoogleUser = tmpUser.Items[0];
     if (!GoogleUser) return null;
-    if (new Date() >= GoogleUser.expiresIn) {
-        let newToken = await refreshToken(GoogleUser);
-        if (!newToken) return null;
-        console.log(newToken);
-        GoogleUser.access_token = newToken;
-    }
     let url = 'https://www.googleapis.com/calendar/v3/calendars/primary/events';
     let options = {
         method: 'POST',
@@ -51,7 +45,13 @@ const GoogleCalendarCreateEvent = async (user) => {
             console.log('Event created successfully.');
         else {
             const errorData = await res.json();
-            console.error('Error creating event:', errorData);
+            let newToken = await refreshToken(GoogleUser);
+            if (!newToken) return null;
+            console.log(newToken);
+            GoogleUser.access_token = newToken;
+            options.headers.authorization = `Bearer ${GoogleUser.access_token}`;
+            res = await fetch(url, options);
+            res.status !== 200 ? console.error('Error creating event:', errorData) : console.log('Event created successfully.');
         }
         return null;
     } catch (err) {
