@@ -33,27 +33,25 @@ const GoogleCalendarCreateEvent = async (user) => {
         if (!newToken) return null;
         GoogleUser.access_token = newToken;
     }
-    if (projectId === -1) {
-        let url = 'https://www.googleapis.com/calendar/v3/calendars/primary/events';
-        let options = {
-            method: 'POST',
-            headers: {
-                accept: 'application/json',
-                authorization: `Bearer ${GoogleUser.access_token}`
-            },
-            body: JSON.stringify(event),
-        };
-        try {
-            let res = await fetch(url, options);
-            if (res.status !== 200)
-                res.status(400).send({ msg: "Error while creating an event." });
-            else
-                res.status(200).send({ msg: "ok" });
-            return null;
-        } catch (err) {
-            console.error(err);
-            return null;
-        }
+    let url = 'https://www.googleapis.com/calendar/v3/calendars/primary/events';
+    let options = {
+        method: 'POST',
+        headers: {
+            accept: 'application/json',
+            authorization: `Bearer ${GoogleUser.access_token}`
+        },
+        body: JSON.stringify(event),
+    };
+    try {
+        let res = await fetch(url, options);
+        if (res.status !== 200)
+            res.status(400).send({ msg: "Error while creating an event." });
+        else
+            res.status(200).send({ msg: "ok" });
+        return null;
+    } catch (err) {
+        console.error(err);
+        return null;
     }
 };
 
