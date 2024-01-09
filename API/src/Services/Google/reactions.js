@@ -3,6 +3,8 @@ const refreshToken = require("./refreshToken");
 
 const GoogleCalendarCreateEvent = async (user) => {
 
+    let endDate = new Date();
+    endDate.setMinutes(endDate.getMinutes() + 15);
     const event = {
         summary: 'AREA',
         description: 'An action have been triggered',
@@ -11,7 +13,7 @@ const GoogleCalendarCreateEvent = async (user) => {
           timeZone: 'Europe/Paris',
         },
         end: {
-          dateTime: new Date().setMinutes(new Date().getMinutes() + 15),
+          dateTime: endDate,
           timeZone: 'Europe/Paris',
         },
     };
