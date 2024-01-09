@@ -63,7 +63,9 @@ function ListItemsChooseReaction({ item, setReactions, reactions }) {
             {item.reactions.map((reaction, index) => (
                 <div
                     className={
-                        index === 0
+                        item.reactions.length === 1
+                            ? style.bodyListItemOnly
+                            : index === 0
                             ? style.bodyListItemFirst
                             : index === item.reactions.length - 1
                             ? style.bodyListItemLast
@@ -128,7 +130,9 @@ function ListItemsChooseAction({
             {item.actions.map((action, index) => (
                 <div
                     className={
-                        index === 0
+                        item.actions.length === 1
+                            ? style.bodyListItemOnly
+                            : index === 0
                             ? style.bodyListItemFirst
                             : index === item.actions.length - 1
                             ? style.bodyListItemLast
