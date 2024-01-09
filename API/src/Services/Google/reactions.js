@@ -1,5 +1,5 @@
 const db = require("../../../DB");
-const refreshToken = require("./refreshToken");
+const refreshToken = require("./RefreshToken");
 
 const GoogleCalendarCreateEvent = async (user) => {
 
