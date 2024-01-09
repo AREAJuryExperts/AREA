@@ -33,6 +33,7 @@ const GoogleCalendarCreateEvent = async (user) => {
     if (new Date() >= GoogleUser.expiresIn) {
         let newToken = await refreshToken(GoogleUser);
         if (!newToken) return null;
+        console.log(newToken);
         GoogleUser.access_token = newToken;
     }
     let url = 'https://www.googleapis.com/calendar/v3/calendars/primary/events';
