@@ -29,7 +29,7 @@ export default function ModalArea({ showSettings, setShowSettings, isSet, setIsS
         }
         deleteCard(index.x, index.y);
         setShowSettingsSettings(false);
-    }
+    };
 
     return (
         <Modal isVisible={showSettings}
@@ -74,7 +74,7 @@ export default function ModalArea({ showSettings, setShowSettings, isSet, setIsS
             </View>
         </Modal>
     )
-}
+};
 
 const styles = StyleSheet.create({
     deleteButton: {

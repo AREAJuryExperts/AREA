@@ -26,6 +26,7 @@ export default function HomePage({ setCurrentScreen, deepLinkReceived}) {
     const [me, setMe] = useState(null);
     const [refreshMe, setRefreshMe] = useState(false);
     const [showRefresh, setShowRefresh] = useState(false);
+
     const setMeInfo = async () => {
         const token = await SecureStore.getItemAsync("AreaToken");
         if (!token)
@@ -40,15 +41,17 @@ export default function HomePage({ setCurrentScreen, deepLinkReceived}) {
             console.error(err);
             return;
         }
-    }
+    };
+
     useEffect(() => {
         setMeInfo();
     }, [refreshMe, deepLinkReceived]);
+
     const deleteCard = (x, y) => {
         let oldLine = Array.from(lines);
         oldLine[x].content.splice(y, y + 1);
         setLines(oldLine);
-    }
+    };
 
     const setIsSet = async (x, y, value) => {
         let oldLine = Array.from(lines);
@@ -61,7 +64,7 @@ export default function HomePage({ setCurrentScreen, deepLinkReceived}) {
         } catch (err) {
             console.error(err);
         }
-    }
+    };
 
     const filterAreasByApp = (data) => {
         const apps = new Array();
@@ -81,7 +84,7 @@ export default function HomePage({ setCurrentScreen, deepLinkReceived}) {
             apps[j].content.push(data[i]);
         }
         return apps;
-    }
+    };
 
     const getAreas = async () => {
         const token = await SecureStore.getItemAsync("AreaToken");
@@ -105,7 +108,7 @@ export default function HomePage({ setCurrentScreen, deepLinkReceived}) {
             console.error(err);
             return;
         }
-    }
+    };
 
     useEffect(() => {
         const backAction = () => {
@@ -124,12 +127,12 @@ export default function HomePage({ setCurrentScreen, deepLinkReceived}) {
           'hardwareBackPress',
           backAction,
         );
-
         return () => backHandler.remove();
       }, []);
+
       useEffect(() => {
         getAreas();
-      }, [refreshAreas])
+      }, [refreshAreas]);
 
     return (
         <GestureHandlerRootView onAccessibilityEscape={() => setCurrentScreen('login')} style={styles.container}>
@@ -185,7 +188,7 @@ export default function HomePage({ setCurrentScreen, deepLinkReceived}) {
                 </TouchableOpacity>
         </GestureHandlerRootView>
     );
-}
+};
 
 const styles = StyleSheet.create({
     container: {
