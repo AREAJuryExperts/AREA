@@ -15,7 +15,6 @@ const registerWebhook = async (req, res) => {
             ":n": req.user.id,
         },
     };
-    console.log("req user id", req.user.id);
     let tmpUser = await db.client().query(params).promise();
     if (tmpUser.Count === 0) return res.status(400).send({msg: "User not found"});
 
