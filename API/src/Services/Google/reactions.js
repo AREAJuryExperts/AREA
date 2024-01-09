@@ -44,11 +44,12 @@ const GoogleCalendarCreateEvent = async (user) => {
     };
     try {
         let res = await fetch(url, options);
-        if (res.ok)
+        console.log(res);
+        if (res.status === 200)
             console.log('Event created successfully.');
         else {
             const errorData = await res.json();
-            console.error('Error creating event:', errorData);
+            // console.error('Error creating event:', errorData);
         }
         return null;
     } catch (err) {
