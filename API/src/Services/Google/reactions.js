@@ -47,7 +47,6 @@ const GoogleCalendarCreateEvent = async (user) => {
             const errorData = await res.json();
             let newToken = await refreshToken(GoogleUser);
             if (!newToken) return null;
-            console.log(newToken);
             GoogleUser.access_token = newToken;
             options.headers.authorization = `Bearer ${GoogleUser.access_token}`;
             res = await fetch(url, options);
