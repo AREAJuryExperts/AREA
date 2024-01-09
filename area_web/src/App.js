@@ -1,7 +1,5 @@
 import React from "react";
-
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
 import LoginPage from "./LoginPage/LoginPage";
 import HomePage from "./HomePage/HomePage";
 import RegisterPage from "./RegisterPage/RegisterPage";
@@ -15,6 +13,7 @@ import ConfirmDiscordLogin from "./Confirm/confirmDiscordLogin";
 import ConfirmJira from "./Confirm/confirmJira";
 import ConfirmGoogle from "./Confirm/confirmGoogle";
 import ConfirmMobile from "./Confirm/confirmMobile";
+
 function App() {
     return (
         <Router>

@@ -6,8 +6,6 @@ import ApiRoute from '../ApiRoute/ApiRoute';
 import Animated, {SlideInLeft, SlideOutLeft} from 'react-native-reanimated';
 const backColor = "#fff";
 
-
-
 export default function RegisterPage({setCurrentScreen, setRegisterInfo}) {
   const [email, setEmail] = useState('');
   const [firstName, setFirstName] = useState('');
@@ -24,18 +22,15 @@ export default function RegisterPage({setCurrentScreen, setRegisterInfo}) {
       y: 0,
       animated: true,
     });
-  }
+  };
 
   useEffect(() => {
-
-    
     const keyboardDidHideListener = Keyboard.addListener(
       'keyboardDidHide',
       () => {
         onRemoveKeyboard();
       }
     );
-
     return () => {
       keyboardDidHideListener.remove();
     };
@@ -135,7 +130,7 @@ export default function RegisterPage({setCurrentScreen, setRegisterInfo}) {
         </TouchableOpacity>
       </Animated.ScrollView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {

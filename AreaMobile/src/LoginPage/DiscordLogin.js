@@ -30,11 +30,12 @@ export default function DiscordLogin({}) {
         } catch (e) {
             console.error(e);
         }
-    }
+    };
+
     useEffect(() => {
         setImage(GetImage('discord'))
         getAuthUrl();
-    }, [])
+    }, []);
 
     const openService = async () => {
         let jwt = await SecureStore.getItemAsync("AreaToken");
@@ -44,11 +45,12 @@ export default function DiscordLogin({}) {
           });
         let result = await WebBrowser.openBrowserAsync(FrontUrl + "/confirmMobile?" + params.toString());
     };
+
     return (
         <TouchableOpacity onPress={() => openService()}
         style={{alignItems : 'center', backgroundColor : 'blue', borderRadius : 25, padding : 5, marginTop : 25, width: '100%'}}>
             <Image tintColor={'white'}source={image} style={{ width: 40, height: 40, marginTop: 5, marginBottom : 5 }} />
             <Text style={{color : 'white', fontSize : 20}}>Login with Discord</Text>
-        </TouchableOpacity >)
-
-}
+        </TouchableOpacity >
+    )
+};

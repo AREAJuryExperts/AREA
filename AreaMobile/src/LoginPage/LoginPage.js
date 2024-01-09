@@ -15,12 +15,14 @@ export default function LoginPage({setCurrentScreen, registerInfo, setRegisterIn
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [incorrectCred, setIncorrectCred] = useState(false);
   const scrollRef = useRef();
+
   const onRemoveKeyboard = () => {
     scrollRef.current?.scrollTo({
       y: 0,
       animated: true,
     });
-  }
+  };
+
   useEffect(() => {
     const keyboardDidHideListener = Keyboard.addListener(
       'keyboardDidHide',
@@ -63,12 +65,14 @@ export default function LoginPage({setCurrentScreen, registerInfo, setRegisterIn
       console.error('error: ', err);
         return;
     }
-  }
+  };
+
   useEffect(() => {
     SecureStore.getItemAsync("AreaToken").then((token) => {
       if (token) {setCurrentScreen('home');}
     })
   }, []);
+
   return (
     <FadeInView>
     <ScrollView contentContainerStyle ={styles.container} scrollEnabled={false} ref={scrollRef}>
@@ -116,7 +120,7 @@ export default function LoginPage({setCurrentScreen, registerInfo, setRegisterIn
     </ScrollView>
     </FadeInView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {

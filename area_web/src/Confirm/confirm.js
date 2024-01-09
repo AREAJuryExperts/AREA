@@ -31,12 +31,9 @@ function Confirm() {
                     window.location.href = "/";
                 }
             });
-        
-        
     }, []);
 
     return (<></>)
 }
 
 export default Confirm;
-

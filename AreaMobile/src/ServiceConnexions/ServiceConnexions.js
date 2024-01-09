@@ -1,4 +1,4 @@
-import { Text, View, TouchableOpacity, Switch, StyleSheet, Image, ScrollView } from 'react-native';
+import { Text, View, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import Modal from "react-native-modal";
 import ApiRoute from '../ApiRoute/ApiRoute';
@@ -8,6 +8,7 @@ import GetImages from '../GetImages/GetImages';
 
 export default function ServiceConnexions({ show, setShow, me, refresh, setRefresh}) {
     const [availableServices, setAvailableServices] = useState([]);
+
     const setNewServices = async () => {
         const token = await SecureStore.getItemAsync("AreaToken");
         if (!token)
@@ -27,11 +28,12 @@ export default function ServiceConnexions({ show, setShow, me, refresh, setRefre
             console.error(err);
             return;
         }
-    }
+    };
 
     useEffect(() => {
         setNewServices();
     }, []);
+
     return (
         <Modal 
             isVisible={show}
@@ -58,7 +60,7 @@ export default function ServiceConnexions({ show, setShow, me, refresh, setRefre
             </View>
         </Modal>
     )
-}
+};
 
 const styles = StyleSheet.create({
 });
