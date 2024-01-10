@@ -44,25 +44,6 @@ function InformationsOnPopup({ item, itemLogo }) {
                     <span className={style.InformationsOnPopupAction}>
                         <b>When</b>
                     </span>
-                    {/* <Switch
-                        {...label}
-                        sx={{
-                            width: 62,
-                            height: 40,
-                            "& .MuiSwitch-switchBase": {
-                                "&.Mui-checked": {
-                                    transform: "translateX(24px)",
-                                },
-                            },
-                            "& .MuiSwitch-thumb": {
-                                width: 24,
-                                height: 24,
-                            },
-                            "& .MuiSwitch-track": {
-                                borderRadius: 26 / 2,
-                            },
-                        }}
-                    /> */}
                 </div>
                 <div className={style.informationsOnPopupContainerLogoAndText}>
                     <div
