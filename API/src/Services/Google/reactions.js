@@ -1,17 +1,19 @@
 const db = require("../../../DB");
-const refreshToken = require("./refreshToken");
+const refreshToken = require("./RefreshToken");
 
 const GoogleCalendarCreateEvent = async (user) => {
-
+    const startDate = new Date();
+    let endDate = new Date();
+    endDate.setMinutes(endDate.getMinutes() + 15);
     const event = {
         summary: 'AREA',
         description: 'An action have been triggered',
         start: {
-          dateTime: new Date(),
+          dateTime: startDate,
           timeZone: 'Europe/Paris',
         },
         end: {
-          dateTime: new Date().setMinutes(new Date().getMinutes() + 15),
+          dateTime: endDate,
           timeZone: 'Europe/Paris',
         },
     };
@@ -28,11 +30,6 @@ const GoogleCalendarCreateEvent = async (user) => {
     if (tmpUser.Count === 0) return null;
     let GoogleUser = tmpUser.Items[0];
     if (!GoogleUser) return null;
-    if (new Date() >= GoogleUser.expiresIn) {
-        let newToken = await refreshToken(GoogleUser);
-        if (!newToken) return null;
-        GoogleUser.access_token = newToken;
-    }
     let url = 'https://www.googleapis.com/calendar/v3/calendars/primary/events';
     let options = {
         method: 'POST',
@@ -44,10 +41,17 @@ const GoogleCalendarCreateEvent = async (user) => {
     };
     try {
         let res = await fetch(url, options);
-        if (res.status !== 200)
-            res.status(400).send({ msg: "Error while creating an event." });
-        else
-            res.status(200).send({ msg: "ok" });
+        if (res.status === 200)
+            console.log('Event created successfully.');
+        else {
+            const errorData = await res.json();
+            let newToken = await refreshToken(GoogleUser);
+            if (!newToken) return null;
+            GoogleUser.access_token = newToken;
+            options.headers.authorization = `Bearer ${GoogleUser.access_token}`;
+            res = await fetch(url, options);
+            res.status !== 200 ? console.error('Error creating event:', errorData) : console.log('Event created successfully.');
+        }
         return null;
     } catch (err) {
         console.error(err);

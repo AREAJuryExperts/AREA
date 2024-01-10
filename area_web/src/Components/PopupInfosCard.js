@@ -1,12 +1,9 @@
 import React from "react";
 import style from "./PopupInfosCard.module.css";
-
 import IconButton from '@mui/material/IconButton';
-
 import CloseIcon from "@mui/icons-material/Close";
 
 export default function PopupWoverlay({ setOpen, open, onClose, children, name }) {
-
     const togglePopUp = () => {
         if (open) {
             onClose();
@@ -18,6 +15,7 @@ export default function PopupWoverlay({ setOpen, open, onClose, children, name }
         console.error("PopupWoverlay: open prop is false");
         return <></>;
     }
+
     return (
         <div className={style.settingsOverlay} onClick={togglePopUp}>
             <div

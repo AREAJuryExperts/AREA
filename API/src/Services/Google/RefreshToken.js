@@ -29,12 +29,11 @@ const RefreshToken = async (user) => {
     let expiresIn = new Date();
     expiresIn.setHours(expiresIn.getHours() + 1);
     user.access_token = token.access_token;
-    user.expiresIn = expiresIn;
+    user.expiresIn = expiresIn.toDateString();
     await dynamo.client().put({
         TableName: "GoogleUsers",
         Item: user,
     }).promise();
-    res.status(200).send({ msg: "ok" });
     return (token.access_token);
 };
 

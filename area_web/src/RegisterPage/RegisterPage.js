@@ -1,10 +1,8 @@
 import style from "./RegisterPage.module.css";
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
-
 import LogoAREA from "../assets/Logo_AREA.png";
 import TextField from '@mui/material/TextField';
-
 import { API_URL } from "../utils";
 
 function TextsFields({ email, setEmail, firstName, setFirstName, lastName, setLastName, password, setPassword, passwordConfirmation, setPasswordConfirmation }) {
@@ -70,9 +68,7 @@ export default function Register() {
     const [lastName, setLastName] = useState("");
     const [password, setPassword] = useState("");
     const [passwordConfirmation, setPasswordConfirmation] = useState("");
-
     const [errorMessage, setErrorMessage] = useState("");
-
     const navigate = useNavigate();
 
     const handleRegister = () => {
@@ -93,11 +89,10 @@ export default function Register() {
                 if (data.msg === "ok") {
                     localStorage.setItem("jwt", data.jwt);
                     navigate("/waitingConfirmation");
-                } else if (data.msg === "Email already exists") {
+                } else if (data.msg === "Email already exists")
                     setErrorMessage("Cet utilisateur a déjà été créé");
-                } else {
+                else
                     setErrorMessage("Erreur lors de l'ajout de l'utilisateur");
-                }
             })
             .catch((error) => {
                 console.error("Error:", error);
