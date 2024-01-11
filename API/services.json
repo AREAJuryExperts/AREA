@@ -86,7 +86,7 @@
     {
         "app" : "Asana",
         "icon" : "Asana.png",
-        "authUrl" : "https://app.asana.com/-/oauth_authorize?response_type=code&client_id=1206159461664814&redirect_uri=https%3A%2F%2Farea.david-benistant.com%2FconfirmAsana&state=secretStateParam",
+        "authUrl" : "https://app.asana.com/-/oauth_authorize?response_type=code&client_id=1206159461664814&redirect_uri=https%3A%2F%2Fd3lyxkfr0ujo0d.cloudfront.net%2FconfirmAsana&state=secretStateParam",
         "actions" : [
             {
                 "displayName" : "A project is created",
@@ -121,6 +121,11 @@
         "icon" : "Jira.png",
         "authUrl" : "https://auth.atlassian.com/authorize?audience=api.atlassian.com&client_id=JDQosRjKdnJpfC1LEK6wsII2oxr2KArF&scope=read%3Ajira-work%20manage%3Ajira-project%20manage%3Ajira-configuration%20read%3Ajira-user%20write%3Ajira-work%20manage%3Ajira-webhook%20manage%3Ajira-data-provider&redirect_uri=https%3A%2F%2Farea.david-benistant.com%2FconfirmJira&state=${YOUR_USER_BOUND_VALUE}&response_type=code&prompt=consent",
         "actions" : [],
-        "reactions" : []
+        "reactions" : [
+            {
+                "displayName" : "Create new sprint",
+                "code" : "JiraCreateSprint"
+            }
+        ]
     }
 ]
