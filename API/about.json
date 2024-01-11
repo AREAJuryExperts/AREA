@@ -1,0 +1,108 @@
+{
+    "client": {
+      "host": "https://area.david-benistant.com"
+    },
+    "server": {
+      "current_time": 1704971835,
+      "services": [
+        {
+          "actions": [
+            {
+              "description": "This action check if the bot received a private message from a user",
+              "name": "Send a private message to the bot"
+            },
+            {
+              "description": "This action check if a user send a message to the server",
+              "name": "Send a message to the server"
+            }
+          ],
+          "reactions": [
+            {
+              "description": "This reaction send a private message to a user",
+              "name": "Received a private message"
+            }
+          ],
+          "name": "Discord"
+        },
+        {
+          "actions": [
+            {
+              "description": "This action check if a card is created in the board",
+              "name": "Card created"
+            },
+            {
+              "description": "This action check if a card is deleted in the board",
+              "name": "Card deleted"
+            },
+            {
+              "description": "This action check if a card is moved in the board",
+              "name": "Card moved"
+            }
+          ],
+          "reactions": [
+            {
+              "description": "This reaction create a new board",
+              "name": "Create new board"
+            }
+          ],
+          "name": "Trello"
+        },
+        {
+          "actions": [
+            {
+              "name": "Repository created"
+            },
+            {
+              "name": "Repository deleted"
+            },
+            {
+              "name": "Push made in a repo"
+            }
+          ],
+          "reactions": [
+            {
+              "name": "Create new repository"
+            },
+            {
+              "name": "Create new issue"
+            }
+          ],
+          "name": "Github"
+        },
+        {
+          "actions": [
+            {
+              "name": "A project is created"
+            },
+            {
+              "name": "A project as been removed or deleted"
+            }
+          ],
+          "reactions": [
+            {
+              "name": "Create new project"
+            }
+          ],
+          "name": "Asana"
+        },
+        {
+          "actions": [],
+          "reactions": [
+            {
+              "name": "Create new sprint"
+            }
+          ],
+          "name": "Jira"
+        },
+        {
+          "actions": [],
+          "reactions": [
+            {
+              "name": "Create an event in Google Calendar"
+            }
+          ],
+          "name": "Google"
+        }
+      ]
+    }
+  }
