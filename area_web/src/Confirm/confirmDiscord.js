@@ -41,6 +41,7 @@ function ConfirmDiscord() {
             });
     }, []);
 
+
     return (<Redirect />)
 }
 
