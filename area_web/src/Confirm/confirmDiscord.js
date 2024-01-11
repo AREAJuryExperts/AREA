@@ -31,12 +31,16 @@ function ConfirmDiscord() {
             .then((data) => {
                 if (data.msg === "ok" || data.msg === "Already connected") {
                     window.location.href = getRedirectUrl()
+                } if (data.msg === "Discord account already connected") {
+                    alert("Discord account already connected")
+                    window.location.href = getRedirectUrl()
                 } else {
                     let redirect = window.location.href;
                     window.location.href = "/login?redirect=" + redirect;
                 }
             });
     }, []);
+
 
     return (<Redirect />)
 }

@@ -44,25 +44,6 @@ function InformationsOnPopup({ item, itemLogo }) {
                     <span className={style.InformationsOnPopupAction}>
                         <b>When</b>
                     </span>
-                    {/* <Switch
-                        {...label}
-                        sx={{
-                            width: 62,
-                            height: 40,
-                            "& .MuiSwitch-switchBase": {
-                                "&.Mui-checked": {
-                                    transform: "translateX(24px)",
-                                },
-                            },
-                            "& .MuiSwitch-thumb": {
-                                width: 24,
-                                height: 24,
-                            },
-                            "& .MuiSwitch-track": {
-                                borderRadius: 26 / 2,
-                            },
-                        }}
-                    /> */}
                 </div>
                 <div className={style.informationsOnPopupContainerLogoAndText}>
                     <div
@@ -186,7 +167,7 @@ function CardTop({ item, itemLogo, toggleCardActive }) {
                         alt={itemLogo}
                         style={{ width: "25px", height: "auto" }}
                     />
-                    <span className={style.cardInstruction}> {item.when} </span>
+                    <span className={style.cardInstruction}>{item.when.length > 22 ? `${item.when.slice(0, 22)}...` : item.when}</span>
                 </div>
             </div>
             <div className={style.cardTopSubcontainer2}>
@@ -249,7 +230,7 @@ function CardBottom({ item, itemLogo }) {
                         )) : item && item.then && item.then.length === 1 ?
                             <>
                                 <img style={{ width: "25px", height: "auto", marginRight: "5px" }} src={item.then[0].serviceLogo} alt={item.then[0].serviceName} />
-                                <span className={style.cardInstruction}> {item.then[0].reactionName} </span>
+                                <span className={style.cardInstruction}> {item.then[0].reactionName.length > 25 ? `${item.then[0].reactionName.slice(0, 25)}...` : item.then[0].reactionName} </span>
                             </> : item && item.then && item.then.map((thenItem, index) => (
                             <img key={index} style={{ width: "25px", height: "auto", marginRight: "5px" }} src={thenItem.serviceLogo} alt={thenItem.serviceName} />
                     ))}
