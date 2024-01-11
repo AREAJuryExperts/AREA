@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
 import style from "./AddArea.module.css";
-
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import IconButton from "@mui/material/IconButton";
 import AddIcon from "@mui/icons-material/Add";
 import Checkbox from "@mui/joy/Checkbox";
-
 import Popup from "../Components/PopupInfosCard";
 import { API_URL, IconRouter } from "../utils";
 
@@ -20,24 +18,19 @@ function ListItemsChooseReaction({ item, setReactions, reactions }) {
     const handleCheckboxChange = (index) => {
         let elem = null;
         let newCheckedState = checkedState;
-        for (let i = 0; i < newCheckedState.length; i++) {
+        for (let i = 0; i < newCheckedState.length; i++)
             if (i === index) {
                 newCheckedState[i].status = !newCheckedState[i].status;
                 elem = newCheckedState[i];
                 break;
             }
-        }
         setCheckedState(newCheckedState);
-
         if (elem === null) return;
-
         if (elem.status === false) {
             let newReactions = [];
-            for (let i = 0; i < reactions.length; i++) {
-                if (reactions[i].reaction !== elem.code) {
+            for (let i = 0; i < reactions.length; i++)
+                if (reactions[i].reaction !== elem.code)
                     newReactions.push(reactions[i]);
-                }
-            }
             setReactions(newReactions);
             return;
         }
@@ -45,39 +38,28 @@ function ListItemsChooseReaction({ item, setReactions, reactions }) {
     };
 
     const handleKeyDown = (event, index) => {
-        if (event.key === 'Enter') {
+        if (event.key === 'Enter')
             handleCheckboxChange(index);
-        }
     };
 
     return (
         <div className={style.listItemContainer}>
             <div className={style.headerRowList}>
-                <img
-                    src={item.icon}
-                    alt={item.app}
-                    className={style.listItemLogo}
-                />
+                <img src={item.icon} alt={item.app} className={style.listItemLogo}/>
                 {item.app}
             </div>
             {item.reactions.map((reaction, index) => (
                 <div
                     className={
-                        index === 0
-                            ? style.bodyListItemFirst
-                            : index === item.reactions.length - 1
-                            ? style.bodyListItemLast
-                            : style.bodyListItem
+                        item.reactions.length === 1 ? style.bodyListItemOnly : index === 0
+                            ? style.bodyListItemFirst : index === item.reactions.length - 1
+                            ? style.bodyListItemLast : style.bodyListItem
                     }
                     key={index}
                     onClick={() => handleCheckboxChange(index)}
                 >
                     <div style={{ display: "flex", justifyContent: "center" }}>
-                        <img
-                            src={item.icon}
-                            alt={item.app}
-                            className={style.listItemLogo}
-                        />
+                        <img src={item.icon} alt={item.app} className={style.listItemLogo}/>
                         <span>{reaction.displayName}</span>
                     </div>
                     <div style={{ display: "flex", justifyContent: "center" }}>
@@ -110,29 +92,22 @@ function ListItemsChooseAction({
     };
 
     const handleKeyDown = (event, action) => {
-        if (event.key === 'Enter') {
+        if (event.key === 'Enter')
             handleClick(action);
-        }
     };
 
     return (
         <div className={style.listItemContainer}>
             <div className={style.headerRowList}>
-                <img
-                    src={item.icon}
-                    alt={item.app}
-                    className={style.listItemLogo}
-                />
+                <img src={item.icon} alt={item.app} className={style.listItemLogo}/>
                 {item.app}
             </div>
             {item.actions.map((action, index) => (
                 <div
                     className={
-                        index === 0
-                            ? style.bodyListItemFirst
-                            : index === item.actions.length - 1
-                            ? style.bodyListItemLast
-                            : style.bodyListItem
+                        item.actions.length === 1 ? style.bodyListItemOnly : index === 0
+                            ? style.bodyListItemFirst : index === item.actions.length - 1
+                            ? style.bodyListItemLast : style.bodyListItem
                     }
                     key={index}
                     tabIndex={0}
@@ -140,11 +115,7 @@ function ListItemsChooseAction({
                     onKeyDown={(e) => handleKeyDown(e, action)}
                 >
                     <div style={{ display: "flex", justifyContent: "center" }}>
-                        <img
-                            src={item.icon}
-                            alt={item.app}
-                            className={style.listItemLogo}
-                        />
+                        <img src={item.icon} alt={item.app} className={style.listItemLogo}/>
                         <span>{action.displayName}</span>
                     </div>
                     <div style={{ display: "flex", justifyContent: "center" }}>
@@ -162,7 +133,6 @@ export default function AddArea() {
     const [selectedAction, setSelectedAction] = useState(null);
     const [selectedActionLogo, setSelectedActionLogo] = useState(null);
     const [reactions, setReactions] = useState([]);
-
     const [areas, setAreas] = useState([]);
 
     useEffect(() => {
@@ -176,16 +146,13 @@ export default function AddArea() {
             .then((response) => response.json())
             .then(async (data) => {
                 let newData = []
-                if (window.user && window.user.connected) {
-                    for (let i = 0; i < data.length; i++) {
-                        for (let j = 0; j < window.user.connected.length; j++) {
+                if (window.user && window.user.connected)
+                    for (let i = 0; i < data.length; i++)
+                        for (let j = 0; j < window.user.connected.length; j++)
                             if (data[i].app === window.user.connected[j]) {
                                 data[i].icon = IconRouter(data[i].app);
                                 newData.push(data[i])
                             }
-                        }
-                    }
-                }
                 setAreas(newData);
             })
             .catch((err) => {

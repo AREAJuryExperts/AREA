@@ -1,7 +1,4 @@
-import React, {useState, useEffect} from "react";
-import {Redirect, getRedirectUrl, url} from "./Redirect";
-
-
+import React, {useEffect} from "react";
 
 export default function ConfirmMobile({}) {
     const handleRedirect = () => {
@@ -10,9 +7,11 @@ export default function ConfirmMobile({}) {
             localStorage.setItem("jwt", urlParams.get("jwt"));
         localStorage.setItem("isMobile", "true");
         document.location.href = urlParams.get("redirect");
-    }
+    };
+
     useEffect(() => {
         handleRedirect();
-    }, [])
+    }, []);
+
     return (<></>)
-}
+};

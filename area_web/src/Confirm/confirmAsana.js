@@ -2,7 +2,6 @@ import React, {useEffect} from "react";
 import { API_URL } from "../utils";
 import {Redirect, getRedirectUrl} from "./Redirect";
 
-
 function ConfirmAsana() {
     const getBearerToken = async () => {
         let token = localStorage.getItem("jwt");

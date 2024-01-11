@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from "react";
 import style from "./HorizontalList.module.css";
-
 import Switch from "@mui/material/Switch";
 import IconButton from "@mui/material/IconButton";
 import SettingsIcon from "@mui/icons-material/Settings";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import DeleteIcon from "@mui/icons-material/Delete";
-
-
 import IMG from "../assets/IMG....png";
 import PopupWoverlay from "../Components/PopupInfosCard";
 import { API_URL, IconRouter } from "../utils";
@@ -47,25 +44,6 @@ function InformationsOnPopup({ item, itemLogo }) {
                     <span className={style.InformationsOnPopupAction}>
                         <b>When</b>
                     </span>
-                    {/* <Switch
-                        {...label}
-                        sx={{
-                            width: 62,
-                            height: 40,
-                            "& .MuiSwitch-switchBase": {
-                                "&.Mui-checked": {
-                                    transform: "translateX(24px)",
-                                },
-                            },
-                            "& .MuiSwitch-thumb": {
-                                width: 24,
-                                height: 24,
-                            },
-                            "& .MuiSwitch-track": {
-                                borderRadius: 26 / 2,
-                            },
-                        }}
-                    /> */}
                 </div>
                 <div className={style.informationsOnPopupContainerLogoAndText}>
                     <div
@@ -175,9 +153,8 @@ function CardTop({ item, itemLogo, toggleCardActive }) {
     };
 
     const handleKeyDown = (event) => {
-        if (event.key === 'Enter') {
+        if (event.key === 'Enter')
             toggleSwitch({ target: { checked: !item.isActive } });
-        }
     };
 
     return (
@@ -190,7 +167,7 @@ function CardTop({ item, itemLogo, toggleCardActive }) {
                         alt={itemLogo}
                         style={{ width: "25px", height: "auto" }}
                     />
-                    <span className={style.cardInstruction}> {item.when} </span>
+                    <span className={style.cardInstruction}>{item.when.length > 22 ? `${item.when.slice(0, 22)}...` : item.when}</span>
                 </div>
             </div>
             <div className={style.cardTopSubcontainer2}>
@@ -253,7 +230,7 @@ function CardBottom({ item, itemLogo }) {
                         )) : item && item.then && item.then.length === 1 ?
                             <>
                                 <img style={{ width: "25px", height: "auto", marginRight: "5px" }} src={item.then[0].serviceLogo} alt={item.then[0].serviceName} />
-                                <span className={style.cardInstruction}> {item.then[0].reactionName} </span>
+                                <span className={style.cardInstruction}> {item.then[0].reactionName.length > 25 ? `${item.then[0].reactionName.slice(0, 25)}...` : item.then[0].reactionName} </span>
                             </> : item && item.then && item.then.map((thenItem, index) => (
                             <img key={index} style={{ width: "25px", height: "auto", marginRight: "5px" }} src={thenItem.serviceLogo} alt={thenItem.serviceName} />
                     ))}
@@ -287,12 +264,11 @@ function CardBottom({ item, itemLogo }) {
 }
 
 function Card({ item, itemLogo, toggleCardActive }) {
-    if (item === null) {
+    if (item === null)
         return (
             <div className={style.cardContainer}>
             </div>
         );
-    }
     return (
         <div className={style.cardContainer} key={item.id}>
             <CardTop item={item} itemLogo={itemLogo} toggleCardActive={toggleCardActive} />
@@ -309,33 +285,25 @@ function ListContainer({ item, toggleCardActive }) {
         if (!item) return;
         if (!item.cardList) return;
         let cardsPerGroup = 3;
-
         let display = [];
         if (startIndex === 0)
             display.push(null);
-
         if (startIndex === 0 || startIndex === item.cardList.length - 1)
             cardsPerGroup = 2;
-
-        for (let i = 0; i < cardsPerGroup && i < item.cardList.length; ++i) {
+        for (let i = 0; i < cardsPerGroup && i < item.cardList.length; ++i)
             display.push(
                 item.cardList[i + startIndex + (startIndex > 0 ? -1 : 0)]
             );
-        }
-
         for (let i = 0; i < 3 - display.length; ++i)
             display.push(null);
-
         setDisplayedCards(display);
     }, [startIndex, item]);
 
     const handleDisplayCard = (direction) => {
         setStartIndex((prevIndex) => {
-            if (direction === "next") {
+            if (direction === "next")
                 return (prevIndex < item.cardList.length - 1) ? prevIndex + 1 : prevIndex;
-            } else {
-                return (prevIndex > 0) ? prevIndex - 1 : prevIndex;
-            }
+            return (prevIndex > 0) ? prevIndex - 1 : prevIndex;
         });
     };
 
@@ -403,38 +371,34 @@ export default function HorizontalList() {
                 data.data.forEach((item) => {
                     let newInfo = null;
                     let found = false;
-                    for (let i = 0; i < newInfos.length; ++i) {
+                    for (let i = 0; i < newInfos.length; ++i)
                         if (newInfos[i].name === item.action.app) {
                             newInfo = newInfos[i];
                             found = true;
                             break;
                         }
-                    }
-                    if (newInfo === null && !found) {
+                    if (newInfo === null && !found)
                         newInfo = {
                             logo: IconRouter(item.action.app),
                             name: item.action.app,
                             cardList: [],
                         };
-                    }
                     let newCard = {
                         id: item.id,
                         when: item.action.displayName,
                         then: [],
                         isActive: item.active,
                     };
-                    for (let i = 0; i < item.reactions.length; ++i) {
+                    for (let i = 0; i < item.reactions.length; ++i)
                         newCard.then.push({
                             serviceName: item.reactions[i].app,
                             serviceLogo: IconRouter(item.reactions[i].app),
                             reactionName: item.reactions[i].name,
                         });
-                    }
                     newInfo.cardList.push(newCard);
 
-                    if (!found) {
+                    if (!found)
                         newInfos.push(newInfo);
-                    }
                 });
                 setInfos(newInfos);
             })
@@ -451,4 +415,4 @@ export default function HorizontalList() {
                 ))}
         </div>
     );
-}
+};

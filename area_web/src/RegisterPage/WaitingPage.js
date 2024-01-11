@@ -1,11 +1,9 @@
 import style from "./RegisterPage.module.css";
-import React, { useState } from 'react';
-import { Navigate, useNavigate } from "react-router-dom";
-
+import React from 'react';
+import { useNavigate } from "react-router-dom";
 import LogoAREA from "../assets/Logo_AREA.png";
 
 export default function RegisterWaitingPage() {
-
     const navigate = useNavigate();
 
     const accountConfirmed = () => {

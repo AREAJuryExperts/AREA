@@ -1,4 +1,4 @@
-import { Text, View, TouchableOpacity, Switch, StyleSheet, Image, ScrollView } from 'react-native';
+import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
 import Modal from "react-native-modal";
 import React, {useState, useEffect} from 'react';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
@@ -11,21 +11,20 @@ global.atob = decode;
 export default function PopUpDetails({ showDetails, setShowDetails, setCurrentScreen}) {
     const [decodedToken, setDecodedToken] = useState({});
     
-    const deconnect = () => {
+    const logout = () => {
         SecureStore.deleteItemAsync("AreaToken").then(() => {
             console.error("Token deleted");
             setCurrentScreen('login');
         })
-    }
+    };
     
     useEffect(() => {
         SecureStore.getItemAsync("AreaToken").then((token) => {
             if (token) {
                 let decoded = jwtDecode(token);
                 setDecodedToken(decoded);
-            } else {
+            } else
                 setCurrentScreen('login');
-            }
         })
     }, []);
 
@@ -48,7 +47,7 @@ export default function PopUpDetails({ showDetails, setShowDetails, setCurrentSc
                 </View>
                 <Text style={styles.subTitle}>{decodedToken && decodedToken.email}</Text>
                 <View style={{width: '100%', alignItems : 'center', marginTop : '10%'}}>
-                    <TouchableOpacity style={styles.logoutBtn} onPress={() => deconnect()}>
+                    <TouchableOpacity style={styles.logoutBtn} onPress={() => logout()}>
                         <Text style={{color : 'white', fontSize : 22}}>Logout</Text>
                     </TouchableOpacity>
                 </View>
@@ -56,7 +55,7 @@ export default function PopUpDetails({ showDetails, setShowDetails, setCurrentSc
 
         </Modal>
     )
-}
+};
 
 const styles = StyleSheet.create({
     baseModal : {

@@ -8,6 +8,7 @@ import * as SecureStore from 'expo-secure-store';
 export default function ServiceConnectRow({ area, me, reloadMe, setReloadMe }) {
     const [alreadyGot, setAlreadyGot] = useState(false);
     const { app, icon, authUrl } = area;
+
     const openService = async () => {
         let jwt = await SecureStore.getItemAsync("AreaToken");
         const params = new URLSearchParams({
@@ -16,13 +17,15 @@ export default function ServiceConnectRow({ area, me, reloadMe, setReloadMe }) {
           });
         let result = await WebBrowser.openBrowserAsync(FrontUrl + "/confirmMobile?" + params.toString());
     };
+
     useEffect(() => {
         if (!me)
             return;
         for (let i in me.connected)
             if (me.connected[i].toLowerCase() === app.toLowerCase())
                 return setAlreadyGot(true);
-    }, [me])
+    }, [me]);
+
     return (
         <TouchableOpacity onPress={() => { return !alreadyGot ? openService() : '' }}
             style={{
@@ -34,4 +37,4 @@ export default function ServiceConnectRow({ area, me, reloadMe, setReloadMe }) {
             <MaterialCommunityIcons name={alreadyGot ? 'check' : 'close'} size={30} color={alreadyGot ? 'green' : 'red'} style={{ position: 'absolute', right: 10 }} />
         </TouchableOpacity>
     )
-}
+};

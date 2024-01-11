@@ -5,8 +5,6 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import ApiRoute from '../ApiRoute/ApiRoute';
 const backColor = "#fff";
 
-
-
 export default function RegisterPage({setCurrentScreen, setRegisterInfo}) {
   const [email, setEmail] = useState('');
   const [firstName, setFirstName] = useState('');
@@ -23,18 +21,15 @@ export default function RegisterPage({setCurrentScreen, setRegisterInfo}) {
       y: 0,
       animated: true,
     });
-  }
+  };
 
   useEffect(() => {
-
-    
     const keyboardDidHideListener = Keyboard.addListener(
       'keyboardDidHide',
       () => {
         onRemoveKeyboard();
       }
     );
-
     return () => {
       keyboardDidHideListener.remove();
     };
@@ -125,7 +120,7 @@ export default function RegisterPage({setCurrentScreen, setRegisterInfo}) {
       </TouchableOpacity>
     </ScrollView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {

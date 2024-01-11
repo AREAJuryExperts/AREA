@@ -1,8 +1,6 @@
-
 import React, {useEffect} from "react";
 import { API_URL } from "../utils";
 import {Redirect, getRedirectUrl} from "./Redirect";
-
 
 function getQueryParams() {
     let queryParams = {};
@@ -13,7 +11,8 @@ function getQueryParams() {
         queryParams[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1] || '');
     }
     return queryParams;
-}
+};
+
 function ConfirmDiscord() {
     useEffect(() => {
         let query = getQueryParams();
@@ -46,4 +45,3 @@ function ConfirmDiscord() {
 }
 
 export default ConfirmDiscord;
-

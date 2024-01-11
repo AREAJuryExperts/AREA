@@ -4,15 +4,16 @@ import React, {useState, useEffect} from 'react';
 
 export default function DisplayActions({ Area, setStep, setAction, areaIndex, me }) {
     const [active, setActive] = useState(false);
+    
     useEffect(() => {
         if (!me)
             return;
-
         for (let i in me.connected) {
             if (me.connected[i].toLowerCase() === Area.app.toLowerCase())
                 return setActive(true);
         }
-    }, [])
+    }, []);
+    
     const containerStyle = (index) => {
         let count = 0;
         Area.actions.forEach(_ => {
@@ -65,4 +66,4 @@ export default function DisplayActions({ Area, setStep, setAction, areaIndex, me
             ))}
         </View>
     )
-}
+};

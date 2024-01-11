@@ -1,6 +1,7 @@
 import { Redirect, getRedirectUrl } from "./Redirect";
 import React, {useEffect} from "react";
 import { API_URL } from "../utils";
+
 function getQueryParams() {
     let queryParams = {};
     let queryString = window.location.search.substring(1);
@@ -10,7 +11,8 @@ function getQueryParams() {
         queryParams[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1] || '');
     }
     return queryParams;
-}
+};
+
 function ConfirmDiscordLogin() {
     useEffect(() => {
         let query = getQueryParams();
@@ -41,4 +43,3 @@ function ConfirmDiscordLogin() {
 }
 
 export default ConfirmDiscordLogin;
-
