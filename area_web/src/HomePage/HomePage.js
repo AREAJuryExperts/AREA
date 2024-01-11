@@ -18,7 +18,7 @@ export default function Home() {
             .then(async (data) => {
                 if (data.msg === "ok")
                     window.user = data.data;
-                if (data.msg === "Invalid Token")
+                if (data.msg === "Invalid Token" || data.msg === "No Token" )
                     window.location.href = "/login";
                 if (data.msg === "User not confirmed")
                     window.location.href = "/waitingConfirmation";
