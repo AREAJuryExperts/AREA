@@ -3,6 +3,7 @@ import React, {useState, useRef, useEffect} from 'react';
 import Logo from '../../assets/logo.svg';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import ApiRoute from '../ApiRoute/ApiRoute';
+import Animated, {SlideInLeft, SlideOutLeft} from 'react-native-reanimated';
 const backColor = "#fff";
 
 export default function RegisterPage({setCurrentScreen, setRegisterInfo}) {
@@ -60,65 +61,74 @@ export default function RegisterPage({setCurrentScreen, setRegisterInfo}) {
   };
 
   return (
-    <ScrollView contentContainerStyle ={styles.container} scrollEnabled={false} ref={scrollRef}>
-      <StatusBar barStyle="dark-content" backgroundColor={backColor}/>
-      <View style={{position: "absolute", top: 10, left: 10}}>
-        <TouchableOpacity onPress={() => setCurrentScreen("login")}>
-            <MaterialCommunityIcons name='keyboard-backspace' size={42} color="black" />
+      <Animated.ScrollView contentContainerStyle ={styles.container} scrollEnabled={false} ref={scrollRef} entering={SlideInLeft} exiting={SlideOutLeft}>
+        <StatusBar barStyle="dark-content" backgroundColor={backColor}/>
+        <View style={{position: "absolute", top: 10, left: 10}}>
+          <TouchableOpacity onPress={() => setCurrentScreen("login")}>
+              <MaterialCommunityIcons name='keyboard-backspace' size={42} color="black" />
+          </TouchableOpacity>
+        </View>
+        <Logo width={150} height={150} />
+        <View style={styles.passwordContainer}>
+          <TextInput
+            style={inputsError[0] ? styles.inputError : styles.input}
+            onChangeText={text => setEmail(text)}
+            value={email}
+            selectionColor={'#0000FF'}
+            placeholder='Email' 
+            maxLength={40}/>
+            <MaterialCommunityIcons name='email' size={24} color="black" />
+        </View>
+        <View style={styles.passwordContainer}>
+          <TextInput
+            style={inputsError[1] ? styles.inputError : styles.input}
+            onChangeText={text => setPassword(text)}
+            value={password}
+            selectionColor={'#0000FF'}
+            placeholder='Password'
+            secureTextEntry={!passwordVisible}
+            maxLength={40}
+            />
+          <MaterialCommunityIcons name={passwordVisible ? 'eye-off' : 'eye'} size={24} color="black" onPress={() => setPasswordVisible(!passwordVisible)}/>
+        </View>
+        <View style={styles.passwordContainer}>
+          <TextInput
+            style={inputsError[1] ? styles.inputError : styles.input}
+            onChangeText={text => setPasswordConfirmation(text)}
+            value={passwordConfirmation}
+            selectionColor={'#0000FF'}
+            placeholder='Password confirmation'
+            secureTextEntry={!passwordConfirmationVisible}
+            maxLength={40}
+            />
+          <MaterialCommunityIcons name={passwordConfirmationVisible ? 'eye-off' : 'eye'} size={24} color="black" onPress={() => setPasswordConfirmationVisible(!passwordConfirmationVisible)}/>
+        </View>
+        <View style={styles.passwordContainer}>
+          <TextInput
+            style={inputsError[2] ? styles.inputError : styles.input}
+            onChangeText={text => setFirstName(text)}
+            value={firstName}
+            selectionColor={'#0000FF'}
+            placeholder='First name'
+            maxLength={40}
+            />
+            <MaterialCommunityIcons name='account' size={24} color="black" />
+        </View>
+        <View style={styles.passwordContainer}>
+          <TextInput
+            style={inputsError[3] ? styles.inputError : styles.input}
+            onChangeText={text => setLastName(text)}
+            value={lastName}
+            selectionColor={'#0000FF'}
+            placeholder='Last name'
+            maxLength={40}
+            />
+            <MaterialCommunityIcons name='account' size={24} color="black" />
+        </View>
+        <TouchableOpacity  onPress={() => submit()} style={styles.connectionButton}>
+          <Text style={styles.connectionButtonText}>Register</Text> 
         </TouchableOpacity>
-      </View>
-      <Logo width={150} height={150} />
-      <View style={styles.passwordContainer}>
-        <TextInput
-          style={inputsError[0] ? styles.inputError : styles.input}
-          onChangeText={text => setEmail(text)}
-          value={email}
-          selectionColor={'#0000FF'}
-          placeholder='Email' />
-          <MaterialCommunityIcons name='email' size={24} color="black" />
-      </View>
-      <View style={styles.passwordContainer}>
-        <TextInput
-          style={inputsError[1] ? styles.inputError : styles.input}
-          onChangeText={text => setPassword(text)}
-          value={password}
-          selectionColor={'#0000FF'}
-          placeholder='Password'
-          secureTextEntry={!passwordVisible}/>
-        <MaterialCommunityIcons name={passwordVisible ? 'eye-off' : 'eye'} size={24} color="black" onPress={() => setPasswordVisible(!passwordVisible)}/>
-      </View>
-      <View style={styles.passwordContainer}>
-        <TextInput
-          style={inputsError[1] ? styles.inputError : styles.input}
-          onChangeText={text => setPasswordConfirmation(text)}
-          value={passwordConfirmation}
-          selectionColor={'#0000FF'}
-          placeholder='Password confirmation'
-          secureTextEntry={!passwordConfirmationVisible}/>
-        <MaterialCommunityIcons name={passwordConfirmationVisible ? 'eye-off' : 'eye'} size={24} color="black" onPress={() => setPasswordConfirmationVisible(!passwordConfirmationVisible)}/>
-      </View>
-      <View style={styles.passwordContainer}>
-        <TextInput
-          style={inputsError[2] ? styles.inputError : styles.input}
-          onChangeText={text => setFirstName(text)}
-          value={firstName}
-          selectionColor={'#0000FF'}
-          placeholder='First name'/>
-          <MaterialCommunityIcons name='account' size={24} color="black" />
-      </View>
-      <View style={styles.passwordContainer}>
-        <TextInput
-          style={inputsError[3] ? styles.inputError : styles.input}
-          onChangeText={text => setLastName(text)}
-          value={lastName}
-          selectionColor={'#0000FF'}
-          placeholder='Last name'/>
-          <MaterialCommunityIcons name='account' size={24} color="black" />
-      </View>
-      <TouchableOpacity  onPress={() => submit()} style={styles.connectionButton}>
-        <Text style={styles.connectionButtonText}>Register</Text> 
-      </TouchableOpacity>
-    </ScrollView>
+      </Animated.ScrollView>
   );
 };
 

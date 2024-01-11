@@ -1,10 +1,12 @@
-import { StyleSheet, Text, View, StatusBar, TextInput, TouchableOpacity, Keyboard, ScrollView, Dimensions} from 'react-native';
+import { StyleSheet, Text, View, StatusBar, TextInput, TouchableOpacity, Keyboard, ScrollView, Dimensions, Animated} from 'react-native';
 import React, {useState, useEffect, useRef} from 'react';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import Logo from '../../assets/logo.svg';
 import ApiRoute from '../ApiRoute/ApiRoute';
 import * as SecureStore from 'expo-secure-store';
 import DiscordLogin from './DiscordLogin';
+import {FadeInView} from '../AnimatedView/AnimatedView';
+
 const backColor = "#fff";
 
 export default function LoginPage({setCurrentScreen, registerInfo, setRegisterInfo}) {
@@ -72,6 +74,7 @@ export default function LoginPage({setCurrentScreen, registerInfo, setRegisterIn
   }, []);
 
   return (
+    <FadeInView>
     <ScrollView contentContainerStyle ={styles.container} scrollEnabled={false} ref={scrollRef}>
       <StatusBar barStyle="dark-content" backgroundColor={backColor}/>
       <Logo width={150} height={150} />
@@ -89,7 +92,9 @@ export default function LoginPage({setCurrentScreen, registerInfo, setRegisterIn
           onChangeText={text => setUserName(text)}
           value={userName}
           selectionColor={'#0000FF'}
-          placeholder='Email' />
+          placeholder='Email'
+          maxLength={40}
+          />
           <MaterialCommunityIcons name='account' size={24} color="black" />
       </View>
       <View style={styles.passwordContainer}>
@@ -100,11 +105,12 @@ export default function LoginPage({setCurrentScreen, registerInfo, setRegisterIn
           value={password}
           selectionColor={'#0000FF'}
           placeholder='Mot de passe'
-          secureTextEntry={!passwordVisible}/>
+          secureTextEntry={!passwordVisible}
+          maxLength={40}/>
         <MaterialCommunityIcons name={passwordVisible ? 'eye-off' : 'eye'} size={24} color="black" onPress={() => setPasswordVisible(!passwordVisible)}/>
       </View>
       {incorrectCred && <Text style={{color: 'red'}}>Incorrect credentials</Text>}
-      <TouchableOpacity onPress={() => setCurrentScreen('register')}>
+      <TouchableOpacity onPress={() => setCurrentScreen('register')} testID='registerBtn'>
         <Text style={styles.notRegistered}>Not registered yet?</Text>
       </TouchableOpacity>
       <TouchableOpacity  onPress={() => connect()} style={styles.connectionButton} testID='loginBtn'>
@@ -112,11 +118,13 @@ export default function LoginPage({setCurrentScreen, registerInfo, setRegisterIn
       </TouchableOpacity>
       <DiscordLogin />
     </ScrollView>
+    </FadeInView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
+    transition: "all .2s",
     backgroundColor: backColor,
     alignItems: 'center',
     paddingTop: 35,
@@ -137,7 +145,8 @@ const styles = StyleSheet.create({
     borderWidth: 2, 
     width: '100%', 
     borderRadius: 15, 
-    paddingLeft: 10, 
+    paddingLeft: 10,
+    paddingRight: 10,
     marginRight: 10,
     color: 'black'
   },
