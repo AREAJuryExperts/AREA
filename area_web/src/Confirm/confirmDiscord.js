@@ -43,7 +43,6 @@ function ConfirmDiscord() {
             });
     }, []);
 
-
     return (<Redirect />)
 }
 
