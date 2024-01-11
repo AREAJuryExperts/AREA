@@ -10,7 +10,7 @@ export const getRedirectUrl = () => {
     return url + "?" + urlSearchParams.toString()
 }
 
-export function Redirect({}) {
+export function Redirect() {
     const setHref = () => {
         document.location.href = url + "?jwt=" + localStorage.getItem("jwt");        
     }

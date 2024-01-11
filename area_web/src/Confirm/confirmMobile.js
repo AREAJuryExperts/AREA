@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 
-export default function ConfirmMobile({}) {
+export default function ConfirmMobile() {
     const handleRedirect = () => {
         let urlParams = new URLSearchParams(window.location.search);
         if (urlParams.get("jwt"))

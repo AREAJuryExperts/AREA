@@ -2,7 +2,7 @@ import { API_URL } from "../utils";
 import React, {useEffect} from 'react';
 import {Redirect, getRedirectUrl} from "./Redirect";
 
-export default function ConfirmJira({}) {
+export default function ConfirmJira() {
     const getBearerToken = async () => {
         let token = localStorage.getItem("jwt");
         const urlParams = new URLSearchParams(window.location.search);
