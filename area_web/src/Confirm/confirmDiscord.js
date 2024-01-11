@@ -35,7 +35,7 @@ function ConfirmDiscord() {
                     alert("Discord account already connected")
                     window.location.href = getRedirectUrl()
                 } else {
-                    alert(data)
+                    alert(data.msg)
                     let redirect = window.location.href;
                     window.location.href = "/login?redirect=" + redirect;
                 }
