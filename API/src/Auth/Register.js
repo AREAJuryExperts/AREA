@@ -51,7 +51,7 @@ const register = async (req, res) => {
             Item: user,
         })
         .promise();
-    res.status(201).json({ msg: "ok", jwt: utils.encodeToken(user) });
+    
 
     let checkoutUrl =
         process.env.WEB_URL +
@@ -93,7 +93,8 @@ const register = async (req, res) => {
         `,
     };
 
-    transporter.sendMail(mailOptions);
+    await transporter.sendMail(mailOptions);
+    res.status(201).json({ msg: "ok", jwt: utils.encodeToken(user) });
 };
 
 module.exports = register;
