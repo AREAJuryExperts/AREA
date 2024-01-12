@@ -13,16 +13,8 @@ jobs:
       DB_ACCESS_KEY: ${{ secrets.DB_ACCESS_KEY }}
       DB_SECRET_KEY: ${{ secrets.DB_SECRET_KEY }}
       API_PORT: ${{ secrets.API_PORT }}
-      GMAIL_USER: ${{ secrets.GMAIL_USER }}
-      GMAIL_PASS: ${{ secrets.GMAIL_PASS }}
       SECRET: ${{ secrets.SECRET }}
       WEB_URL: ${{ secrets.WEB_URL }}
-      DISCORD_CLIENT_ID: ${{ secrets.DISCORD_CLIENT_ID }}
-      DISCORD_CLIENT_SECRET: ${{ secrets.DISCORD_CLIENT_SECRET }}
-      DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
-      TRELLO_KEY: ${{ secrets.TRELLO_KEY }}
-      GITHUB_CLIENT_ID: ${{ secrets.GITHUB_CLIENT_ID }}
-      GITHUB_CLIENT_SECRET: ${{ secrets.GITHUB_CLIENT_SECRET }}
       DEV: "true"
       TEST_EMAIL: ${{ secrets.TEST_EMAIL }}
       TEST_PASSWORD: ${{ secrets.TEST_PASSWORD }}
