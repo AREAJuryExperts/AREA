@@ -158,13 +158,15 @@ function PopupLinks({ showLinks, setShowLinks, onClose }) {
             {links &&
                 links.map((item, index) => (
                     <div
-                        className={
-                            index === 0
-                                ? style.bodyListItemFirst
-                                : style.bodyListItem
-                        }
+                        tabIndex={0}
+                        className={index === 0 ? style.bodyListItemFirst : style.bodyListItem}
                         key={index}
                         onClick={() => (!item.connected ? window.location.href = item.authUrl : 0)}
+                        onKeyDown={(e) => {
+                            if (e.key === 'Enter' && !item.connected) {
+                                window.location.href = item.authUrl;
+                            }
+                        }}
                     >
                         <div
                             style={{
