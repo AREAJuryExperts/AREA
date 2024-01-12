@@ -23,6 +23,18 @@ jobs:
       TRELLO_KEY: ${{ secrets.TRELLO_KEY }}
       GITHUB_CLIENT_ID: ${{ secrets.GITHUB_CLIENT_ID }}
       GITHUB_CLIENT_SECRET: ${{ secrets.GITHUB_CLIENT_SECRET }}
+      ASANA_CLIENT_ID: ${{ secrets.ASANA_CLIENT_ID }}
+      ASANA_CLIENT_SECRET: ${{ secrets.ASANA_CLIENT_SECRET }}
+      ASANA_STATE_PARAM: ${{ secrets.ASANA_STATE_PARAM }}
+      ASANA_REDIRECT_URI: ${{ secrets.ASANA_REDIRECT_URI }}
+      GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+      GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+      GOOGLE_REDIRECT_URI: ${{ secrets.GOOGLE_REDIRECT_URI }}
+      GOOGLE_SCOPE: ${{ secrets.GOOGLE_SCOPE }}
+      JIRA_CLIENT_ID: ${{ secrets.JIRA_CLIENT_ID }}
+      JIRA_CLIENT_SECRET: ${{ secrets.JIRA_CLIENT_SECRET }}
+      JIRA_REDIRECT_URI: ${{ secrets.JIRA_REDIRECT_URI }}
+
       DEV: "false"
       
 
