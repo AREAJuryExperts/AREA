@@ -22,7 +22,6 @@ provider:
     GITHUB_CLIENT_ID : ${env:GITHUB_CLIENT_ID}
     GITHUB_CLIENT_SECRET : ${env:GITHUB_CLIENT_SECRET}
 
-
 functions:
   app:
     handler: serverless/serverless.handler
