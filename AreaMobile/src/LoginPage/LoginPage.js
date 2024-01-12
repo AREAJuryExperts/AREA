@@ -1,9 +1,11 @@
-import { StyleSheet, Text, View, StatusBar, TextInput, TouchableOpacity, Keyboard, ScrollView, Dimensions} from 'react-native';
+import { StyleSheet, Text, View, StatusBar, TextInput, TouchableOpacity, Keyboard, ScrollView, Dimensions, Animated} from 'react-native';
 import React, {useState, useEffect, useRef} from 'react';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import Logo from '../../assets/logo.svg';
 import ApiRoute from '../ApiRoute/ApiRoute';
 import * as SecureStore from 'expo-secure-store';
+import DiscordLogin from './DiscordLogin';
+import {FadeInView} from '../AnimatedView/AnimatedView';
 
 const backColor = "#fff";
 
@@ -13,12 +15,14 @@ export default function LoginPage({setCurrentScreen, registerInfo, setRegisterIn
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [incorrectCred, setIncorrectCred] = useState(false);
   const scrollRef = useRef();
+
   const onRemoveKeyboard = () => {
     scrollRef.current?.scrollTo({
       y: 0,
       animated: true,
     });
-  }
+  };
+
   useEffect(() => {
     const keyboardDidHideListener = Keyboard.addListener(
       'keyboardDidHide',
@@ -26,7 +30,6 @@ export default function LoginPage({setCurrentScreen, registerInfo, setRegisterIn
         onRemoveKeyboard();
       }
     );
-
     return () => {
       keyboardDidHideListener.remove();
     };
@@ -62,17 +65,16 @@ export default function LoginPage({setCurrentScreen, registerInfo, setRegisterIn
       console.error('error: ', err);
         return;
     }
-  }
+  };
 
   useEffect(() => {
     SecureStore.getItemAsync("AreaToken").then((token) => {
-      if (token) {
-        setCurrentScreen('home');
-      }
+      if (token) {setCurrentScreen('home');}
     })
   }, []);
 
   return (
+    <FadeInView>
     <ScrollView contentContainerStyle ={styles.container} scrollEnabled={false} ref={scrollRef}>
       <StatusBar barStyle="dark-content" backgroundColor={backColor}/>
       <Logo width={150} height={150} />
@@ -85,42 +87,47 @@ export default function LoginPage({setCurrentScreen, registerInfo, setRegisterIn
       }
       <View style={styles.passwordContainer}>
         <TextInput
-          style={styles.input}
+        testID='userNameInput'
+        style={styles.input}
           onChangeText={text => setUserName(text)}
           value={userName}
           selectionColor={'#0000FF'}
-          placeholder='Email' />
+          placeholder='Email'
+          maxLength={40}
+          />
           <MaterialCommunityIcons name='account' size={24} color="black" />
       </View>
       <View style={styles.passwordContainer}>
         <TextInput
+          testID='passwordInput'
           style={styles.input}
           onChangeText={text => setPassword(text)}
           value={password}
           selectionColor={'#0000FF'}
           placeholder='Mot de passe'
-          secureTextEntry={!passwordVisible}/>
+          secureTextEntry={!passwordVisible}
+          maxLength={40}/>
         <MaterialCommunityIcons name={passwordVisible ? 'eye-off' : 'eye'} size={24} color="black" onPress={() => setPasswordVisible(!passwordVisible)}/>
       </View>
       {incorrectCred && <Text style={{color: 'red'}}>Incorrect credentials</Text>}
-      <TouchableOpacity onPress={() => setCurrentScreen('home')}>
-        <Text style={styles.fgtPassword}>Forgotten password</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => setCurrentScreen('register')}>
+      <TouchableOpacity onPress={() => setCurrentScreen('register')} testID='registerBtn'>
         <Text style={styles.notRegistered}>Not registered yet?</Text>
       </TouchableOpacity>
-      <TouchableOpacity  onPress={() => connect()} style={styles.connectionButton}>
+      <TouchableOpacity  onPress={() => connect()} style={styles.connectionButton} testID='loginBtn'>
         <Text style={styles.connectionButtonText}>Login</Text> 
       </TouchableOpacity>
+      <DiscordLogin />
     </ScrollView>
+    </FadeInView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
+    transition: "all .2s",
     backgroundColor: backColor,
     alignItems: 'center',
-    paddingTop: 100,
+    paddingTop: 35,
     paddingBottom: 100,
     paddingLeft: 75,
     paddingRight: 75,
@@ -138,7 +145,8 @@ const styles = StyleSheet.create({
     borderWidth: 2, 
     width: '100%', 
     borderRadius: 15, 
-    paddingLeft: 10, 
+    paddingLeft: 10,
+    paddingRight: 10,
     marginRight: 10,
     color: 'black'
   },

@@ -41,7 +41,7 @@ export default function HomePageCard({isSet, setIsSet, when, then, index, delete
         </View>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
     container: {

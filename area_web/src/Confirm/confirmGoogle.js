@@ -1,12 +1,12 @@
 import React, {useEffect} from "react";
 import { API_URL } from "../utils";
+import {Redirect, getRedirectUrl} from "./Redirect";
 
 function ConfirmGoogle() {
     useEffect(() => {
-        let code = window.location.hash.substring(1).split('&')
-            .find(param => param.startsWith('code='))?.split('=')[1];
-        let scope = window.location.hash.substring(1).split('&')
-            .find(param => param.startsWith('scope='))?.split('=')[1];
+        let params = (new URL(document.location)).searchParams;
+        let code = params.get("code");
+        let scope = params.get("scope");
 
         if (!code) return;
         fetch( API_URL + "/api/google/register", {
@@ -22,16 +22,16 @@ function ConfirmGoogle() {
         })
             .then((res) => res.json())
             .then((data) => {
-                if (data.msg === "ok" || data.msg === "Already connected") {
-                    window.location.href = "/";
-                } else {
+                if (data.msg === "ok" || data.msg === "Already connected")
+                    window.location.href = getRedirectUrl()
+                else {
                     let redirect = window.location.href;
                     window.location.href = "/login?redirect=" + redirect;
                 }
             });
     }, []);
 
-    return (<></>)
+    return (<Redirect />)
 }
 
 export default ConfirmGoogle;

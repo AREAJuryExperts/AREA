@@ -35,7 +35,7 @@ const login = async (req, res) => {
     }
 
     if (!user.confirmed) {
-        res.status(400).json({ msg: "User not confirmed" });
+        res.status(403).json({ msg: "User not confirmed" });
         return;
     }
 

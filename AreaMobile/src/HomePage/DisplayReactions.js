@@ -4,8 +4,8 @@ import Checkbox from 'expo-checkbox';
 
 export default function DisplayReactions({ Area, setReactions, me }) {
     const [checked, setChecked] = useState([]);
-
     const [active, setActive] = useState(false);
+
     useEffect(() => {
         if (!me)
             return;
@@ -14,14 +14,15 @@ export default function DisplayReactions({ Area, setReactions, me }) {
             if (me.connected[i].toLowerCase() === Area.app.toLowerCase())
                 return setActive(true);
         }
-    }, [])
+    }, []);
+
     useEffect(() => {
         let tmpTab = [];
         Area.reactions.forEach(_ => {
             tmpTab.push(false);
         });
         setChecked(tmpTab);
-    }, [])
+    }, []);
 
     const containerStyle = (index) => {
         let count = 0;
@@ -89,4 +90,4 @@ export default function DisplayReactions({ Area, setReactions, me }) {
             ))}
         </View>
     )
-}
+};

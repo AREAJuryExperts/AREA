@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TouchableOpacity, Image, Dimensions, BackHandler, Alert, RefreshControl, } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Image, Dimensions, BackHandler, Alert, RefreshControl } from 'react-native';
 import { ScrollView, GestureHandlerRootView } from 'react-native-gesture-handler';
 import React, { useState, useEffect } from 'react';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
@@ -12,7 +12,8 @@ import * as SecureStore from 'expo-secure-store';
 import ApiRoute from '../ApiRoute/ApiRoute';
 import GetImages from '../GetImages/GetImages';
 import ServiceConnexions from '../ServiceConnexions/ServiceConnexions';
-
+import { FadeIn } from 'react-native-reanimated';
+import { FadeInView } from '../AnimatedView/AnimatedView';
 const backColor = "#fff";
 
 export default function HomePage({ setCurrentScreen, deepLinkReceived}) {
@@ -26,6 +27,7 @@ export default function HomePage({ setCurrentScreen, deepLinkReceived}) {
     const [me, setMe] = useState(null);
     const [refreshMe, setRefreshMe] = useState(false);
     const [showRefresh, setShowRefresh] = useState(false);
+
     const setMeInfo = async () => {
         const token = await SecureStore.getItemAsync("AreaToken");
         if (!token)
@@ -40,15 +42,17 @@ export default function HomePage({ setCurrentScreen, deepLinkReceived}) {
             console.error(err);
             return;
         }
-    }
+    };
+
     useEffect(() => {
         setMeInfo();
     }, [refreshMe, deepLinkReceived]);
+
     const deleteCard = (x, y) => {
         let oldLine = Array.from(lines);
         oldLine[x].content.splice(y, y + 1);
         setLines(oldLine);
-    }
+    };
 
     const setIsSet = async (x, y, value) => {
         let oldLine = Array.from(lines);
@@ -61,7 +65,7 @@ export default function HomePage({ setCurrentScreen, deepLinkReceived}) {
         } catch (err) {
             console.error(err);
         }
-    }
+    };
 
     const filterAreasByApp = (data) => {
         const apps = new Array();
@@ -81,7 +85,7 @@ export default function HomePage({ setCurrentScreen, deepLinkReceived}) {
             apps[j].content.push(data[i]);
         }
         return apps;
-    }
+    };
 
     const getAreas = async () => {
         const token = await SecureStore.getItemAsync("AreaToken");
@@ -105,7 +109,7 @@ export default function HomePage({ setCurrentScreen, deepLinkReceived}) {
             console.error(err);
             return;
         }
-    }
+    };
 
     useEffect(() => {
         const backAction = () => {
@@ -124,71 +128,71 @@ export default function HomePage({ setCurrentScreen, deepLinkReceived}) {
           'hardwareBackPress',
           backAction,
         );
-
         return () => backHandler.remove();
       }, []);
+
       useEffect(() => {
         getAreas();
-      }, [refreshAreas])
+      }, [refreshAreas]);
 
     return (
-        <GestureHandlerRootView onAccessibilityEscape={() => setCurrentScreen('login')} style={styles.container}>
-            <HomePageBar setCurrentScreen={setCurrentScreen} setModalVisible={setUserDetailsVisible} setServicesConnexionsModalVisible={setShowServiceConnexions}/>
-            <PopUpDetails showDetails={userDetailsVisible} setShowDetails={setUserDetailsVisible} setCurrentScreen={setCurrentScreen} />
-            <CreateArea setShowCreateArea={setShowCreateArea} showCreateArea={showCreateArea} setCurrentScreen={setCurrentScreen} refresh={refreshAreas} setRefresh={setRefreshAreas} me={me}/>
-            <ServiceConnexions setShow={setShowServiceConnexions} show={showServiceConnexions} me={me} refresh={refreshMe} setRefresh={setRefreshMe}/>
-            <ScrollView style={{width : '100%', height : '100%'}} refreshControl={
-                <RefreshControl refreshing={showRefresh} onRefresh={() => {setShowRefresh(true);setRefreshAreas(!refreshAreas);
-                    setTimeout(() => {
-                        setShowRefresh(false);
-                    }, 1000);}} />
-                }>
-                {
-                    lines.map((line, index) => {
-                        return (
-                            <View style={{ width: '100%', borderBottomColor : 'black', borderBottomWidth : 2, padding : 10}} key={index}>
-                                <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 20 }}>
-                                <Image source={line.img} style={{ width: 35, height: 32}} />
-                                    <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#000', marginLeft : 10 }}>{line.title}</Text>
+        <FadeInView left={true}>
+            <GestureHandlerRootView onAccessibilityEscape={() => setCurrentScreen('login')} style={styles.container}>
+                <HomePageBar setCurrentScreen={setCurrentScreen} setModalVisible={setUserDetailsVisible} setServicesConnexionsModalVisible={setShowServiceConnexions}/>
+                <PopUpDetails showDetails={userDetailsVisible} setShowDetails={setUserDetailsVisible} setCurrentScreen={setCurrentScreen} />
+                <CreateArea setShowCreateArea={setShowCreateArea} showCreateArea={showCreateArea} setCurrentScreen={setCurrentScreen} refresh={refreshAreas} setRefresh={setRefreshAreas} me={me}/>
+                <ServiceConnexions setShow={setShowServiceConnexions} show={showServiceConnexions} me={me} refresh={refreshMe} setRefresh={setRefreshMe}/>
+                <ScrollView style={{width : '100%', height : '100%'}} refreshControl={
+                    <RefreshControl refreshing={showRefresh} onRefresh={() => {setShowRefresh(true);setRefreshAreas(!refreshAreas);setRefreshMe(!refreshMe);
+                        setTimeout(() => {
+                            setShowRefresh(false);
+                        }, 1000);}} />
+                    }>
+                    {
+                        lines.map((line, index) => {
+                            return (
+                                <View style={{ width: '100%', borderBottomColor : 'black', borderBottomWidth : 2, padding : 10}} key={index}>
+                                    <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 20 }}>
+                                    <Image source={line.img} style={{ width: 35, height: 32}} />
+                                        <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#000', marginLeft : 10 }}>{line.title}</Text>
+                                    </View>
+                                        <Carousel
+                                            mode="parallax"
+                                            modeConfig={{
+                                            parallaxScrollingScale: 0.9,
+                                            parallaxScrollingOffset: 1,
+                                            }}
+                                            width={width}
+                                            height={width / 1.8}
+                                            data={line.content}
+                                            scrollAnimationDuration={500}
+                                            onSnapToItem={(ind) => {
+                                                let oldIndex = Array.from(activeIndex);
+                                                oldIndex[index] = ind;
+                                                setActiveIndex(oldIndex)
+                                            }}
+                                            renderItem={(it) => (
+                                                <HomePageCard id={it.item.id} isSet={it.item.active} setIsSet={setIsSet} index={{x : index, y : it.index}} when={it.item.action} then={it.item.reactions} deleteCard={deleteCard} setCurrentScreen={setCurrentScreen} setRefresh={setRefreshAreas} refresh={refreshAreas}/>
+                                            )}
+                                            panGestureHandlerProps={{
+                                                activeOffsetX: [-10, 10],
+                                            }}
+                                            enabled={line.content.length > 1}
+                                        />
+                                        <Pagination activeIndex={activeIndex[index]} itemCount={line.content.length} />
                                 </View>
-                                <View>
-                                    <Carousel
-                                        mode="parallax"
-                                        modeConfig={{
-                                        parallaxScrollingScale: 0.9,
-                                        parallaxScrollingOffset: 1,
-                                        }}
-                                        width={width}
-                                        height={width / 1.8}
-                                        data={line.content}
-                                        scrollAnimationDuration={500}
-                                        onSnapToItem={(ind) => {
-                                            let oldIndex = Array.from(activeIndex);
-                                            oldIndex[index] = ind;
-                                            setActiveIndex(oldIndex)
-                                        }}
-                                        renderItem={(it) => (
-                                            <HomePageCard id={it.item.id} isSet={it.item.active} setIsSet={setIsSet} index={{x : index, y : it.index}} when={it.item.action} then={it.item.reactions} deleteCard={deleteCard} setCurrentScreen={setCurrentScreen} setRefresh={setRefreshAreas} refresh={refreshAreas}/>
-                                        )}
-                                        panGestureHandlerProps={{
-                                            activeOffsetX: [-1, 1],
-                                        }}
-                                    />
-                                    <Pagination activeIndex={activeIndex[index]} itemCount={line.content.length} />
-                                </View>
-                            </View>
-                        )
-                    })
-                }
-            </ScrollView>
-            <View style={{flexDirection : 'row', alignItems : 'center', width : '85%', display : 'flex', justifyContent : 'flex-end'}}>
-                <TouchableOpacity onPress={() => setShowCreateArea(true)} style={{borderRadius: 30, backgroundColor: "blue", width: 50, height: 50, alignItems: "center", justifyContent: "center", marginBottom : '5%'}}>
-                    <MaterialCommunityIcons name='plus-circle-outline' size={45} color="white" />
-                </TouchableOpacity>
-            </View>
-        </GestureHandlerRootView>
+                            )
+                        })
+                    }
+                </ScrollView>
+                    <TouchableOpacity onPress={() => setShowCreateArea(true)} style={{position : 'absolute', right : 10, bottom : 10, backgroundColor : 'blue', borderRadius : 150, padding : 5 }}>
+                        <MaterialCommunityIcons name='plus-circle-outline' size={45} color="white" />
+                    </TouchableOpacity>
+            </GestureHandlerRootView>
+        </FadeInView>
+
     );
-}
+};
 
 const styles = StyleSheet.create({
     container: {

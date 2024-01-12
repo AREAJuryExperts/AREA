@@ -85,9 +85,8 @@ function InfosUser({ showInfos, setShowInfos, onClose }) {
 function ButtonInfos({ showInfos, setShowInfos, onClose }) {
     function handleShowInfos() {
         setShowInfos(!showInfos);
-        if (showInfos) {
+        if (showInfos)
             onClose();
-        }
     }
 
     return (
@@ -115,7 +114,6 @@ function ButtonInfos({ showInfos, setShowInfos, onClose }) {
 }
 
 function PopupLinks({ showLinks, setShowLinks, onClose }) {
-    const navigate = useNavigate();
     const [links, setLinks] = useState([]);
 
     useEffect(() => {
@@ -131,13 +129,12 @@ function PopupLinks({ showLinks, setShowLinks, onClose }) {
                 console.log(data);
                 for (let i = 0; i < data.length; i++) {
                     data[i].connected = false;
-                    for (let j = 0; j < window.user.connected.length; j++) {
-                        data[i].icon = IconRouter(data[i].app);
-                        if (data[i].app === window.user.connected[j]) {
+                    for (let j = 0; j < window.user.connected.length; j++)
+                        if (data[i].app === window.user.connected[j])
                             data[i].connected = true;
-                        }
-                    }
                 }
+                for (let i = 0; i < data.length; i++)
+                    data[i].icon = IconRouter(data[i].app);
                 setLinks(data);
             })
             .catch((err) => {
@@ -161,14 +158,15 @@ function PopupLinks({ showLinks, setShowLinks, onClose }) {
             {links &&
                 links.map((item, index) => (
                     <div
-                        className={
-                            index === 0
-                                ? style.bodyListItemFirst
-                                : style.bodyListItem
-                        }
+                        tabIndex={0}
+                        className={index === 0 ? style.bodyListItemFirst : style.bodyListItem}
                         key={index}
-                        
                         onClick={() => (!item.connected ? window.location.href = item.authUrl : 0)}
+                        onKeyDown={(e) => {
+                            if (e.key === 'Enter' && !item.connected) {
+                                window.location.href = item.authUrl;
+                            }
+                        }}
                     >
                         <div
                             style={{
@@ -202,9 +200,8 @@ function PopupLinks({ showLinks, setShowLinks, onClose }) {
 function ButtonLinks({ showLinks, setShowLinks, onClose }) {
     function handleShowLinks() {
         setShowLinks(!showLinks);
-        if (showLinks) {
+        if (showLinks)
             onClose();
-        }
     }
 
     return (

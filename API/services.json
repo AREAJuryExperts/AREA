@@ -3,6 +3,7 @@
         "app" : "Discord",
         "icon" : "DiscordLogo.png",
         "authUrl" : "https://discord.com/api/oauth2/authorize?client_id=1183779111005597766&response_type=code&redirect_uri=https%3A%2F%2Fd3lyxkfr0ujo0d.cloudfront.net%2FconfirmDiscord&scope=identify+email",
+        "loginUrl" : "https://discord.com/api/oauth2/authorize?client_id=1183779111005597766&response_type=code&redirect_uri=https%3A%2F%2Fd3lyxkfr0ujo0d.cloudfront.net%2FconfirmDiscordLogin&scope=identify+email",
         "actions" : [
             {
                 "displayName" : "Send a private message to the bot",
@@ -85,7 +86,7 @@
     {
         "app" : "Asana",
         "icon" : "Asana.png",
-        "authUrl" : "https://app.asana.com/-/oauth_authorize?response_type=code&client_id=1206159461664814&redirect_uri=https%3A%2F%2Farea.david-benistant.com%2FconfirmAsana&state=secretStateParam",
+        "authUrl" : "https://app.asana.com/-/oauth_authorize?response_type=code&client_id=1206159461664814&redirect_uri=https%3A%2F%2Fd3lyxkfr0ujo0d.cloudfront.net%2FconfirmAsana&state=secretStateParam",
         "actions" : [
             {
                 "displayName" : "A project is created",
@@ -106,15 +107,25 @@
     {
         "app" : "Google",
         "icon" : "Google.png",
-        "authUrl" : "https://accounts.google.com/o/oauth2/auth?client_id=403121110510-3bngdn4539epr1lsukguqijeess63f4v.apps.googleusercontent.com&access_type=offline&redirect_uri=https://area.david-benistant.com/confirmGoogle&response_type=code&scope=https://www.googleapis.com/auth/drive%20https://www.googleapis.com/auth/calendar%20https://www.googleapis.com/auth/contacts.readonly%20profile%20https://www.googleapis.com/auth/youtube%20https://www.googleapis.com/auth/gmail.modify",
+        "authUrl" : "https://accounts.google.com/o/oauth2/auth?client_id=403121110510-3bngdn4539epr1lsukguqijeess63f4v.apps.googleusercontent.com&access_type=offline&redirect_uri=https://area.david-benistant.com/confirmGoogle&response_type=code&scope=https://www.googleapis.com/auth/calendar%20https://www.googleapis.com/auth/contacts.readonly%20profile",
         "actions" : [],
-        "reactions" : []
+        "reactions" : [
+            {
+                "displayName" : "Create an event in Google Calendar",
+                "code" : "GoogleCalendarCreateEvent"
+            }
+        ]
     },
     {
         "app" : "Jira",
         "icon" : "Jira.png",
         "authUrl" : "https://auth.atlassian.com/authorize?audience=api.atlassian.com&client_id=JDQosRjKdnJpfC1LEK6wsII2oxr2KArF&scope=read%3Ajira-work%20manage%3Ajira-project%20manage%3Ajira-configuration%20read%3Ajira-user%20write%3Ajira-work%20manage%3Ajira-webhook%20manage%3Ajira-data-provider&redirect_uri=https%3A%2F%2Farea.david-benistant.com%2FconfirmJira&state=${YOUR_USER_BOUND_VALUE}&response_type=code&prompt=consent",
         "actions" : [],
-        "reactions" : []
+        "reactions" : [
+            {
+                "displayName" : "Create new sprint",
+                "code" : "JiraCreateSprint"
+            }
+        ]
     }
 ]

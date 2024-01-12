@@ -6,10 +6,13 @@
     "start": "expo start",
     "android": "expo run:android",
     "ios": "expo run:ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "test": "jest"
   },
   "dependencies": {
     "@expo/vector-icons": "^13.0.0",
+    "@testing-library/react": "^14.0.0",
+    "@testing-library/react-native": "^12.3.0",
     "base-64": "^1.0.0",
     "expo": "~49.0.15",
     "expo-build-properties": "~0.8.3",
@@ -19,6 +22,9 @@
     "expo-splash-screen": "~0.20.5",
     "expo-status-bar": "~1.6.0",
     "expo-web-browser": "~12.3.2",
+    "jest": "^29.2.1",
+    "jest-expo": "^49.0.0",
+    "jest-svg-transformer": "^1.0.0",
     "jwt-decode": "^4.0.0",
     "react": "18.2.0",
     "react-native": "0.72.6",
@@ -34,5 +40,34 @@
   "devDependencies": {
     "@babel/core": "^7.20.0"
   },
-  "private": true
+  "private": true,
+  "jest": {
+    "preset": "jest-expo",
+    "transformIgnorePatterns": [
+      "node_modules/(?!((jest-)?react-native|@react-native(-community)?)|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|react-native-svg|@firebase/.*|firebase)"
+    ],
+    "setupFiles": [
+      "./__test__/jestSetupFile.js"
+    ],
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "**/*.{js,jsx}",
+      "!**/coverage/**",
+      "!**/node_modules/**",
+      "!**/babel.config.js",
+      "!**/jest.setup.js"
+    ],
+    "transform": {
+      "^.+\\.svg$": "./svgTransformer.js"
+    },
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node",
+      "svg"
+    ]
+  }
 }

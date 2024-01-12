@@ -1,12 +1,9 @@
 import style from "./LoginPage.module.css";
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
-
 import LogoAREA from "../assets/Logo_AREA.png";
 import TextField from '@mui/material/TextField';
 import { API_URL, IconRouter } from "../utils";
-// import DiscordLogo from "./../assets/DiscordLogo.png";
-
 
 function TextsFields({ email, setEmail, password, setPassword }) {
     return (
@@ -35,15 +32,12 @@ function TextsFields({ email, setEmail, password, setPassword }) {
     );
 }
 
-
-
 export default function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
     const [authTypes, setAuthTypes] = useState([]);
     const navigate = useNavigate();
-
 
     useEffect(() => {
         fetch(API_URL + "/api/services")
@@ -84,13 +78,12 @@ export default function Login() {
                         window.location.href = redirect_uri;
                     else
                         window.location.href = "/"
-                } else if (data.msg === "User not confirmed") {
+                } else if (data.msg === "User not confirmed")
                     setErrorMessage("Veuillez confirmer votre compte");
-                } else if (data.msg === "Invalid credentials") {
+                else if (data.msg === "Invalid credentials")
                     setErrorMessage("Utilisateur inconnu ou mot de passe incorrect");
-                } else {
+                else
                     setErrorMessage("Erreur lors de la connexion au serveur");
-                }
             })
             .catch((error) => {
                 console.error("Error:", error);

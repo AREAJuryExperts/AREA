@@ -44,6 +44,18 @@
     margin-right: 10px;
 }
 
+.bodyListItemOnly {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    height: 50px;
+    width: 100%;
+    border: 1px solid #252525;
+    padding: 10px;
+    border-radius: 10px;
+}
+
 .bodyListItemFirst {
     display: flex;
     flex-direction: row;
