@@ -107,7 +107,7 @@
     {
         "app" : "Google",
         "icon" : "Google.png",
-        "authUrl" : "https://accounts.google.com/o/oauth2/auth?client_id=403121110510-3bngdn4539epr1lsukguqijeess63f4v.apps.googleusercontent.com&access_type=offline&redirect_uri=https://area.david-benistant.com/confirmGoogle&response_type=code&scope=https://www.googleapis.com/auth/calendar%20https://www.googleapis.com/auth/contacts.readonly%20profile",
+        "authUrl" : "https://accounts.google.com/o/oauth2/auth?client_id=403121110510-3bngdn4539epr1lsukguqijeess63f4v.apps.googleusercontent.com&access_type=offline&redirect_uri=https://d3lyxkfr0ujo0d.cloudfront.net/confirmGoogle&response_type=code&scope=https://www.googleapis.com/auth/calendar%20https://www.googleapis.com/auth/contacts.readonly%20profile",
         "actions" : [],
         "reactions" : [
             {
@@ -119,7 +119,7 @@
     {
         "app" : "Jira",
         "icon" : "Jira.png",
-        "authUrl" : "https://auth.atlassian.com/authorize?audience=api.atlassian.com&client_id=JDQosRjKdnJpfC1LEK6wsII2oxr2KArF&scope=read%3Ajira-work%20manage%3Ajira-project%20manage%3Ajira-configuration%20read%3Ajira-user%20write%3Ajira-work%20manage%3Ajira-webhook%20manage%3Ajira-data-provider&redirect_uri=https%3A%2F%2Farea.david-benistant.com%2FconfirmJira&state=${YOUR_USER_BOUND_VALUE}&response_type=code&prompt=consent",
+        "authUrl" : "https://auth.atlassian.com/authorize?audience=api.atlassian.com&client_id=i0jMhkgnVGkgOSnjRWaMfkh3xfv94a0R&scope=read%3Adashboard%3Ajira%20write%3Adashboard%3Ajira%20delete%3Adashboard%3Ajira%20read%3Adashboard.property%3Ajira%20write%3Adashboard.property%3Ajira%20delete%3Adashboard.property%3Ajira%20write%3Aboard-scope.admin%3Ajira-software%20read%3Aboard-scope.admin%3Ajira-software%20delete%3Aboard-scope.admin%3Ajira-software%20write%3Aboard-scope%3Ajira-software%20read%3Aboard-scope%3Ajira-software%20read%3Aepic%3Ajira-software%20write%3Aepic%3Ajira-software%20read%3Asprint%3Ajira-software%20write%3Asprint%3Ajira-software%20delete%3Asprint%3Ajira-software%20offline_access&redirect_uri=https%3A%2F%2Fd3lyxkfr0ujo0d.cloudfront.net%2FconfirmJira&state=${YOUR_USER_BOUND_VALUE}&response_type=code&prompt=consent",
         "actions" : [],
         "reactions" : [
             {
