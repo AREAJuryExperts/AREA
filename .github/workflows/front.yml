@@ -33,6 +33,9 @@ jobs:
         else
           echo "INFOS_CHECK=0" >> "$GITHUB_ENV"
         fi
+      
+    - name: get last commit message
+      run: echo "COMMIT_MESSAGE=\"$(git log -1 --pretty=%B | tr '\n' ' ')\"" >> $GITHUB_ENV
 
     - name: Commit changes
       if: env.INFOS_CHECK == '1'
@@ -45,7 +48,7 @@ jobs:
         git remote set-url origin git@github.com:AREAJuryExperts/AREA.git
         git add ./area_web/src/infos.json
         git add ./AreaMobile/src/infos.json
-        git commit -m "AUTO COMMIT update infos.json"
+        git commit -m "AUTO COMMIT update infos.json, ${ env.COMMIT_MESSAGE }"
         git push
 
     - name: install dependecies
@@ -76,9 +79,7 @@ jobs:
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         AWS_DEFAULT_REGION: ${{ env.AWS_REGION }}
 
-    - name: get last commit message
-      if: env.INFOS_CHECK == '0'
-      run: echo "COMMIT_MESSAGE=\"$(git log -1 --pretty=%B | tr '\n' ' ')\"" >> $GITHUB_ENV
+    
 
     - name: test commit message
       if: env.INFOS_CHECK == '0'
