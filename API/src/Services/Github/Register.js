@@ -9,23 +9,23 @@ const Register = async (req, res) => {
         return;
     }
 
+    let prevBody = {
+        client_id: process.env.GITHUB_CLIENT_ID,
+        client_secret: process.env.GITHUB_CLIENT_SECRET,
+        code: req.body.code,
+        redirect_uri: process.env.WEB_URL + "/confirmGithub",
+    }
     let data = await fetch("https://github.com/login/oauth/access_token", {
         method: "POST",
         headers: {
             "Content-Type": "application/x-www-form-urlencoded",
             Accept: "application/json",
         },
-        body: new URLSearchParams({
-            client_id: process.env.GITHUB_CLIENT_ID,
-            client_secret: process.env.GITHUB_CLIENT_SECRET,
-            code: req.body.code,
-            redirect_uri: process.env.WEB_URL + "/confirmGithub",
-        }),
+        body: new URLSearchParams(prevBody),
     });
     if (data.status != 200) {
         data = await data.text()
-        console.log(data)
-        res.status(400).send({ msg: "Invalid code" });
+        await res.status(400).send({ msg: "Invalid code", data });
         return;
     }
 
@@ -43,11 +43,11 @@ const Register = async (req, res) => {
             if (me.status != 200) throw { status: 400, msg: "Invalid code 2" };
             me = await me.json();
         } catch (err) {
-            res.status(err.status).send(err.msg);
+            await res.status(err.status).send(err.msg);
             return;
         }
         if (!me) {
-            res.status(400).send({ msg: "Invalid code 3" });
+            await res.status(400).send({ msg: "Invalid code 3" });
             return;
         }
         let githubUsr = {
