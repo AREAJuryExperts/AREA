@@ -23,16 +23,15 @@ const Register = async (req, res) => {
         },
         body: new URLSearchParams(prevBody),
     });
-    console.log("alalalallalala", prevBody)
     if (data.status != 200) {
         data = await data.text()
-        console.log(data)
-        res.status(400).send({ msg: "Invalid code" });
+        await res.status(400).send({ msg: "Invalid code", data });
         return;
     }
 
     data = await data.json();
     if (data.access_token) {
+        console.log("data", data);
         let me = null;
         try {
             me = await fetch("https://api.github.com/user", {
@@ -44,12 +43,13 @@ const Register = async (req, res) => {
 
             if (me.status != 200) throw { status: 400, msg: "Invalid code 2" };
             me = await me.json();
+            console.log("me", me);
         } catch (err) {
-            res.status(err.status).send(err.msg);
+            await res.status(err.status).send(err.msg);
             return;
         }
         if (!me) {
-            res.status(400).send({ msg: "Invalid code 3" });
+            await res.status(400).send({ msg: "Invalid code 3" });
             return;
         }
         let githubUsr = {
@@ -77,6 +77,7 @@ const Register = async (req, res) => {
         res.status(200).send({ msg: "ok" });
         return;
     }
+    console.log("error", data);
     res.status(400).send({ msg: "Invalid code 4" });
 };
 
