@@ -31,7 +31,6 @@ const Register = async (req, res) => {
 
     data = await data.json();
     if (data.access_token) {
-        console.log("data", data);
         let me = null;
         try {
             me = await fetch("https://api.github.com/user", {
@@ -43,8 +42,7 @@ const Register = async (req, res) => {
 
             if (me.status != 200) throw { status: 400, msg: "Invalid code 2" };
             me = await me.json();
-            console.log("me", me);
-        } catch (err) {
+*        } catch (err) {
             await res.status(err.status).send(err.msg);
             return;
         }
@@ -77,7 +75,6 @@ const Register = async (req, res) => {
         res.status(200).send({ msg: "ok" });
         return;
     }
-    console.log("error", data);
     res.status(400).send({ msg: "Invalid code 4" });
 };
 
