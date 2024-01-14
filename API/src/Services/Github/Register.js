@@ -21,9 +21,7 @@ const Register = async (req, res) => {
             redirect_uri: process.env.WEB_URL + "/confirmGithub",
         }),
     });
-    // res.status(400).send({ msg: "Invalid code" });
     if (data.status != 200) {
-        console.log("data", await data.text());
         res.status(data.status).send({ msg: "Invalid code"});
         return;
     }
