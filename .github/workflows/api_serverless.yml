@@ -21,8 +21,8 @@ jobs:
       DISCORD_CLIENT_SECRET: ${{ secrets.DISCORD_CLIENT_SECRET }}
       DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
       TRELLO_KEY: ${{ secrets.TRELLO_KEY }}
-      GITHUB_CLIENT_ID: ${{ secrets.GITHUB_CLIENT_ID }}
-      GITHUB_CLIENT_SECRET: ${{ secrets.GITHUB_CLIENT_SECRET }}
+      GITHUB_CLIENT_ID: ${{ secrets.GHUB_CLIENT_ID }}
+      GITHUB_CLIENT_SECRET: ${{ secrets.GHUB_CLIENT_SECRET }}
       ASANA_CLIENT_ID: ${{ secrets.ASANA_CLIENT_ID }}
       ASANA_CLIENT_SECRET: ${{ secrets.ASANA_CLIENT_SECRET }}
       ASANA_STATE_PARAM: ${{ secrets.ASANA_STATE_PARAM }}
