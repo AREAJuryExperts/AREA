@@ -16,7 +16,7 @@ jobs:
       run: echo "COMMIT_MESSAGE=$(git log -1 --pretty=%B | tr '\n' ' ')" >> $GITHUB_ENV
 
     - name: ssh
-      if: env.COMMIT_MESSAGE != 'AUTO COMMIT update infos.json  '
+      if: ${{ !startsWith(env.COMMIT_MESSAGE, 'AUTO COMMIT') }}
       run: |
         mkdir -p ~/.ssh
         echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
@@ -25,5 +25,5 @@ jobs:
         chmod 644 ~/.ssh/known_hosts
 
     - name: execute
-      if: env.COMMIT_MESSAGE != 'AUTO COMMIT update infos.json  '
+      if: ${{ !startsWith(env.COMMIT_MESSAGE, 'AUTO COMMIT') }}
       run: ssh -o "StrictHostKeyChecking=no" ec2-user@${{ secrets.SSH_HOST }} "cd .discord_webhook && ./launch.sh"

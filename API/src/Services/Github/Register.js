@@ -22,7 +22,6 @@ const Register = async (req, res) => {
             redirect_uri: process.env.WEB_URL + "/confirmGithub",
         }),
     });
-
     if (data.status != 200) {
         data = await data.text()
         console.log(data)
@@ -41,14 +40,14 @@ const Register = async (req, res) => {
                 },
             });
 
-            if (me.status != 200) throw { status: 400, msg: "Invalid code" };
+            if (me.status != 200) throw { status: 400, msg: "Invalid code 2" };
             me = await me.json();
         } catch (err) {
             res.status(err.status).send(err.msg);
             return;
         }
         if (!me) {
-            res.status(400).send({ msg: "Invalid code" });
+            res.status(400).send({ msg: "Invalid code 3" });
             return;
         }
         let githubUsr = {
@@ -76,7 +75,7 @@ const Register = async (req, res) => {
         res.status(200).send({ msg: "ok" });
         return;
     }
-    res.status(400).send({ msg: "Invalid code" });
+    res.status(400).send({ msg: "Invalid code 4" });
 };
 
 module.exports = Register;
