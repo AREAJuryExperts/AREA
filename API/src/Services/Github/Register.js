@@ -22,6 +22,7 @@ const Register = async (req, res) => {
             redirect_uri: process.env.WEB_URL + "/confirmGithub",
         }),
     });
+    console.log("alalalallalala", data)
     if (data.status != 200) {
         data = await data.text()
         console.log(data)
