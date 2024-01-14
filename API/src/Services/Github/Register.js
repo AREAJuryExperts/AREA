@@ -42,7 +42,7 @@ const Register = async (req, res) => {
 
             if (me.status != 200) throw { status: 400, msg: "Invalid code 2" };
             me = await me.json();
-*        } catch (err) {
+        } catch (err) {
             await res.status(err.status).send(err.msg);
             return;
         }
