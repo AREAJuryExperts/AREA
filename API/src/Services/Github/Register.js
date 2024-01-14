@@ -9,20 +9,21 @@ const Register = async (req, res) => {
         return;
     }
 
+    let prevBody = {
+        client_id: process.env.GITHUB_CLIENT_ID,
+        client_secret: process.env.GITHUB_CLIENT_SECRET,
+        code: req.body.code,
+        redirect_uri: process.env.WEB_URL + "/confirmGithub",
+    }
     let data = await fetch("https://github.com/login/oauth/access_token", {
         method: "POST",
         headers: {
             "Content-Type": "application/x-www-form-urlencoded",
             Accept: "application/json",
         },
-        body: new URLSearchParams({
-            client_id: process.env.GITHUB_CLIENT_ID,
-            client_secret: process.env.GITHUB_CLIENT_SECRET,
-            code: req.body.code,
-            redirect_uri: process.env.WEB_URL + "/confirmGithub",
-        }),
+        body: new URLSearchParams(prevBody),
     });
-    console.log("alalalallalala", data)
+    console.log("alalalallalala", prevBody)
     if (data.status != 200) {
         data = await data.text()
         console.log(data)
