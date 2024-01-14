@@ -24,7 +24,7 @@ const Register = async (req, res) => {
     });
 
     if (data.status != 200) {
-        res.status(data.status).send({ msg: "Invalid code 1" });
+        res.status(data.status).send({ msg: "Invalid code:" + await data.json() });
         return;
     }
 
